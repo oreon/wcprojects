@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+	debug="false">
+
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- The default pattern: Date Priority [Category] Message\n -->
+			<param name="ConversionPattern" value="%-5p [%c{6}] %m%n" />
+		</layout>
+	</appender>
+	
+	
+
+	<category name="org.jboss">
+		<priority value="WARN" />
+	</category>
+
+	<category name="com.oreon.cerebrum">
+		<priority value="WARN" />
+	</category>
+
+	<category name="org.witchcraft">
+		<priority value="WARN" />
+	</category>
+
+	
+	<category name="org.hibernate">
+		<priority value="WARN" />
+	</category>
+
+
+	<category name="org.jboss.seam">
+		<priority value="WARN" />
+	</category>
+
+	<appender name="FILE" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="logs/cerebrum.log" />
+		<param name="MaxFileSize" value="10MB" />
+		<param name="MaxBackupIndex" value="100" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{dd/MM/yy hh:mm:ss:sss z}] %5p %c{2}: %m%n" />
+		</layout>
+	</appender>
+
+	
+	<appender-ref ref="MAIL" />  
+
+	<root>
+		<priority value="WARN" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</root>
+
+</log4j:configuration>

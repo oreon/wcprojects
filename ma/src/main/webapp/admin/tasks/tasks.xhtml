@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/admin/tasks/template.xhtml">
+
+	<ui:define name="content">
+	
+		
+		<p:panel>
+			<f:facet name="header">
+				<h:outputText value="My Tasks" />
+			</f:facet>
+			<ui:include src="tasksComponent.xhtml" />
+		</p:panel>
+		
+		<br/> 
+		<ui:include src="pooledTasks.xhtml" />
+		
+	</ui:define>
+
+
+
+
+</ui:composition>

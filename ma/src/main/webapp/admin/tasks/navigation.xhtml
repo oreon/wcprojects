@@ -1,0 +1,29 @@
+		<html 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
+	xmlns:wc="http://witchcraft.sourceforge.net/jsf"
+ >
+		<a:form>
+		<p:panelMenu style="width:162px" mode="ajax"
+				iconExpandedGroup="disc" iconCollapsedGroup="disc"
+				iconExpandedTopGroup="chevronUp" iconGroupTopPosition="right"
+				iconCollapsedTopGroup="chevronDown" iconCollapsedTopPosition="right">
+		
+		    <p:panelMenuGroup label="ApproveExam"  expanded="true" >
+				<p:panelMenuItem>
+					<s:link propagation="none"  value="approveExam" action="approveExam" />
+				</p:panelMenuItem>
+			</p:panelMenuGroup>
+		
+		</p:panelMenu>
+		</a:form>
+	</html>
+
+	

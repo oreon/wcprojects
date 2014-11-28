@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf">  
+  <c:if test="${empty modalId}"> 
+    <c:set var="modalId" value="EmployeeModalPanel"/> 
+  </c:if>  
+  <c:if test="${empty listTitle}"> 
+    <c:set var="listTitle" value="Employee Search Results (#{empty records ? 0 : (employeeList.paginated ? employeeList.resultCount : records.size)})"/> 
+  </c:if>  
+  <h3>${listTitle}</h3>  
+  <h:form> 
+    <ui:include src="/admin/entities/onepack/employee/modalDlgEmployeeComponent.xhtml"> 
+      <ui:param name="modalId" value="${modalId}"/> 
+    </ui:include> 
+  </h:form>  
+  <h:form id="employeeForm"> 
+    <p:dataTable var="_employee" value="#{records}" id="employeeList" paginator="true" lazy="true" rows="10" selectionMode="single" selection="#{employeeAction.employee}"> 
+      <p:ajax event="rowSelect" update=":#{p:component('editEmployeePanel')}" oncomplete="PF('editEmployeeDialog').show()" listener="#{employeeAction.onRowSelect}"/>  
+      <p:column headerText="#{msg.id}" sortBy="#{employee.id}" rendered="#{s:hasPermission('id', 'viewId' )}"> 
+        <h:link outcome="/admin/entities/onepack/employee/viewEmployee.xhtml" rendered="#{s:hasPermission(_employee, 'view')}" propagation="none"> 
+          <h:outputText value="#{_employee.id}"/>  
+          <f:param name="employeeId" value="#{_employee.id}"/> 
+        </h:link> 
+      </p:column>  
+      <p:column headerText="#{msg.employee_department}" sortBy="#{employee.department}" rendered="#{ ! excludeDepartment == true and ( skipPermissionCheck == 'true' || s:hasPermission('employee', 'viewDepartment')) }"> 
+        <h:panelGroup> 
+          <h:link id="departmentemployee_department" escape="false" value="#{_employee.department.displayName}" outcome="/admin/entities/onepack/department/viewDepartment.xhtml" propagation="none"> 
+            <f:param name="departmentId" value="#{_employee.department.id}"/>  
+            <f:param name="from" value="#{request.servletPath}"/> 
+          </h:link>  
+          <p:overlayPanel for="departmentemployee_department" showEvent="mouseover" hideEffect="fade" dynamic="false"> 
+            <h:form> 
+              <ui:include src="/admin/entities/onepack/department/viewDepartmentComponent.xhtml"> 
+                <ui:param name="department" value="#{_employee.department}"/>  
+                <ui:param name="numColumns" value="4"/>  
+                <ui:param name="panelId" value="departmentEmployees"/>  
+                <ui:param name="excludeEmployees" value="true"/> 
+              </ui:include> 
+            </h:form> 
+          </p:overlayPanel> 
+        </h:panelGroup> 
+      </p:column>  
+      <p:column headerText="#{msg.employee_firstName}" sortBy="#{employee.firstName}" rendered="#{ ! excludeFirstName == true and ( skipPermissionCheck == 'true' || s:hasPermission('employee', 'viewFirstName')) }"> 
+        <h:outputText value="#{_employee.firstName}" escape="false"/> 
+      </p:column>  
+      <p:column headerText="#{msg.employee_lastName}" sortBy="#{employee.lastName}" rendered="#{ ! excludeLastName == true and ( skipPermissionCheck == 'true' || s:hasPermission('employee', 'viewLastName')) }"> 
+        <h:outputText value="#{_employee.lastName}" escape="false"/> 
+      </p:column>  
+      <p:column headerText="#{msg.dateCreated}" sortBy="#{employee.dateCreated}" rendered="#{s:hasPermission('dateCreated', 'viewDateCreated' )}"> 
+        <h:outputText value="#{_employee.dateCreated}"> 
+          <s:convertDateTime type="date" dateStyle="medium"/> 
+        </h:outputText> 
+      </p:column>  
+      <p:column rendered="#{s:hasPermission('_employee', 'view') and !_employeeCategory.archived}"> 
+        <h:link outcome="/admin/entities/onepack/employee/viewEmployee.xhtml" rendered="#{s:hasPermission(_employee, 'view')}"> 
+          <h:graphicImage value="/images/icons/eye.png" style="border: 0px" alt="view"/>  
+          <f:param name="employeeId" value="#{_employee.id}"/>  
+          <s:conversationPropagation type="none"/> 
+        </h:link> 
+      </p:column>  
+      <p:column rendered="#{s:hasPermission('_employee', 'edit') and !_employeeCategory.archived}"> 
+        <h:link outcome="/admin/entities/onepack/employee/editEmployee.xhtml" rendered="#{s:hasPermission(_employee, 'edit')}"> 
+          <h:graphicImage value="/images/icons/edit.png" style="border: 0px" alt="edit"/>  
+          <f:param name="employeeId" value="#{_employee.id}"/>  
+          <s:conversationPropagation type="none"/> 
+        </h:link> 
+      </p:column>  
+      <p:column rendered="#{s:hasPermission('employeeAction', 'archive')}" propagation="none"> 
+        <f:facet name="header"> 
+          <h:outputText value=""/> 
+        </f:facet>  
+        <h:commandLink rendered="#{!_employee.archived}" action="#{employeeAction.archiveById}" onclick="javascript:if(!confirm('Do you really want to delete #{_employee.displayName} ?')){ return false; } else { return true; }"> 
+          <h:graphicImage value="/images/icons/delete.png" style="border: 0px" alt="archive"/>  
+          <f:param name="currentEntityId" value="#{_employee.id}"/> 
+        </h:commandLink>  
+        <h:commandLink rendered="#{_employee.archived}" action="#{employeeAction.delete}" onclick="javascript:if(!confirm('Do you really want to permanently delete #{_employee.displayName} ?')){ return false; } else { return true; }">Delete 
+          <f:param name="currentEntityId" value="#{_employee.id}"/> 
+        </h:commandLink>  
+        <h:commandLink rendered="#{_employee.archived}" action="#{employeeAction.restore}">Restore
+          <f:param name="currentEntityId" value="#{_employee.id}"/> 
+        </h:commandLink> 
+      </p:column> 
+    </p:dataTable> 
+  </h:form> 
+</ui:composition>

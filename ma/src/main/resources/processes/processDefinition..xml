@@ -1,0 +1,21 @@
+<process-definition xmlns="urn:jbpm.org:jpdl-3.2" name="simple">
+ <start-state name="start">
+  <transition name="trPlaceOrder" to="PlaceOrder" />
+ </start-state>
+ <task-node name="PlaceOrder">
+  <task name="placeOrderTask">
+   <assignment actor-id="#{actor.id}" />
+  </task>
+  <transition name="next" to="Deliver" />
+  <transition name="cancel" to="error" />
+ </task-node>
+ <task-node name="Deliver">
+  <task name="getFromStock">
+   <assignment actor-id="#{actor.id}" />
+  </task>
+  <transition name="next" to="end" />
+  <transition name="cancel" to="error" />
+ </task-node>
+ <end-state name="error" />
+ <end-state name="end" />
+</process-definition>

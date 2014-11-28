@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:wc="http://witchcraft.sourceforge.net/jsf"
+	template="/admin/template.xhtml">
+	<ui:define name="content">
+		<h:form>
+
+			<p:panel>
+				<f:facet name="header">
+					<h:outputText
+						value="#{metaEntityAction.metaEntity.displayName} Entity Level Privileges " />
+				</f:facet>
+
+				<table style="border-collapse: none;border:1px solid #ddd"  >
+					<tr>
+						<td>
+							<table style="background-color: #eef">
+								<tr style="background-color: #ddd">
+									<th colspan="2">Create</th>
+								</tr>
+								<ui:repeat var="role" value="#{appRoleList.resultList}"
+									varStatus="loop">
+									<tr>
+
+										<td style="babackground-color: red"><h:outputText
+												value="#{role.name}"
+												rendered="#{skipPermissionCheck == 'true' || s:hasPermission('roleFieldPrivilege', 'readAccessEdit')}" />
+										</td>
+										<td style="babackground-color: red"><h:selectBooleanCheckbox
+												id="readAccess#{entityId}"
+												rendered="#{skipPermissionCheck == 'true' || s:hasPermission('roleFieldPrivilege', 'readAccessEdit')}"
+												label="#{msg.roleFieldPrivilege_readAccess}"
+												required="false" disabled="false">
+												<p:ajaxValidator event="onsubmit" />
+											</h:selectBooleanCheckbox></td>
+									</tr>
+
+								</ui:repeat>
+							</table>
+
+						</td>
+						<td>
+
+							<table style="background-color: #eed">
+								<tr style="background-color: #ddd">
+									<th colspan="2">Edit</th>
+								</tr>
+								<ui:repeat var="role" value="#{appRoleList.resultList}"
+									varStatus="loop">
+									<tr>
+										<td style="babackground-color: red"><h:outputText
+												value="#{role.name}"
+												rendered="#{skipPermissionCheck == 'true' || s:hasPermission('roleFieldPrivilege', 'readAccessEdit')}" />
+										</td>
+										<td><h:selectBooleanCheckbox id="readAccess#{entityId}"
+												rendered="#{skipPermissionCheck == 'true' || s:hasPermission('roleFieldPrivilege', 'readAccessEdit')}"
+												label="#{msg.roleFieldPrivilege_readAccess}"
+												required="false" disabled="false">
+												<p:ajaxValidator event="onsubmit" />
+											</h:selectBooleanCheckbox></td>
+									</tr>
+								</ui:repeat>
+							</table>
+
+						</td>
+						
+						<td>
+
+							<table style="background-color: #eef">
+								<tr style="background-color: #ddd">
+									<th colspan="2">View</th>
+								</tr>
+								<ui:repeat var="role" value="#{appRoleList.resultList}"
+									varStatus="loop">
+									<tr>
+										<td style="babackground-color: red"><h:outputText
+												value="#{role.name}"
+												rendered="#{skipPermissionCheck == 'true' || s:hasPermission('roleFieldPrivilege', 'readAccessEdit')}" />
+										</td>
+										<td><h:selectBooleanCheckbox id="readAccess#{entityId}"
+												rendered="#{skipPermissionCheck == 'true' || s:hasPermission('roleFieldPrivilege', 'readAccessEdit')}"
+												label="#{msg.roleFieldPrivilege_readAccess}"
+												required="false" disabled="false">
+												<p:ajaxValidator event="onsubmit" />
+											</h:selectBooleanCheckbox></td>
+									</tr>
+								</ui:repeat>
+							</table>
+
+						</td>
+						
+						<td>
+
+							<table style="background-color: #eed">
+								<tr style="background-color: #ddd">
+									<th colspan="2">Delete</th>
+								</tr>
+								<ui:repeat var="role" value="#{appRoleList.resultList}"
+									varStatus="loop">
+									<tr>
+										<td style="babackground-color: red"><h:outputText
+												value="#{role.name}"
+												rendered="#{skipPermissionCheck == 'true' || s:hasPermission('roleFieldPrivilege', 'readAccessEdit')}" />
+										</td>
+										<td><h:selectBooleanCheckbox id="readAccess#{entityId}"
+												rendered="#{skipPermissionCheck == 'true' || s:hasPermission('roleFieldPrivilege', 'readAccessEdit')}"
+												label="#{msg.roleFieldPrivilege_readAccess}"
+												required="false" disabled="false">
+												<p:ajaxValidator event="onsubmit" />
+											</h:selectBooleanCheckbox></td>
+									</tr>
+								</ui:repeat>
+							</table>
+
+						</td>
+						
+						
+					</tr>
+
+				
+
+				</table>
+
+
+			</p:panel>
+
+			<br />
+			<br />
+
+			<p:panel>
+				<f:facet name="header">
+					<h:outputText
+						value="#{metaEntityAction.metaEntity.displayName} Field Level Privileges " />
+				</f:facet>
+
+				<p:dataTable id="metaFields" var="_metaField"
+					rendered="#{skipPermissionCheck == 'true' || s:hasPermission('metaEntity', 'metaFieldsEdit')}"
+					value="#{metaEntityAction.listMetaFields}" rowKeyVar="rowIndex"
+					rowClasses="odd, even" styleClass="viewInfo" rules="all" />
+
+
+				<table style="border: 1px solid gray; table-layout: fixed">
+					<tr>
+						<ui:repeat var="fld"
+							value="#{metaEntityAction.metaEntity.listMetaFields}">
+							<th><h:outputText value="#{fld.displayName}" /></th>
+						</ui:repeat>
+					</tr>
+					<tr>
+
+						<ui:repeat var="fld" value="#{metaEntityAction.listMetaFields}">
+							<td>
+
+								<table>
+									<ui:repeat var="fldRole" value="#{fld.listRoleFieldPrivileges}"
+										varStatus="loop">
+
+										<tr>
+											<td colspan="2"><h3>
+													<h:outputText value="#{fldRole.appRole.displayName}" />
+												</h3></td>
+										</tr>
+
+
+
+										<tr style="babackground-color: gray">
+											<td style="babackground-color: red"><h:outputText
+													value="Write"
+													rendered="#{skipPermissionCheck == 'true' || s:hasPermission('roleFieldPrivilege', 'readAccessEdit')}" />
+											</td>
+											<td style="babackground-color: kred"><h:selectBooleanCheckbox
+													id="readAccess#{entityId}"
+													rendered="#{skipPermissionCheck == 'true' || s:hasPermission('roleFieldPrivilege', 'readAccessEdit')}"
+													label="#{msg.roleFieldPrivilege_readAccess}"
+													required="false" disabled="false"
+													value="#{fldRole.readAccess}">
+													<p:ajaxValidator event="onsubmit" />
+												</h:selectBooleanCheckbox></td>
+										</tr>
+
+										<tr>
+											<td><h:outputText value="Read"
+													rendered="#{skipPermissionCheck == 'true' || s:hasPermission('roleFieldPrivilege', 'writeAccessEdit')}" />
+											</td>
+											<td><h:selectBooleanCheckbox id="writeAccess#{entityId}"
+													rendered="#{skipPermissionCheck == 'true' || s:hasPermission('roleFieldPrivilege', 'writeAccessEdit')}"
+													label="#{msg.roleFieldPrivilege_writeAccess}"
+													required="false" disabled="false"
+													value="#{fldRole.writeAccess}">
+													<p:ajaxValidator event="onsubmit" />
+												</h:selectBooleanCheckbox></td>
+										</tr>
+
+									</ui:repeat>
+								</table>
+							</td>
+						</ui:repeat>
+
+					</tr>
+				</table>
+
+			</p:panel>
+
+
+			<div class="buttonBox">
+				<h:commandButton value="Save" action="#{metaEntityAction.save}">
+					<s:conversationId />
+				</h:commandButton>
+				<h:outputText value=" " />
+				<h:commandButton value="Cancel" immediate="true"
+					action="#{metaEntityAction.cancel}"></h:commandButton>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
