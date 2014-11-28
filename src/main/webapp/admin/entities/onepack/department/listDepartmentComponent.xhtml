@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf">  
+  <c:if test="${empty modalId}"> 
+    <c:set var="modalId" value="DepartmentModalPanel"/> 
+  </c:if>  
+  <c:if test="${empty listTitle}"> 
+    <c:set var="listTitle" value="Department Search Results (#{empty records ? 0 : (departmentList.paginated ? departmentList.resultCount : records.size)})"/> 
+  </c:if>  
+  <h3>${listTitle}</h3>  
+  <h:form> 
+    <ui:include src="/admin/entities/onepack/department/modalDlgDepartmentComponent.xhtml"> 
+      <ui:param name="modalId" value="${modalId}"/> 
+    </ui:include> 
+  </h:form>  
+  <h:form id="departmentForm"> 
+    <p:dataTable var="_department" value="#{records}" id="departmentList" paginator="true" lazy="true" rows="10" selectionMode="single" selection="#{departmentAction.department}"> 
+      <p:ajax event="rowSelect" update=":#{p:component('editDepartmentPanel')}" oncomplete="PF('editDepartmentDialog').show()" listener="#{departmentAction.onRowSelect}"/>  
+      <p:column headerText="#{msg.id}" sortBy="#{department.id}" rendered="#{s:hasPermission('id', 'viewId' )}"> 
+        <h:link outcome="/admin/entities/onepack/department/viewDepartment.xhtml" rendered="#{s:hasPermission(_department, 'view')}" propagation="none"> 
+          <h:outputText value="#{_department.id}"/>  
+          <f:param name="departmentId" value="#{_department.id}"/> 
+        </h:link> 
+      </p:column>  
+      <p:column headerText="#{msg.department_name}" sortBy="#{department.name}" rendered="#{ ! excludeName == true and ( skipPermissionCheck == 'true' || s:hasPermission('department', 'viewName')) }"> 
+        <h:outputText value="#{_department.name}" escape="false"/> 
+      </p:column>  
+      <p:column headerText="#{msg.dateCreated}" sortBy="#{department.dateCreated}" rendered="#{s:hasPermission('dateCreated', 'viewDateCreated' )}"> 
+        <h:outputText value="#{_department.dateCreated}"> 
+          <s:convertDateTime type="date" dateStyle="medium"/> 
+        </h:outputText> 
+      </p:column>  
+      <p:column rendered="#{s:hasPermission('_department', 'view') and !_departmentCategory.archived}"> 
+        <h:link outcome="/admin/entities/onepack/department/viewDepartment.xhtml" rendered="#{s:hasPermission(_department, 'view')}"> 
+          <h:graphicImage value="/images/icons/eye.png" style="border: 0px" alt="view"/>  
+          <f:param name="departmentId" value="#{_department.id}"/>  
+          <s:conversationPropagation type="none"/> 
+        </h:link> 
+      </p:column>  
+      <p:column rendered="#{s:hasPermission('_department', 'edit') and !_departmentCategory.archived}"> 
+        <h:link outcome="/admin/entities/onepack/department/editDepartment.xhtml" rendered="#{s:hasPermission(_department, 'edit')}"> 
+          <h:graphicImage value="/images/icons/edit.png" style="border: 0px" alt="edit"/>  
+          <f:param name="departmentId" value="#{_department.id}"/>  
+          <s:conversationPropagation type="none"/> 
+        </h:link> 
+      </p:column>  
+      <p:column rendered="#{s:hasPermission('departmentAction', 'archive')}" propagation="none"> 
+        <f:facet name="header"> 
+          <h:outputText value=""/> 
+        </f:facet>  
+        <h:commandLink rendered="#{!_department.archived}" action="#{departmentAction.archiveById}" onclick="javascript:if(!confirm('Do you really want to delete #{_department.displayName} ?')){ return false; } else { return true; }"> 
+          <h:graphicImage value="/images/icons/delete.png" style="border: 0px" alt="archive"/>  
+          <f:param name="currentEntityId" value="#{_department.id}"/> 
+        </h:commandLink>  
+        <h:commandLink rendered="#{_department.archived}" action="#{departmentAction.delete}" onclick="javascript:if(!confirm('Do you really want to permanently delete #{_department.displayName} ?')){ return false; } else { return true; }">Delete 
+          <f:param name="currentEntityId" value="#{_department.id}"/> 
+        </h:commandLink>  
+        <h:commandLink rendered="#{_department.archived}" action="#{departmentAction.restore}">Restore
+          <f:param name="currentEntityId" value="#{_department.id}"/> 
+        </h:commandLink> 
+      </p:column> 
+    </p:dataTable> 
+  </h:form> 
+</ui:composition>

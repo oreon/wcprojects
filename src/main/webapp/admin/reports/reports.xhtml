@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/admin/reports/template.xhtml">
+
+	<ui:define name="content">
+
+		<p:panel>
+			<f:facet name="header">
+				<h:outputText value="Reports" />
+			</f:facet>
+			<h:form>
+			</h:form>
+		</p:panel>
+
+
+
+		<p:panel>
+			<f:facet name="header">
+				<h:outputText value="Custom Reports" />
+			</f:facet>
+
+			<h:form>
+
+				<ui:repeat var="report" value="#{customReportList.resultList}">
+					<h:commandLink value="${report.name}"
+						action="#{customReportExecutorAction.runReport(report.id)}">
+						<f:param name="reportId" value="${report.id}" />
+					</h:commandLink>
+					<br />
+					<h:outputText value="${issue.higlightedFragment}" escape="false" />
+					<hr />
+				</ui:repeat>
+
+			</h:form>
+		</p:panel>
+
+
+
+	</ui:define>
+
+
+
+
+</ui:composition>

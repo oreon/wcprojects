@@ -1,0 +1,94 @@
+package permissions;
+
+import java.security.Principal;
+import org.jboss.seam.security.permission.PermissionCheck;
+import org.jboss.seam.security.Role;
+
+     
+//admin should have all previliges     
+rule "CanAdminDoEverything"
+salience 15
+no-loop 
+when
+  $c : PermissionCheck( )
+  $r : Role(name == "admin")
+then
+  $c.grant();
+end
+
+//dummy rule to hide 'id' from non admins 
+
+rule "phsyicianCanViewPrescriptions"
+salience  10
+activation-group "view"
+no-loop 
+when
+  $principal: Principal()
+  $c : PermissionCheck(target == "prescriptionPackage" )
+  $r : Role(name == "physician" || name == "nurse")
+then
+  //System.out.println("viewpres " + $c.getTarget() + " " + $r.getName() ); 
+  $c.grant();
+end
+
+//only users with no tenant id (super-mgt ) users can edit facilty 
+rule "CanEditFacility"
+salience  10
+activation-group "view"
+no-loop 
+when
+  $principal: Principal()
+  $c : PermissionCheck(target == "physician" && action == "editFacility")
+  $r : Role(name == "admin" || name == "support")
+then
+  System.out.println("view pres " + $c.getTarget() + " " + $r.getName() ); 
+  $c.grant();
+end
+
+
+rule "CanEditPrescription"
+salience  10
+activation-group "edit"
+no-loop 
+when
+  $principal: Principal()
+  $c : PermissionCheck(target == "prescription" ) //allow all permissions on prescription to physician 
+  $r : Role(name == "physician" || name == "admin")
+then
+  //System.out.println("edit pres invkd " + $c.getTarget() + " " + $r.getName() ); 
+  $c.grant();
+end
+
+
+rule "CanViewPrescription"
+salience  10
+activation-group "view"
+no-loop
+dialect "java"  
+when
+  principal: Principal()
+  c : PermissionCheck(     )
+  r : Role( )
+eval(  c.getTarget().equals("prescription") && c.getAction().startsWith("view")  && ( r.getName().equals("nurse") || r.getName().equals("physician") ))  
+  
+then
+  //System.out.println("viewpres " + $c.getTarget() + " " + $r.getName() ); 
+  c.grant();
+end
+
+
+//include the fields that need to be permission checked here 
+rule "CanNonAdminDoEverything"
+salience 3
+activation-group "view"
+no-loop
+//dialect "java"
+when
+  $principal: Principal()
+  $c : PermissionCheck(  target != "prescriptionPackage"  && target != "prescription" && action != "editFacility")
+then
+  $c.grant();
+  //System.out.println("nonadmin " + $c.getTarget() + " "  ); 
+end         
+
+

@@ -1,0 +1,595 @@
+/* Setup defaults since variable in browsers
+----------------------------------------------- */
+body, div, dd, dt, dl, img, ul, ol, li, p, h1, h2, h3, h4, h5, form, hr, fieldset {
+	margin: 0;
+	padding: 0;
+}
+/* Element Defaults
+----------------------------------------------- */
+html {
+	height: 100%;
+	background-color: #fff;
+}
+img {
+	border: 0;
+}
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: small;
+	line-height: 1.1em;
+	color: #362F2D;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	
+}
+label {
+	font-weight: bold;
+	color: #5E5147;
+}
+input {
+	border: 1px solid #C3BBB6;
+	padding: 4px;
+	margin: 5px 0;
+	background: #fff url(../img/input.bg.gif) 0 0 repeat-x;
+}
+select {
+	border: 1px solid #C3BBB6;
+	padding: 4px;
+	margin: 5px 0;
+	background: #fff url(../img/input.bg.gif) 0 0 repeat-x;
+}
+
+/* Layout
+----------------------------------------------- */
+
+#document {
+	padding: 0 1px;
+	background: #fff url(../img/bg.gif) 0 0 repeat-y;
+	float: left;
+	width:100%;
+	border-bottom: 1px solid #C3BBB6;
+}
+
+#header {
+	width: 90%;
+	height: 30px;
+}
+
+#status {
+	float:right;
+}
+
+#topmenu {
+	background: #fff;
+	width: 90%;
+	height: 14px;
+}
+
+#leftcol {
+	background: #fff;
+	float: left;
+	width: 12%;
+	height: 500px;
+}
+
+#content {
+	background: #fff;
+	float: left;
+	width: 66%;
+	height: 500px;
+	padding-left: 17px;
+	padding-top: 10px;
+}
+
+ol, ul {
+	margin: 10px 0px 10px 6px;
+}
+li {
+	margin: 10px 12px;
+}
+fieldset {
+	border: 0;
+}
+
+#footer {
+	width: 90%;
+	height: 20px;
+	clear: both;
+}
+
+
+.entry {
+	clear: both;
+	padding-top: 3px;
+}
+
+.entry .label {
+	float: left;
+	padding-right: 5px;
+	padding-left:5 px;
+	font-weight: bold;
+	width: 150px;
+	text-align: right;
+}
+.entry .output {
+	float: right;
+	width: 360px;
+	padding-top: 3px;
+	text-align: left;
+}
+.entry .input {
+	float: right;
+	width: 360px;
+	text-align: left;
+}
+.entry .error {
+	float: right;
+	width: 360px;
+	text-align: left;
+}
+
+
+
+
+table.viewInfo{
+	border-collapse:collapse;
+	border-bottom: 1px solid red;
+	width: 98%;
+	margin: 1px;
+	font-size: 13px;
+	line-height: 30px;
+	width: 98%;
+}
+
+table.viewInfo th{
+	background:#619AD9;
+	padding: 2px 6px;
+	color: #fff;	
+	text-align: left;
+}
+
+
+table.viewInfo td.leftCol{
+	font-weight: bold;
+	background:#f5f5f9;
+	width: 25%;
+}
+
+
+table.viewInfo td{
+	/*background:#f9f9f3;*/
+	padding: 2px 3px;
+	color: #777;	
+	text-align: left;
+	border-bottom: 1px solid #eef;
+}
+
+table.viewInfo tr.odd{
+	background:#eef;
+}
+
+
+
+table.editInfo{
+	background:#fff;
+	border-collapse:collapse;
+	border:1px solid #aaa;
+	margin: 1px;
+	width: 70%;
+}
+
+table.editInfo th{
+	background:#619AD9;
+	padding: 2px 2px;
+	color: #fff;
+	line-height: 20px;	
+	text-align: left;
+}
+
+table.editInfo td{
+	/*background:#f9f9f3;*/
+	padding: 1px;
+	color: #777;	
+	text-align: left;
+	border-bottom: 1px solid #eef;
+}
+
+
+table.dispTable th {
+font-size: 14px;
+font-weight: normal;
+color: #039;
+border-bottom: 2px solid #6678B1;
+padding: 10px 8px;
+}
+
+table.dispTable tr.header {
+	background-color: #eef
+}
+
+table.dispTable td {
+	border-bottom: 1px solid #CCC;
+	color: #669;
+	padding: 6px 8px;
+}
+
+td,th {
+	display: table-cell;
+	vertical-align: inherit;
+}
+
+table.dispTable {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	border-collapse: collapse;
+	text-align: left;
+}
+
+tr.odd{
+background-color: #eef
+}
+
+table {
+	border-collapse: separate;
+}
+
+/* Buttons */
+input[type="submit"], input[type="button"], input[type="reset"] {
+	font-weight: bold;
+	color: #fff;
+	border: 1px solid #5D1414;
+	height: 26px;
+	background: #a11;
+	padding: 2px;
+	/*background: #fff url(../img/button-background.gif) 0 0 repeat-x;*/
+	border-color: #faa;
+}
+
+.buttonBox {
+	text-align: left;
+	padding: 5px 5px;
+	clear: both;
+}
+
+
+a:active, a:link, a:visited {
+	color: #0D5798;    
+}
+a:hover {
+	color: #8CAFCD;
+}
+
+input, textarea {
+	border: 1px solid #BBBBBB;
+	font-size: 10px;
+	background: #F0F8FF;
+	color: black;
+}
+
+input[type='submit'], input[type='button'] {
+	background: #4477AA;
+	color: white;
+	margin: 5px;
+	border-color: gray;
+}
+
+
+.tableControl, .actionButtons {
+	width: 100%;
+}
+
+.tableControl {
+	text-align: right;
+}
+
+.footer {
+	text-align: center;
+	font-size: 10px;
+}
+
+.rich-table {
+    width:100%;
+}
+
+h1 {
+	font-family: Arial,sans-serif;
+	color: #578BB8;
+	font-size: 1.6em;
+	margin-top: 0;
+}
+
+
+
+.body {
+	padding: 30px;
+}
+
+.columnHeader:hover
+{
+    color: #FF6600;
+}
+
+.message {
+	border: 1px solid #FFCC00;
+	padding: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	background-color: #F0F8FF;
+	font-size: 12px;
+}
+
+.name {
+	vertical-align: top;
+	font-weight: bold;
+	width: 115px;
+	float: left;
+	padding: 5px;
+	margin-top: 3px;
+	clear: left;
+}
+.value {
+	float: left;
+	padding: 5px;
+}
+.error {
+	margin-left: 20px;
+	margin-top: 5px;
+	float: left;
+	padding: 5px;
+	/*border: 1px solid red;*/
+}
+
+.errors {
+	color: red;
+}
+.errors input {
+	border: 1px solid red;
+}
+.errors textarea {
+	border: 1px solid red;
+}
+.required {
+	color: red;
+	padding-left: 2px;
+}
+
+/* date picker style */
+div.seam-date 
+{
+  margin-top: 5px;
+  border: 1px solid #AAAAAA;
+  background-color: #FFFFFF;  
+  color: #505050;
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+}
+
+table.seam-date td {
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
+  font-weight: 12px; 
+}
+
+.seam-date-monthNames
+{
+  width: 70px;
+  border: 1px solid #dddddd;
+  border-right: 3px solid #444444;
+  border-bottom: 3px solid #444444;
+  background-color: #ffffff; 
+  font-size: 12px;
+  cursor: pointer;	
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
+  font-weight: normal;
+}
+
+a.seam-date-monthNameLink, a.seam-date-monthNameLink:visited
+{
+  text-align: center;
+  display: block;
+  color: #555555;  
+}
+
+a.seam-date-monthNameLink:hover
+{ 
+  background-color: #CCCCCC;
+  color: red;  
+}
+
+.seam-date-years
+{
+  height: 10em;
+  overflow: auto;
+  width: 60px;
+  border: 1px solid #dddddd;
+  border-right: 3px solid #444444;
+  border-bottom: 3px solid #444444;
+  background-color: #ffffff; 
+  font-size: 12px;
+  cursor: pointer;	
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
+  font-weight: normal;
+}
+
+a.seam-date-yearLink, a.seam-date-yearLink:visited
+{
+  text-align: center;
+  display: block;
+  color: #555555;    
+}
+
+a.seam-date-yearLink:hover
+{
+  background-color: #CCCCCC;
+  color: red;    
+}  
+
+tr.seam-date-header
+{
+  padding: 2px 0px 2px 0px;
+}
+  
+td.seam-date-header
+{
+  padding: 0px 8px 0px 8px;
+  text-align: center;
+  color: gray;
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 12px;  
+}
+
+td.seam-date-header-prevMonth
+{
+  background-image: url("../img/cal-prev.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 0px 2px 0px 2px;
+  width: 17px;
+  height: 16px;
+  margin-left: 2px;
+}
+
+td.seam-date-header-nextMonth
+{
+  background-image: url("../img/cal-next.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 0px 2px 0px 2px;
+  width: 17px;
+  height: 16px;
+  margin-right: 2px;
+}
+
+tr.seam-date-headerDays
+{
+  color: white;
+  font-weight: normal;
+}
+
+tr.seam-date-headerDays > td
+{
+  background-color: #CCCCCC;
+  border: 1px solid #AAAAAA;
+  color: white;
+  text-align: center;
+  width: 26px;   
+}
+
+tr.seam-date-footer
+{
+  background-color: white; 
+  color: #505050;
+  font-weight: bold;
+}
+
+tr.seam-date-footer > td
+{
+  text-align: center;
+}
+
+td.seam-date-inMonth
+{
+  background-color: white; 
+  color: black;
+  font-weight: normal;
+  cursor: pointer;
+  border: 1px solid #ece9d8;
+}
+
+td.seam-date-outMonth
+{
+  background-color: white; 
+  color: #999999;
+  font-weight: normal;
+  cursor: pointer;
+  border: 1px solid #ece9d8;
+}
+
+td.seam-date-selected
+{
+  background-color: #CCCCCC;        
+  border: 1px solid #AAAAAA; 
+  color: black;
+  font-weight: normal;
+}
+
+td.seam-date-dayOff-inMonth
+{
+  background-color: #efefef;
+  color: black;
+  font-weight: normal;
+  cursor: pointer;
+  border: 1px solid #ece9d8;
+}
+
+td.seam-date-dayOff-outMonth
+{
+  background-color: #efefef;
+  color: #999999;
+  font-weight: normal;
+  cursor: pointer;
+  border: 1px solid #ece9d8;
+}
+
+td.seam-date-hover 
+{
+  background-color: #CCCCCC;
+  border: 1px solid #AAAAAA;
+  cursor: pointer;
+  color: red;
+}
+
+
+
+.dr-mpnl-pnl {overflow:auto!important}
+
+
+.rich-panel-body, .rich-tabpanel-content, .rich-tabpanel {
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: small;
+line-height: 1.25em;
+color: #333;
+width:100%;
+}
+
+element.style {
+width:90% ;
+}
+
+td.rich-tabpanel-content {
+	width:100%;
+	border : 1px solid lightgray;
+}
+
+table.infoTable{
+	border-collapse:collapse;
+	border-bottom: 1px solid red;
+	width: 98%;
+}
+
+table.infoTable th{
+	background:#619AD9;
+	padding: 2px 6px;
+	color: #fff;	
+	text-align: left;
+}
+
+
+table.infoTable td.leftCol{
+	font-weight: bold;
+	background:#f5f5f9;
+	width: 25%;
+}
+
+
+table.infoTable td{
+	background:#f9f9f3;
+	padding: 2px 6px;
+	color: #777;	
+	text-align: left;
+	border-bottom: 1px solid #eef;
+}
+

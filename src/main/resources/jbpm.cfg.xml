@@ -1,0 +1,46 @@
+<jbpm-configuration>
+
+	<jbpm-context>
+
+		<service name="persistence">
+			<factory>
+				<bean class="org.jbpm.persistence.db.DbPersistenceServiceFactory">
+					<field name="isTransactionEnabled">
+						<false />
+					</field>
+				</bean>
+			</factory>
+		</service>
+		<service name="tx" factory="org.jbpm.tx.TxServiceFactory" />
+		<service name="message" factory="org.jbpm.msg.db.DbMessageServiceFactory" />
+		<service name="scheduler" factory="org.jbpm.scheduler.db.DbSchedulerServiceFactory" />
+		<service name="logging" factory="org.jbpm.logging.db.DbLoggingServiceFactory" />
+		<service name="authentication"
+			factory="org.jbpm.security.authentication.DefaultAuthenticationServiceFactory" />
+
+	</jbpm-context>
+
+
+	<bean name='jbpm.mail.address.resolver'
+		class='org.witchcraft.jbpm.mail.IdentityAddressResolver'
+		singleton='true' />
+
+	<string name="resource.mail.templates" value="jbpm.mail.templates.xml" />
+
+	<string name="jbpm.mail.smtp.host" value="smtp.gmail.com" />
+
+	<string name="jbpm.mail.from.address" value="neonwc@gmail.com" />
+	<string name="jbpm.mail.user" value="neonwc@gmail.com" />
+	<string name="jbpm.mail.pass" value="witchcraft" />
+	<string name="jbpm.mail.port" value="465" />
+	<string name="jbpm.mail.smtp.socketFactory.port" value="465" />
+	<string name="jbpm.mail.smtp.socketFactory.class" value="javax.net.ssl.SSLSocketFactory" />
+	<string name="jbpm.mail.smtp.auth" value="true" />
+	<string name="jbpm.mail.smtp.starttls.enable" value="true" />
+	<string name="jbpm.mail.debug" value="true" />
+	<string name="jbpm.mail.smtp.socketFactory.fallback" value="false" />
+	<string name="jbpm.mail.advanced.config" value="true" />
+	<string name='mail.class.name' value='org.witchcraft.jbpm.mail.Mail' />
+
+
+</jbpm-configuration>

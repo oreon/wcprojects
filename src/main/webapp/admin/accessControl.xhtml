@@ -1,0 +1,127 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:wc="http://witchcraft.sourceforge.net/jsf"
+	template="/admin/template.xhtml">
+	<ui:define name="content">
+		<h:form>
+			<h:dataTable value="#{roleFieldPrivilegeAction.accountPermissions}" var="_metaEntity">
+				<h:column >
+					<f:facet name="header">
+						RECEP
+					</f:facet>
+					<h:outputText value="#{_metaEntity.recipient}"></h:outputText>
+				</h:column>
+				
+				<h:column >
+					<f:facet name="header">
+						TARGET
+					</f:facet>
+					<h:outputText value="#{_metaEntity.target}"></h:outputText>
+				</h:column>
+				
+				
+				<h:column >
+					<f:facet name="header">
+						ACTION
+					</f:facet>
+					<h:outputText value="#{_metaEntity.action}"></h:outputText>
+				</h:column>
+				
+				<h:column >
+					<f:facet name="header">
+						DIS
+					</f:facet>
+					<h:outputText value="#{_metaEntity.discriminator}"></h:outputText>
+				</h:column>
+
+			</h:dataTable>
+
+
+			<p:panel>
+				<f:facet name="header">
+					<h:outputText value="Manage Access" />
+				</f:facet>
+
+				<ui:repeat var="entity"
+					value="#{metaEntityList.resultListWithRoleFields}">
+
+					<h:form>
+
+						<p:panel>
+							<f:facet name="header">
+								<h:outputText value="#{entity.displayName}" />
+							</f:facet>
+
+							<table border="1">
+								<tr>
+									<ui:repeat var="fld" value="#{entity.listMetaFields}">
+										<th><h:outputText value="#{fld.displayName}" /></th>
+									</ui:repeat>
+								</tr>
+								<tr>
+
+									<ui:repeat var="fld" value="#{entity.listMetaFields}">
+										<td><ui:repeat var="fldRole"
+												value="#{fld.listRoleFieldPrivileges}">
+
+												<h:outputText value="#{fldRole.appRole.displayName}" />
+												<br />
+												<s:decorate id="readAccessDecorate"
+													template="/layout/edit.xhtml">
+													<ui:define name="label">
+														<h:outputText
+															value="#{msg.roleFieldPrivilege_readAccess}  "
+															rendered="#{skipPermissionCheck == 'true' || s:hasPermission('roleFieldPrivilege', 'readAccessEdit')}" />
+													</ui:define>
+													<h:selectBooleanCheckbox id="readAccess#{entityId}"
+														rendered="#{skipPermissionCheck == 'true' || s:hasPermission('roleFieldPrivilege', 'readAccessEdit')}"
+														label="#{msg.roleFieldPrivilege_readAccess}"
+														required="false" disabled="false"
+														value="#{fldRole.readAccess}">
+														<p:ajaxValidator event="onsubmit" />
+													</h:selectBooleanCheckbox>
+												</s:decorate>
+												<s:decorate id="writeAccessDecorate"
+													template="/layout/edit.xhtml">
+													<ui:define name="label">
+														<h:outputText
+															value="#{msg.roleFieldPrivilege_writeAccess}  "
+															rendered="#{skipPermissionCheck == 'true' || s:hasPermission('roleFieldPrivilege', 'writeAccessEdit')}" />
+													</ui:define>
+													<h:selectBooleanCheckbox id="writeAccess#{entityId}"
+														rendered="#{skipPermissionCheck == 'true' || s:hasPermission('roleFieldPrivilege', 'writeAccessEdit')}"
+														label="#{msg.roleFieldPrivilege_writeAccess}"
+														required="false" disabled="false"
+														value="#{fldRole.writeAccess}">
+														<p:ajaxValidator event="onsubmit" />
+													</h:selectBooleanCheckbox>
+												</s:decorate>
+											</ui:repeat></td>
+									</ui:repeat>
+
+								</tr>
+							</table>
+
+							<h:commandButton value="Save"
+								action="#{metaEntityAction.persist(entity)}" />
+
+						</p:panel>
+					</h:form>
+
+				</ui:repeat>
+
+
+			</p:panel>
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>

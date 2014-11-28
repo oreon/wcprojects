@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	>
+		<p:panel>
+			<f:facet name="header">
+				<h:outputText value="Pooled Tasks" />
+			</f:facet>
+			<p:dataTable value="#{pooledTaskInstanceList}" var="task">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id" />
+					</f:facet>
+					<h:outputText
+						value="#{task.variables['processToken'].id}" />
+				</h:column>
+				
+			
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Task" />
+					</f:facet>
+					<h:outputText value="#{task.name}" />
+				</h:column>
+
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Title" />
+					</f:facet>
+					<h:outputText
+						value="#{task.variables['processToken'].displayName}" />
+				</h:column>
+
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Initiator" />
+					</f:facet>
+					  #{task.variables['processToken'].createdByUser.userName}
+				</h:column>
+
+				<h:column>
+					<s:link action="#{pooledTask.assignToCurrentActor}" value="Assign"
+						taskInstance="#{task}" />
+				</h:column>
+
+			</p:dataTable>
+
+		</p:panel>
+
+
+
+
+</ui:composition>

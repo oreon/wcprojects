@@ -1,0 +1,44 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:wc="http://witchcraft.sourceforge.net/jsf"
+	template="/admin/template.xhtml">
+	<ui:define name="content">
+		Found #{claimListConversational.entityList.size} results for search term: <b>
+		${claimListConversational.searchText} </b>
+		<br />
+		<h:form>
+
+			<p:tabPanel>
+				<p:tab label="Search Results">
+					<ui:repeat var="claim"
+						value="#{claimListConversational.entityList}">
+						<s:link value="${claim.summary}"
+							view="/admin/entities/quickclaim/claim/viewClaim.seam">
+							<f:param name="claimId" value="${claim.id}" />
+						</s:link>
+						<br />
+		<h:outputText value="${claim.higlightedFragment}" escape="false" />
+						<hr />
+					</ui:repeat>
+
+				</p:tab>
+				<p:tab label="Tabular">
+					<ui:include
+						src="/admin/entities/quickclaim/claim/listClaimComponent.xhtml">
+						<ui:param name="records"
+							value="#{claimListConversational.entityList}" />
+					</ui:include>
+
+				</p:tab>
+			</p:tabPanel>
+		</h:form>
+	</ui:define>
+</ui:composition>

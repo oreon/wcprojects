@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:s="http://jboss.org/schema/seam/taglib">
+	
+<h:head>
+	<ui:include src ="/admin/metaIncludes.xhtml" />
+</h:head>
+
+<h:body>
+
+<f:loadBundle basename="messages" var="msg" />
+
+<ui:include src="/admin/header.xhtml"></ui:include>
+<div id="topmenu"></div>
+<div id="leftcol">
+<c:set var="skipPermissionCheck" value="true"/> 
+
+<s:div >
+<ui:include src="entities/navigation.xhtml" />
+</s:div>
+
+
+
+</div>
+<!-- 
+<p:growl  id="growlMessages" /> 
+ -->
+<s:div id="content">
+
+
+
+<s:div
+	style="border:1px solid #bbc; background-color:#eef"
+	rendered="#{facesContext.maximumSeverity != null}">
+	<p:messages globalOnly="true" errorStyle="color:red" autoUpdate="true"
+		warnStyle="color:gray" infoStyle="color:green" />
+	
+</s:div> 
+
+<c:set var="skipPermissionCheck" value="true" />
+<ui:insert name="content" />
+</s:div>
+<div id="footer"></div>
+
+
+
+
+</h:body>
+</html>

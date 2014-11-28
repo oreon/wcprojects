@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a="http://richfaces.org/a4j"
+	template="/admin/tasks/template.xhtml">
+
+	<ui:define name="content"> 
+		
+		<h2>Task: #{jbpmProcessAction.task.task.taskNode.name} - #{jbpmProcessAction.task.variables['processToken'].displayName}</h2>
+		
+		<h:form >
+		
+			<ui:include src="#{jbpmProcessAction.taskForm}"/>
+	
+			<h:outputText value="Comments" />
+			<p:editor id="Comment_text" required="false"
+				value="#{jbpmProcessAction.comment}" />
+
+			<ui:repeat var="trans"
+				value="#{jbpmProcessAction.task.availableTransitions}">
+				<h:commandLink value="#{msg[trans.name]}"
+					action="#{jbpmProcessAction.makeDecision}"
+					taskInstance="#{jbpmProcessAction.task}">
+					<f:param name="transName" value="#{trans.name}" />
+					<f:param name="taskId"
+						value="#{jbpmProcessAction.task.id}" />
+				</h:commandLink>
+				<h:outputText value=" " />
+			</ui:repeat>
+
+
+		</h:form>
+		 Comments
+			 
+			<p:dataTable
+			rendered="#{not empty jbpmProcessAction.comments}"
+			rowClasses="odd, even" id="cmaList" styleClass="dataTable"
+			value="#{jbpmProcessAction.comments}" var="_cmt">
+			<h:column>
+				<f:facet name="header">
+					Comment
+				</f:facet>
+				<s:formattedText value="#{_cmt.message}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					Actor
+					
+				</f:facet>
+				<h:outputText value="#{_cmt.actorId}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					Date
+				</f:facet>
+				<h:outputText value="#{_cmt.time}" />
+			</h:column>
+
+		</p:dataTable>
+
+
+
+	</ui:define>
+</ui:composition>

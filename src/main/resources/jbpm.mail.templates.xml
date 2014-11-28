@@ -1,0 +1,24 @@
+<mail-templates>
+
+  <variable name="BaseTaskListURL" value="http://localhost:8080/jbpm/task?id=" />
+
+  <mail-template name='task-assign'>
+    <actors>#{taskInstance.actorId}</actors>
+    <subject>Task: '#{taskInstance.name} #{taskInstance.variables['token'].displayName}'</subject>
+    <text><![CDATA[Hi,
+Task '#{taskInstance.name}'  -  '#{taskInstance.variables['token'].displayName}' has been assigned to you.
+You can view it here : http://test.nwrs.ca/trackrite/admin/tasks/viewTask.seam?taskId=#{taskInstance.id}
+Thanks.
+-- NAS Team--]]></text>
+  </mail-template>
+
+  <mail-template name='task-reminder'>
+    <actors>#{taskInstance.actorId}</actors>
+    <subject>Task '#{taskInstance.name}' !</subject>
+    <text><![CDATA[Hey,
+Don't forget about #BaseTaskListURL#{taskInstance.id} 
+Get going !
+---powered by JBoss jBPM---]]></text>
+  </mail-template>
+
+</mail-templates>    

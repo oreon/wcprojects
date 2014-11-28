@@ -1,0 +1,42 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
+	xmlns:wc="http://witchcraft.sourceforge.net/jsf"
+	template = "/defaultTemplate/template.xhtml" >	
+
+<ui:define name="content">
+
+    <h:form id="login">
+
+        <rich:panel>
+            <f:facet name="header">Register </f:facet>
+			
+            <ui:include src="/admin/entities/facility/facility/editFacilityComponent.xhtml" >
+            	<ui:param name="excludeWards" value="true"/> 
+            </ui:include>
+            
+            <ui:include src="/admin/entities/employee/physician/editPhysicianComponent.xhtml" >
+            	<ui:param name="excludeFacility" value="true"/>
+            	<ui:param name="excludeEnabled" value="true"/>
+            </ui:include>
+
+        </rich:panel>
+
+        <div class="actionButtons">
+            <h:commandButton value="Register" action="#{facilityAction.register}" >
+            </h:commandButton>
+        </div>
+
+    </h:form>
+
+ </ui:define>
+</ui:composition>

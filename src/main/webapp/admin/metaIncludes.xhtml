@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:wc="http://witchcraft.sourceforge.net/jsf">
+
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>${artifactId}</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		
+		<link rel="shortcut icon" href="#{request.contextPath}/images/favicon.ico" />
+		 <script type="text/javascript" src="#{request.contextPath}/js/commons.js"></script> 
+		 <link href="#{request.contextPath}/resources/css/screen.css" rel="stylesheet" type="text/css" />
+		
+		<link href="#{request.contextPath}/resources/css/pure-min.css" rel="stylesheet" type="text/css" />
+		
+		<script type="text/javascript">
+	    function handleDialogSubmit(xhr, status, args, dlg) {
+	        if (args.validationFailed) {
+	            //alert('invalid');
+	        	dlg.show();
+	        } else {
+	        	//alert('valid');
+	        	dlg.hide();
+	        }
+	    }
+	</script>
+    
+  <!--    
+    <p:jQuery name="addScrollToCTDialog" timing="onJScall" selector="#ctContent" 
+        query="css('overflow-y','auto').css('overflow-x','hidden').css('height', jQuery(window).height() - 70)" />
+        
+    <p:jQuery name="resetScrollToCTDialog" timing="onJScall" selector="#ctContent" 
+        query="css('height','auto').css('overflow-y','auto').css('overflow-x','hidden')" />
+-->
+
+</ui:composition>

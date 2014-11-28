@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:s="http://jboss.org/schema/seam/taglib">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Cerebrum EMR </title>
+<link rel="stylesheet" href="#{request.contextPath}/css/style.css" type="text/css" />
+</head>
+<body>
+<f:loadBundle basename="messages" var="msg" />
+<p:toolbar>
+	<p:toolbarGroup>
+		<h:graphicImage value="/images/icons/house.png" />
+		<s:link view="/reg/index.seam" value="Home" />
+	</p:toolbarGroup>
+
+	<p:toolbarGroup rendered="#{ not identity.loggedIn}">
+		<h:graphicImage value="/images/icons/house.png" />
+		<s:link view="/regCandidate/registerForm.seam" value="Register" />
+	</p:toolbarGroup>
+	
+	<p:toolbarGroup>
+		<h:graphicImage value="/images/icons/house.png" />
+		<s:link view="/reg/jobs.seam" value="Jobs" />
+	</p:toolbarGroup>
+	
+	<p:toolbarGroup  rendered="#{identity.loggedIn}">
+		<h:graphicImage value="/images/icons/house.png"/>
+		<s:link action="#{candidateAction.setCandidateId(candidateAction.currentLoggedInCandidate.id)}" view="/manageAccount/viewProfile" value="Manage Profile" propagation="begin" />
+	</p:toolbarGroup>
+	
+	
+	<p:toolbarGroup location="right" rendered="#{ identity.loggedIn}">
+		<s:link action="#{identity.logout}" view="/reg/index.xhtml"
+			value="Logout #{identity.credentials.username}" propagation="none" />
+	</p:toolbarGroup>
+
+	<p:toolbarGroup location="right" rendered="#{ not identity.loggedIn}">
+		<s:link  view="/reg/index.xhtml"
+			value="Log In"  propagation="none" />
+	</p:toolbarGroup>
+	
+</p:toolbar>
+
+
+<br/>
+<br/>
+<h3> MAIN PAGE </h3>
+<i>
+	<p:messages globalOnly="true" errorStyle="color:red" warnStyle="color:gray" infoStyle="color:green" />
+
+</i>
+
+<br/>
+<br/>
+<c:set var="skipPermissionCheck" value="true" />
+<ui:insert name="content" />
+
+
+</body>
+</html>

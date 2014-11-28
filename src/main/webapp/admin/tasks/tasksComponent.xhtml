@@ -1,0 +1,74 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	>
+
+		<h:form id="list">
+			<div><h:outputText value="There are no tasks at the moment."
+				rendered="#{empty taskInstancePriorityList}" /> 
+				
+				<p:dataTable
+				value="#{taskInstancePriorityList}" var="task"
+				rendered="#{not empty taskInstancePriorityList}" bgcolor="#F1F1F1">
+				
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id" />
+					</f:facet>
+					<h:outputText value="#{task.id}">
+					</h:outputText>
+				</h:column>
+
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Created" />
+					</f:facet>
+					<h:outputText
+						value="#{task.taskMgmtInstance.processInstance.start}">
+						<s:convertDateTime type="date" />
+					</h:outputText>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Due" />
+					</f:facet>
+					<h:outputText value="#{task.dueDate}">
+						<s:convertDateTime type="date" />
+					</h:outputText>
+				</h:column>
+
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Task" />
+					</f:facet>
+					<h:outputText value="#{msg[task.name]}" />
+				</h:column>
+				
+				
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Title" />
+					</f:facet>
+					<h:outputText value="#{task.variables['processToken'].displayName}" />
+				</h:column>
+				
+				
+				<h:column>
+					<s:link action="/admin/tasks/viewTask.xhtml" taskInstance="#{task}"  
+						value="View" >
+					</s:link>
+				</h:column>
+
+			</p:dataTable></div>
+			
+
+		</h:form>
+	
+</ui:composition>

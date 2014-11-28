@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:s="http://jboss.com/products/seam/taglib" xmlns:a="http://richfaces.org/a4j" xmlns:p="http://primefaces.prime.com.tr/ui" xmlns:rich="http://richfaces.org/rich" xmlns:c="http://java.sun.com/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:wc="http://witchcraft.sourceforge.net/jsf" template="/admin/reports/template.xhtml">  
+  <ui:define name="content"> 
+    <h:form> 
+      <s:validateAll> 
+        <h:panelGrid columns="3" styleClass="viewInfo" columnClasses="leftCol, rightCol"> 
+          <f:facet name="header"> 
+            <h:outputText value="EmployeesByDepartment"/> 
+          </f:facet> 
+        </h:panelGrid> 
+      </s:validateAll>  
+      <h:commandButton propagation="none" value="Run Report as PDF" action="#{employeesByDepartmentAction.runReport('EmployeesByDepartment', 'PDF')}"/>  
+      <h:commandButton propagation="none" value="Run Report as HTML" action="#{employeesByDepartmentAction.runReport('EmployeesByDepartment', 'HTML')}"/> 
+    </h:form> 
+  </ui:define> 
+</ui:composition>
