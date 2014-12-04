@@ -4,6 +4,7 @@
 	xmlns:bpm="http://jboss.org/schema/seam/bpm" xmlns:international="http://jboss.org/schema/seam/international"
 	xmlns:security="http://jboss.org/schema/seam/security" xmlns:web="http://jboss.org/schema/seam/web"
 	xmlns:mail="http://jboss.org/schema/seam/mail" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:resteasy="http://jboss.org/schema/seam/resteasy"
 
 	xmlns:persistence="http://jboss.org/schema/seam/persistence"
 	xmlns:transaction="http://jboss.org/schema/seam/transaction"
@@ -25,7 +26,11 @@
  			      	http://jboss.org/schema/seam/international 
  			      	http://jboss.org/schema/seam/international-2.3.xsd
  					http://jboss.org/schema/seam/persistence 
- 					http://jboss.org/schema/seam/persistence-2.3.xsd">
+ 					http://jboss.org/schema/seam/persistence-2.3.xsd
+ 					http://jboss.org/schema/seam/resteasy 
+ 					http://jboss.org/schema/seam/resteasy-2.3.xsd"
+
+ 					>
 
 
 	<core:init debug="false" />
@@ -58,7 +63,7 @@
 
 		<persistence:filters>
 			<value>#{archivedFilter}</value>
-<!--  	<value>#{tenantFilter}</value>  -->		
+			<!-- <value>#{tenantFilter}</value> -->
 		</persistence:filters>
 
 	</persistence:managed-persistence-context>
@@ -95,14 +100,21 @@
 
 
 	<web:exception-filter url-pattern="*.seam" />
-	
+
 	<web:multipart-filter disabled="true" />
-	
-	<!--
-		<bpm:jbpm> <bpm:process-definitions>
-		<value>processes/processdefinition.xml</value>
-		</bpm:process-definitions> </bpm:jbpm>
-	-->
+
+	<!-- <bpm:jbpm> <bpm:process-definitions> <value>processes/processdefinition.xml</value> 
+		</bpm:process-definitions> </bpm:jbpm> -->
+
+
+
+	<resteasy:application  destroy-session-after-request="true">
+		<resteasy:media-type-mappings>
+			<key>json</key>
+			<value>application/json</value>
+		</resteasy:media-type-mappings>
+	</resteasy:application>
+
 
 
 </components>

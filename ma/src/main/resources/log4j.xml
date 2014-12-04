@@ -34,6 +34,11 @@
 	<category name="org.jboss.seam">
 		<priority value="WARN" />
 	</category>
+	
+
+	<category name="org.jboss.resteasy">
+		<priority value="INFO" />
+	</category>
 
 	<appender name="FILE" class="org.apache.log4j.RollingFileAppender">
 		<param name="File" value="logs/cerebrum.log" />
