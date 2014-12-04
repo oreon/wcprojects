@@ -89,10 +89,10 @@ public class BaseEntity implements Serializable{
 	
     
     
-    
+    /*
     public Boolean isArchived() {
 		return archived;
-	}
+	}*/
     
     public Boolean getArchived(){
     	return archived;
