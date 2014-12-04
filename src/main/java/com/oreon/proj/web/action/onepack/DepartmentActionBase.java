@@ -56,9 +56,6 @@ public abstract class DepartmentActionBase extends BaseAction<Department>
 	@RequestParameter
 	protected Long departmentId;
 
-	@In(create = true, value = "employeeAction")
-	com.oreon.proj.web.action.onepack.EmployeeAction employeesAction;
-
 	public void setDepartmentId(Long id) {
 		setEntityId(id);
 	}
@@ -74,18 +71,8 @@ public abstract class DepartmentActionBase extends BaseAction<Department>
 		return (Long) getId();
 	}
 
-	public Department getEntity() {
-		return instance;
-	}
-
-	//@Override
-	public void setEntity(Department t) {
-		this.instance = t;
-		loadAssociations();
-	}
-
 	public Department getDepartment() {
-		return (Department) getInstance();
+		return getEntity();
 	}
 
 	@Override
@@ -112,13 +99,19 @@ public abstract class DepartmentActionBase extends BaseAction<Department>
 	 * An order should always have at least one order item . Marked in uml with 1..* multiplicity
 	 */
 	private void addDefaultAssociations() {
-		instance = getInstance();
+		if (isNew()) {
+			instance = getInstance();
 
+		}
 	}
 
 	public void wire() {
-		getInstance();
-
+		/*
+		if (isNew()){
+			getInstance();
+			
+		}
+		 */
 	}
 
 	public Department getDefinedInstance() {
@@ -126,11 +119,7 @@ public abstract class DepartmentActionBase extends BaseAction<Department>
 	}
 
 	public void setDepartment(Department t) {
-		this.instance = t;
-		if (getInstance() != null && t != null) {
-			setDepartmentId(t.getId());
-			loadAssociations();
-		}
+		setEntity(t);
 	}
 
 	@Override
@@ -150,11 +139,7 @@ public abstract class DepartmentActionBase extends BaseAction<Department>
 
 		addDefaultAssociations();
 
-		wire();
-	}
-
-	public void updateAssociations() {
-
+		//wire();
 	}
 
 	protected List<com.oreon.proj.onepack.Employee> listEmployees = new ArrayList<com.oreon.proj.onepack.Employee>();
@@ -197,7 +182,8 @@ public abstract class DepartmentActionBase extends BaseAction<Department>
 	}
 
 	public void updateComposedAssociations() {
-
+		/*
+		 */
 	}
 
 	public void clearLists() {

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf">  
+  <h:panelGroup id="editInvestingGoalComponentPanel"> 
+    <h:panelGrid columns="1"/>  
+    <c:if test="${numColumns == null }"> 
+      <c:set var="numColumns" value="2"/> 
+    </c:if>  
+    <h:panelGrid columns="${numColumns}" styleClass="editInfo" columnClasses="leftCol, rightCol"> 
+      <f:facet name="header"> 
+        <h:outputText value="#{msg.InvestingGoal}"/> 
+      </f:facet>  
+      <s:decorate id="nameEngDecorate" rendered="#{ ! excludeNameEng == true}" template="/layout/edit.xhtml"> 
+        <ui:define name="label"> 
+          <h:outputText value="#{msg.investingGoal_nameEng}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investingGoal', 'editNameEng')}"/>
+        </ui:define>  
+        <h:inputText escape="false" id="nameEng#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investingGoal', 'editNameEng')}" label="#{msg.investingGoal_nameEng}" required="false" disabled="false" value="#{investingGoalAction.investingGoal.nameEng}"></h:inputText> 
+      </s:decorate>  
+      <s:decorate id="nameFreDecorate" rendered="#{ ! excludeNameFre == true}" template="/layout/edit.xhtml"> 
+        <ui:define name="label"> 
+          <h:outputText value="#{msg.investingGoal_nameFre}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investingGoal', 'editNameFre')}"/>
+        </ui:define>  
+        <h:inputText escape="false" id="nameFre#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investingGoal', 'editNameFre')}" label="#{msg.investingGoal_nameFre}" required="false" disabled="false" value="#{investingGoalAction.investingGoal.nameFre}"></h:inputText> 
+      </s:decorate>  
+      <s:decorate id="imageFileIriDecorate" rendered="#{ ! excludeImageFileIri == true}" template="/layout/edit.xhtml"> 
+        <ui:define name="label"> 
+          <h:outputText value="#{msg.investingGoal_imageFileIri}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investingGoal', 'editImageFileIri')}"/>
+        </ui:define>  
+        <h:inputText escape="false" id="imageFileIri#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investingGoal', 'editImageFileIri')}" label="#{msg.investingGoal_imageFileIri}" required="false" disabled="false" value="#{investingGoalAction.investingGoal.imageFileIri}"></h:inputText> 
+      </s:decorate>  
+      <s:decorate id="isDefaultDecorate" rendered="#{ ! excludeIsDefault == true}" template="/layout/edit.xhtml"> 
+        <ui:define name="label"> 
+          <h:outputText value="#{msg.investingGoal_isDefault}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investingGoal', 'editIsDefault')}"/>
+        </ui:define>  
+        <h:selectBooleanCheckbox escape="false" id="isDefault#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investingGoal', 'editIsDefault')}" label="#{msg.investingGoal_isDefault}" required="false" disabled="false" value="#{investingGoalAction.investingGoal.isDefault}"></h:selectBooleanCheckbox> 
+      </s:decorate>  
+      <s:decorate id="investingGoalPlanCodeIdDecorate" rendered="#{ ! excludeInvestingGoalPlanCode == true}" template="/layout/edit.xhtml"> 
+        <ui:define name="label"> 
+          <h:outputText value="#{msg.investingGoal_investingGoalPlanCode}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investingGoal', 'editInvestingGoalPlanCode')}"/>
+        </ui:define>  
+        <p:selectOneMenu id="investingGoalPlanCodeId" label="#{msg.investingGoal_investingGoalPlanCode}" value="#{investingGoalAction.investingGoal.investingGoalPlanCode}" required="true" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investingGoal', 'editInvestingGoalPlanCode')}" disabled="false" converter="#{investingGoalPlanCodeList.converter}"> 
+          <f:selectItem itemLabel="Select One" itemValue=""/>  
+          <f:selectItems value="#{investingGoalPlanCodeList.fetchAll()}" var="itemIter" itemLabel="#{itemIter.displayName}" itemValue="#{itemIter}"/> 
+        </p:selectOneMenu> 
+      </s:decorate> 
+    </h:panelGrid>  
+    <br/>  
+    <br/> 
+  </h:panelGroup> 
+</ui:composition>

@@ -21,6 +21,71 @@
           <s:conversationPropagation type="end"/>  
           <f:param name="departmentId" value="0"/> 
         </h:commandLink>  
+        <br/>  
+        <h:commandLink value="Customer" action="customer"> 
+          <s:conversationPropagation type="none"/> 
+        </h:commandLink>  
+        <h:commandLink action="editCustomer"> 
+          <h:graphicImage value="/images/icons/add.png" style="border: 0px" alt="create"/>  
+          <s:conversationPropagation type="end"/>  
+          <f:param name="customerId" value="0"/> 
+        </h:commandLink>  
+        <br/>  
+        <h:commandLink value="CustomerOrder" action="customerOrder"> 
+          <s:conversationPropagation type="none"/> 
+        </h:commandLink>  
+        <h:commandLink action="editCustomerOrder"> 
+          <h:graphicImage value="/images/icons/add.png" style="border: 0px" alt="create"/>  
+          <s:conversationPropagation type="end"/>  
+          <f:param name="customerOrderId" value="0"/> 
+        </h:commandLink>  
+        <br/>  
+        <h:commandLink value="Product" action="product"> 
+          <s:conversationPropagation type="none"/> 
+        </h:commandLink>  
+        <h:commandLink action="editProduct"> 
+          <h:graphicImage value="/images/icons/add.png" style="border: 0px" alt="create"/>  
+          <s:conversationPropagation type="end"/>  
+          <f:param name="productId" value="0"/> 
+        </h:commandLink>  
+        <br/>  
+        <h:commandLink value="OrderItem" action="orderItem"> 
+          <s:conversationPropagation type="none"/> 
+        </h:commandLink>  
+        <h:commandLink action="editOrderItem"> 
+          <h:graphicImage value="/images/icons/add.png" style="border: 0px" alt="create"/>  
+          <s:conversationPropagation type="end"/>  
+          <f:param name="orderItemId" value="0"/> 
+        </h:commandLink>  
+        <br/> 
+      </p:tab>  
+      <p:tab title="Univeris.data" expanded="#{panelMenuStateBean.state['Univeris.data']}"> 
+        <h:commandLink value="InvestorProfile" action="investorProfile"> 
+          <s:conversationPropagation type="none"/> 
+        </h:commandLink>  
+        <h:commandLink action="editInvestorProfile"> 
+          <h:graphicImage value="/images/icons/add.png" style="border: 0px" alt="create"/>  
+          <s:conversationPropagation type="end"/>  
+          <f:param name="investorProfileId" value="0"/> 
+        </h:commandLink>  
+        <br/>  
+        <h:commandLink value="InvestingGoal" action="investingGoal"> 
+          <s:conversationPropagation type="none"/> 
+        </h:commandLink>  
+        <h:commandLink action="editInvestingGoal"> 
+          <h:graphicImage value="/images/icons/add.png" style="border: 0px" alt="create"/>  
+          <s:conversationPropagation type="end"/>  
+          <f:param name="investingGoalId" value="0"/> 
+        </h:commandLink>  
+        <br/>  
+        <h:commandLink value="InvestingGoalPlanCode" action="investingGoalPlanCode"> 
+          <s:conversationPropagation type="none"/> 
+        </h:commandLink>  
+        <h:commandLink action="editInvestingGoalPlanCode"> 
+          <h:graphicImage value="/images/icons/add.png" style="border: 0px" alt="create"/>  
+          <s:conversationPropagation type="end"/>  
+          <f:param name="investingGoalPlanCodeId" value="0"/> 
+        </h:commandLink>  
         <br/> 
       </p:tab> 
     </p:accordionPanel> 

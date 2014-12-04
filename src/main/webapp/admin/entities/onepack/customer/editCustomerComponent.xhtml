@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf">  
+  <h:panelGroup id="editCustomerComponentPanel"> 
+    <h:panelGrid columns="1"/>  
+    <c:if test="${numColumns == null }"> 
+      <c:set var="numColumns" value="2"/> 
+    </c:if>  
+    <h:panelGrid columns="${numColumns}" styleClass="editInfo" columnClasses="leftCol, rightCol"> 
+      <f:facet name="header"> 
+        <h:outputText value="#{msg.Customer}"/> 
+      </f:facet>  
+      <s:decorate id="firstNameDecorate" rendered="#{ ! excludeFirstName == true}" template="/layout/edit.xhtml"> 
+        <ui:define name="label"> 
+          <h:outputText value="#{msg.customer_firstName}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editFirstName')}"/>
+        </ui:define>  
+        <h:inputText escape="false" id="firstName#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editFirstName')}" label="#{msg.customer_firstName}" required="false" disabled="false" value="#{customerAction.customer.firstName}"></h:inputText> 
+      </s:decorate>  
+      <s:decorate id="lastNameDecorate" rendered="#{ ! excludeLastName == true}" template="/layout/edit.xhtml"> 
+        <ui:define name="label"> 
+          <h:outputText value="#{msg.customer_lastName}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editLastName')}"/>
+        </ui:define>  
+        <h:inputText escape="false" id="lastName#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editLastName')}" label="#{msg.customer_lastName}" required="false" disabled="false" value="#{customerAction.customer.lastName}"></h:inputText> 
+      </s:decorate> 
+    </h:panelGrid>  
+    <br/>  
+    <br/> 
+  </h:panelGroup> 
+</ui:composition>

@@ -2,7 +2,6 @@ package org.witchcraft.seam.action;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.security.AccessControlException;
 import java.util.List;
 import java.util.Map;
 
@@ -197,31 +196,49 @@ public abstract class WCBaseAction<T extends BaseEntity> extends EntityHome<T> {
 	// Needed for many to many list initializations in dialog
 	public void onRowSelect(SelectEvent event) throws Exception {
 		T t = (T) event.getObject();
-		setEntityIdForModalDlg(t.getId());
+		setEntity(t);
+	}
+
+	public T getEntity() {
+		return getInstance();
+	}
+
+	public void setEntity(T t) {
+		setInstance(t);
+		loadAssociations();
 	}
 
 	public void setEntityId(Long entityId) {
+		
+		clearInstance();
+		clearLists();
+		
+		if (!  (new Long(0)).equals(entityId)){
+			setId(entityId);
+			setInstance(loadInstance());
+		}
+		//else
+		//	setInstance(loadInstance());
+		
+		loadAssociations();
+		
+		/*
+		setId(entityId);
+		
 		if (entityId == 0) {
 			clearInstance();
 			clearLists();
 			loadAssociations();
-			return;
-		}
-		setId(entityId);
-		instance = loadInstance();
-		UserUtilAction userUtilAction = (UserUtilAction) Component
-				.getInstance("userUtilAction");
 
-		
-		if (!isPostBack())
-			loadAssociations();
+		} else {
+			instance = loadInstance();
+			if (!isPostBack())
+				loadAssociations();
+		}*/
 	}
 
 	public void setEntityIdForModalDlg(Long entityId) {
-		setId(entityId);
-		instance = loadInstance();
-		clearLists();
-		loadAssociations();
+		setEntityId(entityId);
 	}
 
 	protected void addInfoMessage(String message, Object... params) {
@@ -304,8 +321,10 @@ public abstract class WCBaseAction<T extends BaseEntity> extends EntityHome<T> {
 		return false;
 	}
 
+	/*
 	@Transactional
 	public T persist(T e) {
+		
 		if (e.getId() != null && e.getId() > 0) {
 
 			if (e instanceof Auditable) {
@@ -320,7 +339,8 @@ public abstract class WCBaseAction<T extends BaseEntity> extends EntityHome<T> {
 					EventTypes.CREATE, e);
 		}
 		return e;
-	}
+		
+	}*/
 
 	@Transactional
 	public String doSave() {
@@ -415,10 +435,10 @@ public abstract class WCBaseAction<T extends BaseEntity> extends EntityHome<T> {
 		String result = doSave();
 		if (endConversation)
 			Conversation.instance().end(true);
-		
-		if (!StringUtils.isEmpty(fromView)){
+
+		if (!StringUtils.isEmpty(fromView)) {
 			fromView = fromView.replace("xhtml", "seam");
-			
+
 			try {
 				FacesContext.getCurrentInstance().getExternalContext()
 						.redirect(fromView);
@@ -457,12 +477,13 @@ public abstract class WCBaseAction<T extends BaseEntity> extends EntityHome<T> {
 		return result;
 	}
 
+	/*
 	public String savehome() {
 		Conversation.instance().begin();
 		persist();
 		Conversation.instance().endAndRedirect();
 		return null;
-	}
+	}*/
 
 	@SuppressWarnings("unchecked")
 	public T loadFromId(Long entityId) {
