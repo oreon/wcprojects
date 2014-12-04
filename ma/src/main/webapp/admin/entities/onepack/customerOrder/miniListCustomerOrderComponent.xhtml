@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf">  
+  <p:dataTable var="_customerOrder" value="#{records}"> 
+    <p:column headerText="#{msg.id}" sortBy="#{customerOrder.id}" rendered="#{s:hasPermission('id', 'viewId' )}"> 
+      <h:link outcome="/admin/entities/onepack/customerOrder/viewCustomerOrder.xhtml" rendered="#{s:hasPermission(_customerOrder, 'view')}" propagation="none"> 
+        <h:outputText value="#{_customerOrder.id}"/>  
+        <f:param name="customerOrderId" value="#{_customerOrder.id}"/> 
+      </h:link> 
+    </p:column>  
+    <p:column style="width:2%"> 
+      <p:rowToggler/> 
+    </p:column>  
+    <p:rowExpansion> 
+      <ui:include src="/admin/entities/onepack/orderItem/miniListOrderItemComponent.xhtml"> 
+        <ui:param name="records" value="#{_customerOrder.listOrderItems}"/>  
+        <ui:param name="excludeCustomerOrder" value="true"/> 
+      </ui:include> 
+    </p:rowExpansion>  
+    <p:column headerText="#{msg.customerOrder_notes}" sortBy="#{customerOrder.notes}" rendered="#{ ! excludeNotes == true and ( skipPermissionCheck == 'true' || s:hasPermission('customerOrder', 'viewNotes')) }"> 
+      <h:panelGroup> 
+        <h:outputText id="${panelId}notesAbbr" value="#{_customerOrder.notesAbbreviated}" escape="false"/> 
+      </h:panelGroup> 
+    </p:column>  
+    <p:column headerText="#{msg.customerOrder_customer}" sortBy="#{customerOrder.customer}" rendered="#{ ! excludeCustomer == true and ( skipPermissionCheck == 'true' || s:hasPermission('customerOrder', 'viewCustomer')) }"> 
+      <h:panelGroup> 
+        <h:link id="customercustomerOrder_customer" escape="false" value="#{_customerOrder.customer.displayName}" outcome="/admin/entities/onepack/customer/viewCustomer.xhtml" propagation="none"> 
+          <f:param name="customerId" value="#{_customerOrder.customer.id}"/>  
+          <f:param name="from" value="#{request.servletPath}"/> 
+        </h:link>  
+        <p:overlayPanel for="customercustomerOrder_customer" showEvent="mouseover" hideEffect="fade" dynamic="false"> 
+          <h:form> 
+            <ui:include src="/admin/entities/onepack/customer/viewCustomerComponent.xhtml"> 
+              <ui:param name="customer" value="#{_customerOrder.customer}"/>  
+              <ui:param name="numColumns" value="4"/>  
+              <ui:param name="panelId" value="customer"/>  
+              <ui:param name="exclude" value="true"/> 
+            </ui:include> 
+          </h:form> 
+        </p:overlayPanel> 
+      </h:panelGroup> 
+    </p:column>  
+    <p:column headerText="#{msg.customerOrder_shipDate}" sortBy="#{customerOrder.shipDate}" rendered="#{ ! excludeShipDate == true and ( skipPermissionCheck == 'true' || s:hasPermission('customerOrder', 'viewShipDate')) }"> 
+      <h:outputText value="#{_customerOrder.shipDate}"> 
+        <s:convertDateTime type="date" dateStyle="medium"/> 
+      </h:outputText> 
+    </p:column> 
+  </p:dataTable> 
+</ui:composition>

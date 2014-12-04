@@ -5,7 +5,6 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
-import org.hibernate.Session;
 import org.jboss.seam.Component;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Logger;

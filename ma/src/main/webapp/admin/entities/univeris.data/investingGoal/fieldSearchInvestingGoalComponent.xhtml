@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf">  
+  <div class="entry errors">
+    <h:messages globalOnly="true"/>
+  </div>  
+  <h:panelGrid columns="6"> 
+    <h:panelGroup> 
+      <h:outputText value="#{msg.id}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('patient', 'editId')}"/>  
+      <br/>  
+      <h:inputText id="InvestingGoalSearchId" value="#{investingGoalList.investingGoal.id}" size="5"/> 
+    </h:panelGroup>  
+    <h:panelGroup> 
+      <h:outputText value="#{msg.investingGoal_nameEng}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investingGoal', 'editNameEng')}"/>  
+      <br/>  
+      <h:inputText id="nameEng" value="#{investingGoalList.investingGoal.nameEng}"/> 
+    </h:panelGroup>  
+    <h:panelGroup> 
+      <h:outputText value="#{msg.investingGoal_nameFre}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investingGoal', 'editNameFre')}"/>  
+      <br/>  
+      <h:inputText id="nameFre" value="#{investingGoalList.investingGoal.nameFre}"/> 
+    </h:panelGroup>  
+    <h:panelGroup> 
+      <h:outputText value="#{msg.investingGoal_imageFileIri}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investingGoal', 'editImageFileIri')}"/>  
+      <br/>  
+      <h:inputText id="imageFileIri" value="#{investingGoalList.investingGoal.imageFileIri}"/> 
+    </h:panelGroup>  
+    <h:panelGroup> 
+      <h:outputText value="#{msg.investingGoal_isDefault}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investingGoal', 'editIsDefault')}"/>  
+      <br/>  
+      <h:selectOneMenu id="isDefault" value="#{investingGoalList.investingGoal.isDefault}" required="false"> 
+        <f:selectItem itemLabel="Any" itemValue=""/>  
+        <f:selectItem itemLabel="True" itemValue="true"/>  
+        <f:selectItem itemLabel="False" itemValue="false"/> 
+      </h:selectOneMenu> 
+    </h:panelGroup>  
+    <h:panelGroup> 
+      <h:outputText value="#{msg.investingGoal_investingGoalPlanCode}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investingGoal', 'editInvestingGoalPlanCode')}"/>  
+      <br/>  
+      <p:selectOneMenu id="investingGoalPlanCodeId" converter="#{investingGoalPlanCodeList.converter}" value="#{ investingGoalList.investingGoal.investingGoalPlanCode}"> 
+        <f:selectItem itemLabel="Any..." itemValue=""/>  
+        <f:selectItems value="#{investingGoalPlanCodeList.fetchAll()}" var="itemIter" itemLabel="#{itemIter.displayName}" itemValue="#{itemIter}"/> 
+      </p:selectOneMenu> 
+    </h:panelGroup> 
+  </h:panelGrid>  
+  <h:panelGrid columns="2"> 
+    <h:outputText value="Creation Date From"/>  
+    <h:outputText value="Creation Date To"/>  
+    <p:calendar id="from" value="#{investingGoalList.dateCreatedRange.begin}"/>  
+    <p:calendar id="to" value="#{investingGoalList.dateCreatedRange.end}"/> 
+  </h:panelGrid> 
+</ui:composition>

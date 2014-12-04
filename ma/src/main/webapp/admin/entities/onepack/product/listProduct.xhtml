@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf" template="/admin/template.xhtml">  
+  <ui:define name="content"> 
+    <c:set var="modalId" value="ProductModalPanel-Product"/>  
+    <ui:include src="/admin/entities/onepack/product/searchProductComponent.xhtml"/>  
+    <br/>  
+    <br/>  
+    <br/>  
+    <h:form> 
+      <p:button value="Create New" outcome="/admin/entities/onepack/product/editProduct.xhtml" propagation="none"> 
+        <f:param name="productId" value="0"/> 
+      </p:button>  
+      <p:commandButton value="Quick Create" update=":#{p:component('editProductPanel')}" actionListener="#{productAction.setProductId(0)}" oncomplete="PF('editProductDialog').show()"></p:commandButton> 
+    </h:form>  
+    <br/>  
+    <div id="printable"> 
+      <ui:include src="/admin/entities/onepack/product/listProductComponent.xhtml"> 
+        <ui:param name="records" value="#{productList.lazyModel}"/> 
+      </ui:include> 
+    </div>  
+    <br/>  
+    <h:form> 
+      <p:button value="Create New" outcome="/admin/entities/onepack/product/editProduct.xhtml" propagation="none"> 
+        <f:param name="productId" value="0"/> 
+      </p:button>  
+      <p:commandButton value="Quick Create" update=":#{p:component('editProductPanel')}" actionListener="#{productAction.setProductId(0)}" oncomplete="PF('editProductDialog').show()"></p:commandButton> 
+    </h:form>  
+    <br/> 
+  </ui:define> 
+</ui:composition>

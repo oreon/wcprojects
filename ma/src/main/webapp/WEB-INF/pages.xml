@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<pages xmlns="http://jboss.com/products/seam/pages" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.1.xsd" no-conversation-view-id="/admin/home.xhtml" login-view-id="/login.xhtml">  
-  <!--PROTECTED REGION ID(USER_EDITABLE_PAGESROOT) ENABLED START-->  
+<pages xmlns="http://jboss.com/products/seam/pages"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.1.xsd"
+       no-conversation-view-id="/admin/home.xhtml"
+       login-view-id="/login.xhtml">
+       
+<!--PROTECTED REGION ID(USER_EDITABLE_PAGESROOT) ENABLED START-->  
   <page view-id="/admin/*"> 
     <restrict>#{identity.loggedIn}</restrict> 
   </page>  
@@ -13,14 +18,18 @@
       </rule> 
     </navigation> 
   </page>  
-  <!--PROTECTED REGION END-->  
-  <page view-id="/adminLogin.xhtml"> 
-    <navigation from-action="#{identity.login}"> 
-      <redirect view-id="/admin/entities/summary.xhtml"/> 
-    </navigation> 
-  </page>  
-  <page view-id="*"> 
-    <!--PROTECTED REGION ID(USER_EDITABLE_PAGESROOT_BLKT_ACTION) ENABLED START-->  
+  <!--PROTECTED REGION END-->
+
+    
+    <page view-id="/adminLogin.xhtml">     
+        <navigation from-action="#{identity.login}">
+           <redirect view-id="/admin/entities/summary.xhtml"/>
+        </navigation>
+	</page>
+
+	<page view-id="*">
+	
+		<!--PROTECTED REGION ID(USER_EDITABLE_PAGESROOT_BLKT_ACTION) ENABLED START-->  
     <navigation from-action="#{identity.logout}"> 
       <end-conversation before-redirect="true"/>  
       <redirect view-id="/login.xhtml"/> 
@@ -29,148 +38,834 @@
       <end-conversation before-redirect="true"/>  
       <redirect view-id="/admin/home.xhtml"/> 
     </navigation>  
-    <!--PROTECTED REGION END-->  
-    <navigation> 
-      <!--PROTECTED REGION ID(USER_EDITABLE_PAGESROOT_BLKT) ENABLED START-->  
+    <!--PROTECTED REGION END-->
+	
+		
+        <navigation>
+        	<!--PROTECTED REGION ID(USER_EDITABLE_PAGESROOT_BLKT) ENABLED START-->  
       <rule if-outcome="home"> 
         <redirect view-id="/home.xhtml"/> 
       </rule>  
-      <!--PROTECTED REGION END-->  
-      <rule if-outcome="employee"> 
-        <end-conversation/>  
-        <redirect view-id="/admin/entities/onepack/employee/listEmployee.xhtml"/> 
-      </rule>  
-      <rule if-outcome="viewEmployee"> 
-        <end-conversation/>  
-        <redirect view-id="/admin/entities/onepack/employee/viewEmployee.xhtml"/> 
-      </rule>  
-      <rule if-outcome="editEmployee"> 
-        <end-conversation/>  
-        <redirect view-id="/admin/entities/onepack/employee/editEmployee.xhtml"/> 
-      </rule>  
-      <rule if-outcome="department"> 
-        <end-conversation/>  
-        <redirect view-id="/admin/entities/onepack/department/listDepartment.xhtml"/> 
-      </rule>  
-      <rule if-outcome="viewDepartment"> 
-        <end-conversation/>  
-        <redirect view-id="/admin/entities/onepack/department/viewDepartment.xhtml"/> 
-      </rule>  
-      <rule if-outcome="editDepartment"> 
-        <end-conversation/>  
-        <redirect view-id="/admin/entities/onepack/department/editDepartment.xhtml"/> 
-      </rule> 
-    </navigation> 
-  </page>  
-  <page view-id="/admin/entities/onepack/employee/editEmployee.xhtml"> 
-    <!-- <description>Edit Employee: #{employee.displayName}</description> -->  
-    <restrict>#{s:hasPermission('employee', 'edit')}</restrict>  
-    <begin-conversation join="true"/>  
-    <navigation> 
-      <rule if-outcome="save"> 
-        <end-conversation/>  
-        <redirect view-id="/admin/entities/onepack/employee/viewEmployee.xhtml"/> 
-      </rule>  
-      <rule if-outcome="cancel"> 
-        <end-conversation/>  
-        <redirect view-id="/admin/entities/onepack/employee/listEmployee.xhtml"/> 
-      </rule> 
-    </navigation>  
-    <param name="employeeId" value="#{employeeAction.employeeId}"/>  
-    <param name="departmentId" value="#{employeeAction.departmentId}"/> 
-  </page>  
-  <page view-id="/admin/entities/onepack/employee/viewEmployee.xhtml" action="#{redirect.captureCurrentView()}"> 
-    <!-- <description>View Employee: #{employee.displayName}</description> -->  
-    <restrict>#{s:hasPermission('employee', 'view')}</restrict>  
-    <navigation> 
-      <rule if-outcome="edit"> 
-        <end-conversation/>  
-        <redirect view-id="/admin/entities/onepack/employee/editEmployee.xhtml"/> 
-      </rule>  
-      <rule if-outcome="cancel"> 
-        <end-conversation/>  
-        <redirect view-id="/admin/entities/onepack/employee/listEmployee.xhtml"/> 
-      </rule> 
-    </navigation>  
-    <param name="employeeId" value="#{employeeAction.employeeId}"/> 
-  </page>  
-  <page view-id="/admin/entities/onepack/employee/listEmployee.xhtml" action="#{redirect.captureCurrentView()}"> 
-    <restrict>#{s:hasPermission('employee', 'view')}</restrict>  
-    <navigation> 
-      <rule if-outcome="viewEmployee"> 
-        <end-conversation/>  
-        <redirect view-id="/admin/entities/onepack/employee/viewEmployee.xhtml"/> 
-      </rule>  
-      <rule if-outcome="edit"> 
-        <end-conversation/>  
-        <redirect view-id="/admin/entities/onepack/employee/editEmployee.xhtml"/> 
-      </rule>  
-      <rule if-outcome="textSearch"> 
-        <redirect view-id="/admin/entities/onepack/employee/textSearchResultsEmployee.xhtml"/> 
-      </rule> 
-    </navigation>  
-    <param name="firstResult" value="#{employeeList.firstResult}"/>  
-    <param name="sort" value="#{employeeList.orderColumn}"/>  
-    <param name="dir" value="#{employeeList.orderDirection}"/>  
-    <param name="from"/>  
-    <param name="id" value="#{employeeList.employee.id}"/>  
-    <param name="departmentId" value="#{employeeList.departmentId}" validateModel="false"/>  
-    <param name="firstName" value="#{employeeList.employee.firstName}" validateModel="false"/>  
-    <param name="lastName" value="#{employeeList.employee.lastName}" validateModel="false"/> 
-  </page>  
-  <page view-id="/admin/entities/onepack/department/editDepartment.xhtml"> 
-    <!-- <description>Edit Department: #{department.displayName}</description> -->  
-    <restrict>#{s:hasPermission('department', 'edit')}</restrict>  
-    <begin-conversation join="true"/>  
-    <navigation> 
-      <rule if-outcome="save"> 
-        <end-conversation/>  
-        <redirect view-id="/admin/entities/onepack/department/viewDepartment.xhtml"/> 
-      </rule>  
-      <rule if-outcome="cancel"> 
-        <end-conversation/>  
-        <redirect view-id="/admin/entities/onepack/department/listDepartment.xhtml"/> 
-      </rule> 
-    </navigation>  
-    <param name="departmentId" value="#{departmentAction.departmentId}"/> 
-  </page>  
-  <page view-id="/admin/entities/onepack/department/viewDepartment.xhtml" action="#{redirect.captureCurrentView()}"> 
-    <!-- <description>View Department: #{department.displayName}</description> -->  
-    <restrict>#{s:hasPermission('department', 'view')}</restrict>  
-    <navigation> 
-      <rule if-outcome="edit"> 
-        <end-conversation/>  
-        <redirect view-id="/admin/entities/onepack/department/editDepartment.xhtml"/> 
-      </rule>  
-      <rule if-outcome="cancel"> 
-        <end-conversation/>  
-        <redirect view-id="/admin/entities/onepack/department/listDepartment.xhtml"/> 
-      </rule> 
-    </navigation>  
-    <param name="departmentId" value="#{departmentAction.departmentId}"/> 
-  </page>  
-  <page view-id="/admin/entities/onepack/department/listDepartment.xhtml" action="#{redirect.captureCurrentView()}"> 
-    <restrict>#{s:hasPermission('department', 'view')}</restrict>  
-    <navigation> 
-      <rule if-outcome="viewDepartment"> 
-        <end-conversation/>  
-        <redirect view-id="/admin/entities/onepack/department/viewDepartment.xhtml"/> 
-      </rule>  
-      <rule if-outcome="edit"> 
-        <end-conversation/>  
-        <redirect view-id="/admin/entities/onepack/department/editDepartment.xhtml"/> 
-      </rule>  
-      <rule if-outcome="textSearch"> 
-        <redirect view-id="/admin/entities/onepack/department/textSearchResultsDepartment.xhtml"/> 
-      </rule> 
-    </navigation>  
-    <param name="firstResult" value="#{departmentList.firstResult}"/>  
-    <param name="sort" value="#{departmentList.orderColumn}"/>  
-    <param name="dir" value="#{departmentList.orderDirection}"/>  
-    <param name="from"/>  
-    <param name="id" value="#{departmentList.department.id}"/>  
-    <param name="name" value="#{departmentList.department.name}" validateModel="false"/> 
-  </page>  
+      <!--PROTECTED REGION END-->
+         
+         
+            
+        
+            <rule if-outcome="employee">
+                <redirect view-id="/admin/entities/onepack/employee/listEmployee.xhtml" />
+            </rule>
+            
+            <rule if-outcome="viewEmployee">
+                <redirect view-id="/admin/entities/onepack/employee/viewEmployee.xhtml" />
+            </rule>
+            
+            <rule if-outcome="editEmployee">
+                <redirect view-id="/admin/entities/onepack/employee/editEmployee.xhtml" />
+            </rule>
+        
+            <rule if-outcome="department">
+                <redirect view-id="/admin/entities/onepack/department/listDepartment.xhtml" />
+            </rule>
+            
+            <rule if-outcome="viewDepartment">
+                <redirect view-id="/admin/entities/onepack/department/viewDepartment.xhtml" />
+            </rule>
+            
+            <rule if-outcome="editDepartment">
+                <redirect view-id="/admin/entities/onepack/department/editDepartment.xhtml" />
+            </rule>
+        
+            <rule if-outcome="customer">
+                <redirect view-id="/admin/entities/onepack/customer/listCustomer.xhtml" />
+            </rule>
+            
+            <rule if-outcome="viewCustomer">
+                <redirect view-id="/admin/entities/onepack/customer/viewCustomer.xhtml" />
+            </rule>
+            
+            <rule if-outcome="editCustomer">
+                <redirect view-id="/admin/entities/onepack/customer/editCustomer.xhtml" />
+            </rule>
+        
+            <rule if-outcome="customerOrder">
+                <redirect view-id="/admin/entities/onepack/customerOrder/listCustomerOrder.xhtml" />
+            </rule>
+            
+            <rule if-outcome="viewCustomerOrder">
+                <redirect view-id="/admin/entities/onepack/customerOrder/viewCustomerOrder.xhtml" />
+            </rule>
+            
+            <rule if-outcome="editCustomerOrder">
+                <redirect view-id="/admin/entities/onepack/customerOrder/editCustomerOrder.xhtml" />
+            </rule>
+        
+            <rule if-outcome="product">
+                <redirect view-id="/admin/entities/onepack/product/listProduct.xhtml" />
+            </rule>
+            
+            <rule if-outcome="viewProduct">
+                <redirect view-id="/admin/entities/onepack/product/viewProduct.xhtml" />
+            </rule>
+            
+            <rule if-outcome="editProduct">
+                <redirect view-id="/admin/entities/onepack/product/editProduct.xhtml" />
+            </rule>
+        
+            <rule if-outcome="orderItem">
+                <redirect view-id="/admin/entities/onepack/orderItem/listOrderItem.xhtml" />
+            </rule>
+            
+            <rule if-outcome="viewOrderItem">
+                <redirect view-id="/admin/entities/onepack/orderItem/viewOrderItem.xhtml" />
+            </rule>
+            
+            <rule if-outcome="editOrderItem">
+                <redirect view-id="/admin/entities/onepack/orderItem/editOrderItem.xhtml" />
+            </rule>
+        
+            <rule if-outcome="investorProfile">
+                <redirect view-id="/admin/entities/univeris.data/investorProfile/listInvestorProfile.xhtml" />
+            </rule>
+            
+            <rule if-outcome="viewInvestorProfile">
+                <redirect view-id="/admin/entities/univeris.data/investorProfile/viewInvestorProfile.xhtml" />
+            </rule>
+            
+            <rule if-outcome="editInvestorProfile">
+                <redirect view-id="/admin/entities/univeris.data/investorProfile/editInvestorProfile.xhtml" />
+            </rule>
+        
+            <rule if-outcome="investingGoal">
+                <redirect view-id="/admin/entities/univeris.data/investingGoal/listInvestingGoal.xhtml" />
+            </rule>
+            
+            <rule if-outcome="viewInvestingGoal">
+                <redirect view-id="/admin/entities/univeris.data/investingGoal/viewInvestingGoal.xhtml" />
+            </rule>
+            
+            <rule if-outcome="editInvestingGoal">
+                <redirect view-id="/admin/entities/univeris.data/investingGoal/editInvestingGoal.xhtml" />
+            </rule>
+        
+            <rule if-outcome="investingGoalPlanCode">
+                <redirect view-id="/admin/entities/univeris.data/investingGoalPlanCode/listInvestingGoalPlanCode.xhtml" />
+            </rule>
+            
+            <rule if-outcome="viewInvestingGoalPlanCode">
+                <redirect view-id="/admin/entities/univeris.data/investingGoalPlanCode/viewInvestingGoalPlanCode.xhtml" />
+            </rule>
+            
+            <rule if-outcome="editInvestingGoalPlanCode">
+                <redirect view-id="/admin/entities/univeris.data/investingGoalPlanCode/editInvestingGoalPlanCode.xhtml" />
+            </rule>
+        
+        </navigation>
+    </page>
+
+    
+    
+    <page view-id="/admin/entities/onepack/employee/editEmployee.xhtml"  >
+    	<!-- <description>Edit Employee: #{employee.displayName}</description> -->
+    	<restrict>#{s:hasPermission('employee', 'edit')}</restrict>
+    	<begin-conversation join="true"/>
+    	<navigation> 
+			 <rule if-outcome="save">
+ 				<redirect view-id="/admin/entities/onepack/employee/viewEmployee.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+ 				<redirect view-id="/admin/entities/onepack/employee/listEmployee.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="employeeId" value="#{employeeAction.employeeId}" />
+		
+	</page>
+	
+	 <page view-id="/admin/entities/onepack/employee/viewEmployee.xhtml"  action="#{redirect.captureCurrentView()}">
+	 	<!-- <description>View Employee: #{employee.displayName}</description> -->
+	 	<restrict>#{s:hasPermission('employee', 'view')}</restrict>
+	 	<navigation> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/onepack/employee/editEmployee.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+             	
+ 				<redirect view-id="/admin/entities/onepack/employee/listEmployee.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="employeeId" value="#{employeeAction.employeeId}" />
+	</page>
+	
+	<page view-id="/admin/entities/onepack/employee/listEmployee.xhtml" action="#{redirect.captureCurrentView()}" >
+		<restrict>#{s:hasPermission('employee', 'view')}</restrict>
+		<navigation>
+			<rule if-outcome="viewEmployee">
+				
+				<redirect view-id="/admin/entities/onepack/employee/viewEmployee.xhtml" />
+			</rule> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/onepack/employee/editEmployee.xhtml" />
+            </rule>			
+            <rule if-outcome="textSearch"> 
+        		<redirect view-id="/admin/entities/onepack/employee/textSearchResultsEmployee.xhtml"/> 
+      		</rule>
+		</navigation>
+		
+		<param name="firstResult" value="#{employeeList.firstResult}" />
+		<param name="sort" value="#{employeeList.orderColumn}" />
+		<param name="dir" value="#{employeeList.orderDirection}" />
+
+		<param name="from" />
+		<param name="id" value="#{employeeList.employee.id}" />
+	
+		
+			
+				
+				<param name="departmentId" value="#{employeeList.departmentId}"  validateModel="false" />
+				
+			
+		
+	
+		
+			
+				<param name="firstName" value="#{employeeList.employee.firstName}"  validateModel="false" />
+			
+		
+	
+		
+			
+				<param name="lastName" value="#{employeeList.employee.lastName}"  validateModel="false" />
+			
+		
+	
+	</page>
+	
+	
+	
+    
+    <page view-id="/admin/entities/onepack/department/editDepartment.xhtml"  >
+    	<!-- <description>Edit Department: #{department.displayName}</description> -->
+    	<restrict>#{s:hasPermission('department', 'edit')}</restrict>
+    	<begin-conversation join="true"/>
+    	<navigation> 
+			 <rule if-outcome="save">
+ 				<redirect view-id="/admin/entities/onepack/department/viewDepartment.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+ 				<redirect view-id="/admin/entities/onepack/department/listDepartment.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="departmentId" value="#{departmentAction.departmentId}" />
+		
+	</page>
+	
+	 <page view-id="/admin/entities/onepack/department/viewDepartment.xhtml"  action="#{redirect.captureCurrentView()}">
+	 	<!-- <description>View Department: #{department.displayName}</description> -->
+	 	<restrict>#{s:hasPermission('department', 'view')}</restrict>
+	 	<navigation> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/onepack/department/editDepartment.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+             	
+ 				<redirect view-id="/admin/entities/onepack/department/listDepartment.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="departmentId" value="#{departmentAction.departmentId}" />
+	</page>
+	
+	<page view-id="/admin/entities/onepack/department/listDepartment.xhtml" action="#{redirect.captureCurrentView()}" >
+		<restrict>#{s:hasPermission('department', 'view')}</restrict>
+		<navigation>
+			<rule if-outcome="viewDepartment">
+				
+				<redirect view-id="/admin/entities/onepack/department/viewDepartment.xhtml" />
+			</rule> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/onepack/department/editDepartment.xhtml" />
+            </rule>			
+            <rule if-outcome="textSearch"> 
+        		<redirect view-id="/admin/entities/onepack/department/textSearchResultsDepartment.xhtml"/> 
+      		</rule>
+		</navigation>
+		
+		<param name="firstResult" value="#{departmentList.firstResult}" />
+		<param name="sort" value="#{departmentList.orderColumn}" />
+		<param name="dir" value="#{departmentList.orderDirection}" />
+
+		<param name="from" />
+		<param name="id" value="#{departmentList.department.id}" />
+	
+		
+			
+				<param name="name" value="#{departmentList.department.name}"  validateModel="false" />
+			
+		
+	
+	</page>
+	
+	
+	
+    
+    <page view-id="/admin/entities/onepack/customer/editCustomer.xhtml"  >
+    	<!-- <description>Edit Customer: #{customer.displayName}</description> -->
+    	<restrict>#{s:hasPermission('customer', 'edit')}</restrict>
+    	<begin-conversation join="true"/>
+    	<navigation> 
+			 <rule if-outcome="save">
+ 				<redirect view-id="/admin/entities/onepack/customer/viewCustomer.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+ 				<redirect view-id="/admin/entities/onepack/customer/listCustomer.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="customerId" value="#{customerAction.customerId}" />
+		
+	</page>
+	
+	 <page view-id="/admin/entities/onepack/customer/viewCustomer.xhtml"  action="#{redirect.captureCurrentView()}">
+	 	<!-- <description>View Customer: #{customer.displayName}</description> -->
+	 	<restrict>#{s:hasPermission('customer', 'view')}</restrict>
+	 	<navigation> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/onepack/customer/editCustomer.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+             	
+ 				<redirect view-id="/admin/entities/onepack/customer/listCustomer.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="customerId" value="#{customerAction.customerId}" />
+	</page>
+	
+	<page view-id="/admin/entities/onepack/customer/listCustomer.xhtml" action="#{redirect.captureCurrentView()}" >
+		<restrict>#{s:hasPermission('customer', 'view')}</restrict>
+		<navigation>
+			<rule if-outcome="viewCustomer">
+				
+				<redirect view-id="/admin/entities/onepack/customer/viewCustomer.xhtml" />
+			</rule> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/onepack/customer/editCustomer.xhtml" />
+            </rule>			
+            <rule if-outcome="textSearch"> 
+        		<redirect view-id="/admin/entities/onepack/customer/textSearchResultsCustomer.xhtml"/> 
+      		</rule>
+		</navigation>
+		
+		<param name="firstResult" value="#{customerList.firstResult}" />
+		<param name="sort" value="#{customerList.orderColumn}" />
+		<param name="dir" value="#{customerList.orderDirection}" />
+
+		<param name="from" />
+		<param name="id" value="#{customerList.customer.id}" />
+	
+		
+			
+				<param name="firstName" value="#{customerList.customer.firstName}"  validateModel="false" />
+			
+		
+	
+		
+			
+				<param name="lastName" value="#{customerList.customer.lastName}"  validateModel="false" />
+			
+		
+	
+	</page>
+	
+	
+	
+    
+    <page view-id="/admin/entities/onepack/customerOrder/editCustomerOrder.xhtml"  >
+    	<!-- <description>Edit CustomerOrder: #{customerOrder.displayName}</description> -->
+    	<restrict>#{s:hasPermission('customerOrder', 'edit')}</restrict>
+    	<begin-conversation join="true"/>
+    	<navigation> 
+			 <rule if-outcome="save">
+ 				<redirect view-id="/admin/entities/onepack/customerOrder/viewCustomerOrder.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+ 				<redirect view-id="/admin/entities/onepack/customerOrder/listCustomerOrder.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="customerOrderId" value="#{customerOrderAction.customerOrderId}" />
+		
+	</page>
+	
+	 <page view-id="/admin/entities/onepack/customerOrder/viewCustomerOrder.xhtml"  action="#{redirect.captureCurrentView()}">
+	 	<!-- <description>View CustomerOrder: #{customerOrder.displayName}</description> -->
+	 	<restrict>#{s:hasPermission('customerOrder', 'view')}</restrict>
+	 	<navigation> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/onepack/customerOrder/editCustomerOrder.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+             	
+ 				<redirect view-id="/admin/entities/onepack/customerOrder/listCustomerOrder.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="customerOrderId" value="#{customerOrderAction.customerOrderId}" />
+	</page>
+	
+	<page view-id="/admin/entities/onepack/customerOrder/listCustomerOrder.xhtml" action="#{redirect.captureCurrentView()}" >
+		<restrict>#{s:hasPermission('customerOrder', 'view')}</restrict>
+		<navigation>
+			<rule if-outcome="viewCustomerOrder">
+				
+				<redirect view-id="/admin/entities/onepack/customerOrder/viewCustomerOrder.xhtml" />
+			</rule> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/onepack/customerOrder/editCustomerOrder.xhtml" />
+            </rule>			
+            <rule if-outcome="textSearch"> 
+        		<redirect view-id="/admin/entities/onepack/customerOrder/textSearchResultsCustomerOrder.xhtml"/> 
+      		</rule>
+		</navigation>
+		
+		<param name="firstResult" value="#{customerOrderList.firstResult}" />
+		<param name="sort" value="#{customerOrderList.orderColumn}" />
+		<param name="dir" value="#{customerOrderList.orderDirection}" />
+
+		<param name="from" />
+		<param name="id" value="#{customerOrderList.customerOrder.id}" />
+	
+		
+			
+				<param name="notes" value="#{customerOrderList.customerOrder.notes}"  validateModel="false" />
+			
+		
+	
+		
+			
+				
+				<param name="customerId" value="#{customerOrderList.customerId}"  validateModel="false" />
+				
+			
+		
+	
+		
+			
+				<param name="shipDate" value="#{customerOrderList.customerOrder.shipDate}"  validateModel="false" />
+			
+		
+	
+	</page>
+	
+	
+	
+    
+    <page view-id="/admin/entities/onepack/product/editProduct.xhtml"  >
+    	<!-- <description>Edit Product: #{product.displayName}</description> -->
+    	<restrict>#{s:hasPermission('product', 'edit')}</restrict>
+    	<begin-conversation join="true"/>
+    	<navigation> 
+			 <rule if-outcome="save">
+ 				<redirect view-id="/admin/entities/onepack/product/viewProduct.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+ 				<redirect view-id="/admin/entities/onepack/product/listProduct.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="productId" value="#{productAction.productId}" />
+		
+	</page>
+	
+	 <page view-id="/admin/entities/onepack/product/viewProduct.xhtml"  action="#{redirect.captureCurrentView()}">
+	 	<!-- <description>View Product: #{product.displayName}</description> -->
+	 	<restrict>#{s:hasPermission('product', 'view')}</restrict>
+	 	<navigation> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/onepack/product/editProduct.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+             	
+ 				<redirect view-id="/admin/entities/onepack/product/listProduct.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="productId" value="#{productAction.productId}" />
+	</page>
+	
+	<page view-id="/admin/entities/onepack/product/listProduct.xhtml" action="#{redirect.captureCurrentView()}" >
+		<restrict>#{s:hasPermission('product', 'view')}</restrict>
+		<navigation>
+			<rule if-outcome="viewProduct">
+				
+				<redirect view-id="/admin/entities/onepack/product/viewProduct.xhtml" />
+			</rule> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/onepack/product/editProduct.xhtml" />
+            </rule>			
+            <rule if-outcome="textSearch"> 
+        		<redirect view-id="/admin/entities/onepack/product/textSearchResultsProduct.xhtml"/> 
+      		</rule>
+		</navigation>
+		
+		<param name="firstResult" value="#{productList.firstResult}" />
+		<param name="sort" value="#{productList.orderColumn}" />
+		<param name="dir" value="#{productList.orderDirection}" />
+
+		<param name="from" />
+		<param name="id" value="#{productList.product.id}" />
+	
+		
+			
+				<param name="name" value="#{productList.product.name}"  validateModel="false" />
+			
+		
+	
+	</page>
+	
+	
+	
+    
+    <page view-id="/admin/entities/onepack/orderItem/editOrderItem.xhtml"  >
+    	<!-- <description>Edit OrderItem: #{orderItem.displayName}</description> -->
+    	<restrict>#{s:hasPermission('orderItem', 'edit')}</restrict>
+    	<begin-conversation join="true"/>
+    	<navigation> 
+			 <rule if-outcome="save">
+ 				<redirect view-id="/admin/entities/onepack/orderItem/viewOrderItem.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+ 				<redirect view-id="/admin/entities/onepack/orderItem/listOrderItem.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="orderItemId" value="#{orderItemAction.orderItemId}" />
+		
+	</page>
+	
+	 <page view-id="/admin/entities/onepack/orderItem/viewOrderItem.xhtml"  action="#{redirect.captureCurrentView()}">
+	 	<!-- <description>View OrderItem: #{orderItem.displayName}</description> -->
+	 	<restrict>#{s:hasPermission('orderItem', 'view')}</restrict>
+	 	<navigation> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/onepack/orderItem/editOrderItem.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+             	
+ 				<redirect view-id="/admin/entities/onepack/orderItem/listOrderItem.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="orderItemId" value="#{orderItemAction.orderItemId}" />
+	</page>
+	
+	<page view-id="/admin/entities/onepack/orderItem/listOrderItem.xhtml" action="#{redirect.captureCurrentView()}" >
+		<restrict>#{s:hasPermission('orderItem', 'view')}</restrict>
+		<navigation>
+			<rule if-outcome="viewOrderItem">
+				
+				<redirect view-id="/admin/entities/onepack/orderItem/viewOrderItem.xhtml" />
+			</rule> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/onepack/orderItem/editOrderItem.xhtml" />
+            </rule>			
+            <rule if-outcome="textSearch"> 
+        		<redirect view-id="/admin/entities/onepack/orderItem/textSearchResultsOrderItem.xhtml"/> 
+      		</rule>
+		</navigation>
+		
+		<param name="firstResult" value="#{orderItemList.firstResult}" />
+		<param name="sort" value="#{orderItemList.orderColumn}" />
+		<param name="dir" value="#{orderItemList.orderDirection}" />
+
+		<param name="from" />
+		<param name="id" value="#{orderItemList.orderItem.id}" />
+	
+		
+			
+				<param name="qty" value="#{orderItemList.orderItem.qty}"  validateModel="false" />
+			
+		
+	
+		
+			
+				
+				<param name="productId" value="#{orderItemList.productId}"  validateModel="false" />
+				
+			
+		
+	
+		
+			
+				
+				<param name="customerOrderId" value="#{orderItemList.customerOrderId}"  validateModel="false" />
+				
+			
+		
+	
+	</page>
+	
+	
+	
+    
+    <page view-id="/admin/entities/univeris.data/investorProfile/editInvestorProfile.xhtml"  >
+    	<!-- <description>Edit InvestorProfile: #{investorProfile.displayName}</description> -->
+    	<restrict>#{s:hasPermission('investorProfile', 'edit')}</restrict>
+    	<begin-conversation join="true"/>
+    	<navigation> 
+			 <rule if-outcome="save">
+ 				<redirect view-id="/admin/entities/univeris.data/investorProfile/viewInvestorProfile.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+ 				<redirect view-id="/admin/entities/univeris.data/investorProfile/listInvestorProfile.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="investorProfileId" value="#{investorProfileAction.investorProfileId}" />
+		
+	</page>
+	
+	 <page view-id="/admin/entities/univeris.data/investorProfile/viewInvestorProfile.xhtml"  action="#{redirect.captureCurrentView()}">
+	 	<!-- <description>View InvestorProfile: #{investorProfile.displayName}</description> -->
+	 	<restrict>#{s:hasPermission('investorProfile', 'view')}</restrict>
+	 	<navigation> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/univeris.data/investorProfile/editInvestorProfile.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+             	
+ 				<redirect view-id="/admin/entities/univeris.data/investorProfile/listInvestorProfile.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="investorProfileId" value="#{investorProfileAction.investorProfileId}" />
+	</page>
+	
+	<page view-id="/admin/entities/univeris.data/investorProfile/listInvestorProfile.xhtml" action="#{redirect.captureCurrentView()}" >
+		<restrict>#{s:hasPermission('investorProfile', 'view')}</restrict>
+		<navigation>
+			<rule if-outcome="viewInvestorProfile">
+				
+				<redirect view-id="/admin/entities/univeris.data/investorProfile/viewInvestorProfile.xhtml" />
+			</rule> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/univeris.data/investorProfile/editInvestorProfile.xhtml" />
+            </rule>			
+            <rule if-outcome="textSearch"> 
+        		<redirect view-id="/admin/entities/univeris.data/investorProfile/textSearchResultsInvestorProfile.xhtml"/> 
+      		</rule>
+		</navigation>
+		
+		<param name="firstResult" value="#{investorProfileList.firstResult}" />
+		<param name="sort" value="#{investorProfileList.orderColumn}" />
+		<param name="dir" value="#{investorProfileList.orderDirection}" />
+
+		<param name="from" />
+		<param name="id" value="#{investorProfileList.investorProfile.id}" />
+	
+		
+			
+				<param name="nameEng" value="#{investorProfileList.investorProfile.nameEng}"  validateModel="false" />
+			
+		
+	
+		
+			
+				<param name="nameFre" value="#{investorProfileList.investorProfile.nameFre}"  validateModel="false" />
+			
+		
+	
+		
+			
+				<param name="descEng" value="#{investorProfileList.investorProfile.descEng}"  validateModel="false" />
+			
+		
+	
+		
+			
+				<param name="descFre" value="#{investorProfileList.investorProfile.descFre}"  validateModel="false" />
+			
+		
+	
+		
+			
+				<param name="imageFileUri" value="#{investorProfileList.investorProfile.imageFileUri}"  validateModel="false" />
+			
+		
+	
+		
+			
+				<param name="conservativeOrder" value="#{investorProfileList.investorProfile.conservativeOrder}"  validateModel="false" />
+			
+		
+	
+	</page>
+	
+	
+	
+    
+    <page view-id="/admin/entities/univeris.data/investingGoal/editInvestingGoal.xhtml"  >
+    	<!-- <description>Edit InvestingGoal: #{investingGoal.displayName}</description> -->
+    	<restrict>#{s:hasPermission('investingGoal', 'edit')}</restrict>
+    	<begin-conversation join="true"/>
+    	<navigation> 
+			 <rule if-outcome="save">
+ 				<redirect view-id="/admin/entities/univeris.data/investingGoal/viewInvestingGoal.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+ 				<redirect view-id="/admin/entities/univeris.data/investingGoal/listInvestingGoal.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="investingGoalId" value="#{investingGoalAction.investingGoalId}" />
+		
+	</page>
+	
+	 <page view-id="/admin/entities/univeris.data/investingGoal/viewInvestingGoal.xhtml"  action="#{redirect.captureCurrentView()}">
+	 	<!-- <description>View InvestingGoal: #{investingGoal.displayName}</description> -->
+	 	<restrict>#{s:hasPermission('investingGoal', 'view')}</restrict>
+	 	<navigation> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/univeris.data/investingGoal/editInvestingGoal.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+             	
+ 				<redirect view-id="/admin/entities/univeris.data/investingGoal/listInvestingGoal.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="investingGoalId" value="#{investingGoalAction.investingGoalId}" />
+	</page>
+	
+	<page view-id="/admin/entities/univeris.data/investingGoal/listInvestingGoal.xhtml" action="#{redirect.captureCurrentView()}" >
+		<restrict>#{s:hasPermission('investingGoal', 'view')}</restrict>
+		<navigation>
+			<rule if-outcome="viewInvestingGoal">
+				
+				<redirect view-id="/admin/entities/univeris.data/investingGoal/viewInvestingGoal.xhtml" />
+			</rule> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/univeris.data/investingGoal/editInvestingGoal.xhtml" />
+            </rule>			
+            <rule if-outcome="textSearch"> 
+        		<redirect view-id="/admin/entities/univeris.data/investingGoal/textSearchResultsInvestingGoal.xhtml"/> 
+      		</rule>
+		</navigation>
+		
+		<param name="firstResult" value="#{investingGoalList.firstResult}" />
+		<param name="sort" value="#{investingGoalList.orderColumn}" />
+		<param name="dir" value="#{investingGoalList.orderDirection}" />
+
+		<param name="from" />
+		<param name="id" value="#{investingGoalList.investingGoal.id}" />
+	
+		
+			
+				<param name="nameEng" value="#{investingGoalList.investingGoal.nameEng}"  validateModel="false" />
+			
+		
+	
+		
+			
+				<param name="nameFre" value="#{investingGoalList.investingGoal.nameFre}"  validateModel="false" />
+			
+		
+	
+		
+			
+				<param name="imageFileIri" value="#{investingGoalList.investingGoal.imageFileIri}"  validateModel="false" />
+			
+		
+	
+		
+			
+				<param name="isDefault" value="#{investingGoalList.investingGoal.isDefault}"  validateModel="false" />
+			
+		
+	
+		
+			
+				
+				<param name="investingGoalPlanCodeId" value="#{investingGoalList.investingGoalPlanCodeId}"  validateModel="false" />
+				
+			
+		
+	
+	</page>
+	
+	
+	
+    
+    <page view-id="/admin/entities/univeris.data/investingGoalPlanCode/editInvestingGoalPlanCode.xhtml"  >
+    	<!-- <description>Edit InvestingGoalPlanCode: #{investingGoalPlanCode.displayName}</description> -->
+    	<restrict>#{s:hasPermission('investingGoalPlanCode', 'edit')}</restrict>
+    	<begin-conversation join="true"/>
+    	<navigation> 
+			 <rule if-outcome="save">
+ 				<redirect view-id="/admin/entities/univeris.data/investingGoalPlanCode/viewInvestingGoalPlanCode.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+ 				<redirect view-id="/admin/entities/univeris.data/investingGoalPlanCode/listInvestingGoalPlanCode.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="investingGoalPlanCodeId" value="#{investingGoalPlanCodeAction.investingGoalPlanCodeId}" />
+		
+	</page>
+	
+	 <page view-id="/admin/entities/univeris.data/investingGoalPlanCode/viewInvestingGoalPlanCode.xhtml"  action="#{redirect.captureCurrentView()}">
+	 	<!-- <description>View InvestingGoalPlanCode: #{investingGoalPlanCode.displayName}</description> -->
+	 	<restrict>#{s:hasPermission('investingGoalPlanCode', 'view')}</restrict>
+	 	<navigation> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/univeris.data/investingGoalPlanCode/editInvestingGoalPlanCode.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+             	
+ 				<redirect view-id="/admin/entities/univeris.data/investingGoalPlanCode/listInvestingGoalPlanCode.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="investingGoalPlanCodeId" value="#{investingGoalPlanCodeAction.investingGoalPlanCodeId}" />
+	</page>
+	
+	<page view-id="/admin/entities/univeris.data/investingGoalPlanCode/listInvestingGoalPlanCode.xhtml" action="#{redirect.captureCurrentView()}" >
+		<restrict>#{s:hasPermission('investingGoalPlanCode', 'view')}</restrict>
+		<navigation>
+			<rule if-outcome="viewInvestingGoalPlanCode">
+				
+				<redirect view-id="/admin/entities/univeris.data/investingGoalPlanCode/viewInvestingGoalPlanCode.xhtml" />
+			</rule> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/univeris.data/investingGoalPlanCode/editInvestingGoalPlanCode.xhtml" />
+            </rule>			
+            <rule if-outcome="textSearch"> 
+        		<redirect view-id="/admin/entities/univeris.data/investingGoalPlanCode/textSearchResultsInvestingGoalPlanCode.xhtml"/> 
+      		</rule>
+		</navigation>
+		
+		<param name="firstResult" value="#{investingGoalPlanCodeList.firstResult}" />
+		<param name="sort" value="#{investingGoalPlanCodeList.orderColumn}" />
+		<param name="dir" value="#{investingGoalPlanCodeList.orderDirection}" />
+
+		<param name="from" />
+		<param name="id" value="#{investingGoalPlanCodeList.investingGoalPlanCode.id}" />
+	
+		
+			
+				<param name="investingGoalCode" value="#{investingGoalPlanCodeList.investingGoalPlanCode.investingGoalCode}"  validateModel="false" />
+			
+		
+	
+	</page>
+	
+	
+	
+    
+    
+   
   <!--PROTECTED REGION ID(USER_EDITABLE_XCPT) ENABLED START-->  
   <exception class="org.witchcraft.exceptions.BusinessException"> 
     <redirect> 
@@ -221,5 +916,6 @@
       <message severity="error">Unexpected error, please try again</message> 
     </redirect> 
   </exception>  
-  <!--PROTECTED REGION END--> 
+  <!--PROTECTED REGION END-->
+    
 </pages>

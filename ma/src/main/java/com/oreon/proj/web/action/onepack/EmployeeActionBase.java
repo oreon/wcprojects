@@ -54,9 +54,6 @@ public abstract class EmployeeActionBase extends BaseAction<Employee>
 	@RequestParameter
 	protected Long employeeId;
 
-	@In(create = true, value = "departmentAction")
-	com.oreon.proj.web.action.onepack.DepartmentAction departmentAction;
-
 	public void setEmployeeId(Long id) {
 		setEntityId(id);
 	}
@@ -68,35 +65,12 @@ public abstract class EmployeeActionBase extends BaseAction<Employee>
 		setEntityIdForModalDlg(id);
 	}
 
-	public void setDepartmentId(Long id) {
-
-		if (id != null && id > 0)
-			getInstance().setDepartment(departmentAction.loadFromId(id));
-
-	}
-
-	public Long getDepartmentId() {
-		if (getInstance().getDepartment() != null)
-			return getInstance().getDepartment().getId();
-		return 0L;
-	}
-
 	public Long getEmployeeId() {
 		return (Long) getId();
 	}
 
-	public Employee getEntity() {
-		return instance;
-	}
-
-	//@Override
-	public void setEntity(Employee t) {
-		this.instance = t;
-		loadAssociations();
-	}
-
 	public Employee getEmployee() {
-		return (Employee) getInstance();
+		return getEntity();
 	}
 
 	@Override
@@ -123,19 +97,25 @@ public abstract class EmployeeActionBase extends BaseAction<Employee>
 	 * An order should always have at least one order item . Marked in uml with 1..* multiplicity
 	 */
 	private void addDefaultAssociations() {
-		instance = getInstance();
+		if (isNew()) {
+			instance = getInstance();
 
+		}
 	}
 
 	public void wire() {
-		getInstance();
-
-		com.oreon.proj.onepack.Department department = departmentAction
-				.getInstance();
-		if (department != null && isNew()) {
-			getInstance().setDepartment(department);
+		/*
+		if (isNew()){
+			getInstance();
+				 
+					com.oreon.proj.onepack.Department department = departmentAction.getInstance();
+					if (department != null  ) {
+						 getInstance().setDepartment(department);
+					}
+				 
+			
 		}
-
+		 */
 	}
 
 	public Employee getDefinedInstance() {
@@ -143,11 +123,7 @@ public abstract class EmployeeActionBase extends BaseAction<Employee>
 	}
 
 	public void setEmployee(Employee t) {
-		this.instance = t;
-		if (getInstance() != null && t != null) {
-			setEmployeeId(t.getId());
-			loadAssociations();
-		}
+		setEntity(t);
 	}
 
 	@Override
@@ -176,15 +152,12 @@ public abstract class EmployeeActionBase extends BaseAction<Employee>
 
 		addDefaultAssociations();
 
-		wire();
-	}
-
-	public void updateAssociations() {
-
+		//wire();
 	}
 
 	public void updateComposedAssociations() {
-
+		/*
+		 */
 	}
 
 	public void clearLists() {

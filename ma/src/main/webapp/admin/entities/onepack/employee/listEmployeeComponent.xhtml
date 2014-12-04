@@ -55,28 +55,18 @@
         <h:link outcome="/admin/entities/onepack/employee/viewEmployee.xhtml" rendered="#{s:hasPermission(_employee, 'view')}"> 
           <h:graphicImage value="/images/icons/eye.png" style="border: 0px" alt="view"/>  
           <f:param name="employeeId" value="#{_employee.id}"/>  
-          <s:conversationPropagation type="none"/> 
+          <s:conversationId/> 
         </h:link> 
       </p:column>  
       <p:column rendered="#{s:hasPermission('_employee', 'edit') and !_employeeCategory.archived}"> 
         <h:link outcome="/admin/entities/onepack/employee/editEmployee.xhtml" rendered="#{s:hasPermission(_employee, 'edit')}"> 
           <h:graphicImage value="/images/icons/edit.png" style="border: 0px" alt="edit"/>  
           <f:param name="employeeId" value="#{_employee.id}"/>  
-          <s:conversationPropagation type="none"/> 
+          <s:conversationId/> 
         </h:link> 
       </p:column>  
       <p:column rendered="#{s:hasPermission('employeeAction', 'archive')}" propagation="none"> 
-        <f:facet name="header"> 
-          <h:outputText value=""/> 
-        </f:facet>  
-        <h:commandLink rendered="#{!_employee.archived}" action="#{employeeAction.archiveById}" onclick="javascript:if(!confirm('Do you really want to delete #{_employee.displayName} ?')){ return false; } else { return true; }"> 
-          <h:graphicImage value="/images/icons/delete.png" style="border: 0px" alt="archive"/>  
-          <f:param name="currentEntityId" value="#{_employee.id}"/> 
-        </h:commandLink>  
-        <h:commandLink rendered="#{_employee.archived}" action="#{employeeAction.delete}" onclick="javascript:if(!confirm('Do you really want to permanently delete #{_employee.displayName} ?')){ return false; } else { return true; }">Delete 
-          <f:param name="currentEntityId" value="#{_employee.id}"/> 
-        </h:commandLink>  
-        <h:commandLink rendered="#{_employee.archived}" action="#{employeeAction.restore}">Restore
+        <h:commandLink action="#{employeeAction.delete(_employee)}" onclick="javascript:if(!confirm('Do you really want to permanently delete #{_employee.displayName} ?')){ return false; } else { return true; }">Delete 
           <f:param name="currentEntityId" value="#{_employee.id}"/> 
         </h:commandLink> 
       </p:column> 

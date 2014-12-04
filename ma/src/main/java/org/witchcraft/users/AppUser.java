@@ -16,13 +16,12 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Filter;
 import org.hibernate.search.annotations.Analyzer;
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.validator.constraints.Length;
 import org.jboss.seam.annotations.Name;
@@ -117,6 +116,7 @@ public class AppUser extends BaseEntity
 		this.appRoles = appRoles;
 	}
 
+	@XmlTransient
 	public Set<AppRole> getAppRoles() {
 		return appRoles;
 	}

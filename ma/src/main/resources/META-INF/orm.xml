@@ -19,5 +19,33 @@
 			select u from Department u where u.name = ?1
 			]]> </query> 
     </named-query> 
+  </entity>  
+  <!--  Customer  JPA Configurations -->  
+  <entity class="com.oreon.proj.onepack.Customer" name="Customer"> 
+    <table name="customer"></table> 
+  </entity>  
+  <!--  CustomerOrder  JPA Configurations -->  
+  <entity class="com.oreon.proj.onepack.CustomerOrder" name="CustomerOrder"> 
+    <table name="customerorder"></table> 
+  </entity>  
+  <!--  Product  JPA Configurations -->  
+  <entity class="com.oreon.proj.onepack.Product" name="Product"> 
+    <table name="product"></table> 
+  </entity>  
+  <!--  OrderItem  JPA Configurations -->  
+  <entity class="com.oreon.proj.onepack.OrderItem" name="OrderItem"> 
+    <table name="orderitem"></table> 
+  </entity>  
+  <!--  InvestorProfile  JPA Configurations -->  
+  <entity class="com.oreon.proj.univeris.data.InvestorProfile" name="InvestorProfile"> 
+    <table name="investorprofile"></table> 
+  </entity>  
+  <!--  InvestingGoal  JPA Configurations -->  
+  <entity class="com.oreon.proj.univeris.data.InvestingGoal" name="InvestingGoal"> 
+    <table name="investinggoal"></table> 
+  </entity>  
+  <!--  InvestingGoalPlanCode  JPA Configurations -->  
+  <entity class="com.oreon.proj.univeris.data.InvestingGoalPlanCode" name="InvestingGoalPlanCode"> 
+    <table name="investinggoalplancode"></table> 
   </entity> 
 </entity-mappings>

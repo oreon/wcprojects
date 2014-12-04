@@ -46,7 +46,7 @@ public class EntityAuditLogInterceptor extends BaseAction<AuditLog>{
 			String userName = credentials == null ? "UNKNOWN": credentials.getUsername();
 			BaseEntity businessEntity = (BaseEntity) entity	;
 			AuditLog auditLog = new AuditLog(action, businessEntity,  entity.getClass().getCanonicalName(), businessEntity.getId(),  userName);
-			persist(auditLog);
+			//persist(auditLog);
 		}
 	}
 

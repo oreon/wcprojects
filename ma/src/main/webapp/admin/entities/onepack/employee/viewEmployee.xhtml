@@ -19,7 +19,7 @@
               <h:commandButton value="Edit" rendered="#{s:hasPermission(employeeAction.instance, 'edit')}" action="edit"></h:commandButton>  
               <h:outputText value=" "/>  
               <h:commandButton value="Back To Listing" action="#{employeeAction.cancel}"> 
-                <s:conversationPropagation type="end"/> 
+                <s:conversationId/> 
               </h:commandButton> 
             </div> 
           </p:tab>  

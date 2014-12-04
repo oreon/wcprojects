@@ -34,28 +34,18 @@
         <h:link outcome="/admin/entities/onepack/department/viewDepartment.xhtml" rendered="#{s:hasPermission(_department, 'view')}"> 
           <h:graphicImage value="/images/icons/eye.png" style="border: 0px" alt="view"/>  
           <f:param name="departmentId" value="#{_department.id}"/>  
-          <s:conversationPropagation type="none"/> 
+          <s:conversationId/> 
         </h:link> 
       </p:column>  
       <p:column rendered="#{s:hasPermission('_department', 'edit') and !_departmentCategory.archived}"> 
         <h:link outcome="/admin/entities/onepack/department/editDepartment.xhtml" rendered="#{s:hasPermission(_department, 'edit')}"> 
           <h:graphicImage value="/images/icons/edit.png" style="border: 0px" alt="edit"/>  
           <f:param name="departmentId" value="#{_department.id}"/>  
-          <s:conversationPropagation type="none"/> 
+          <s:conversationId/> 
         </h:link> 
       </p:column>  
       <p:column rendered="#{s:hasPermission('departmentAction', 'archive')}" propagation="none"> 
-        <f:facet name="header"> 
-          <h:outputText value=""/> 
-        </f:facet>  
-        <h:commandLink rendered="#{!_department.archived}" action="#{departmentAction.archiveById}" onclick="javascript:if(!confirm('Do you really want to delete #{_department.displayName} ?')){ return false; } else { return true; }"> 
-          <h:graphicImage value="/images/icons/delete.png" style="border: 0px" alt="archive"/>  
-          <f:param name="currentEntityId" value="#{_department.id}"/> 
-        </h:commandLink>  
-        <h:commandLink rendered="#{_department.archived}" action="#{departmentAction.delete}" onclick="javascript:if(!confirm('Do you really want to permanently delete #{_department.displayName} ?')){ return false; } else { return true; }">Delete 
-          <f:param name="currentEntityId" value="#{_department.id}"/> 
-        </h:commandLink>  
-        <h:commandLink rendered="#{_department.archived}" action="#{departmentAction.restore}">Restore
+        <h:commandLink action="#{departmentAction.delete(_department)}" onclick="javascript:if(!confirm('Do you really want to permanently delete #{_department.displayName} ?')){ return false; } else { return true; }">Delete 
           <f:param name="currentEntityId" value="#{_department.id}"/> 
         </h:commandLink> 
       </p:column> 

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf">  
+  <h:panelGroup id="editInvestorProfileComponentPanel"> 
+    <h:panelGrid columns="1"/>  
+    <c:if test="${numColumns == null }"> 
+      <c:set var="numColumns" value="2"/> 
+    </c:if>  
+    <h:panelGrid columns="${numColumns}" styleClass="editInfo" columnClasses="leftCol, rightCol"> 
+      <f:facet name="header"> 
+        <h:outputText value="#{msg.InvestorProfile}"/> 
+      </f:facet>  
+      <s:decorate id="nameEngDecorate" rendered="#{ ! excludeNameEng == true}" template="/layout/edit.xhtml"> 
+        <ui:define name="label"> 
+          <h:outputText value="#{msg.investorProfile_nameEng}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investorProfile', 'editNameEng')}"/>
+        </ui:define>  
+        <h:inputText escape="false" id="nameEng#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investorProfile', 'editNameEng')}" label="#{msg.investorProfile_nameEng}" required="false" disabled="false" value="#{investorProfileAction.investorProfile.nameEng}"></h:inputText> 
+      </s:decorate>  
+      <s:decorate id="nameFreDecorate" rendered="#{ ! excludeNameFre == true}" template="/layout/edit.xhtml"> 
+        <ui:define name="label"> 
+          <h:outputText value="#{msg.investorProfile_nameFre}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investorProfile', 'editNameFre')}"/>
+        </ui:define>  
+        <h:inputText escape="false" id="nameFre#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investorProfile', 'editNameFre')}" label="#{msg.investorProfile_nameFre}" required="false" disabled="false" value="#{investorProfileAction.investorProfile.nameFre}"></h:inputText> 
+      </s:decorate>  
+      <s:decorate id="descEngDecorate" rendered="#{ ! excludeDescEng == true}" template="/layout/edit.xhtml"> 
+        <ui:define name="label"> 
+          <h:outputText value="#{msg.investorProfile_descEng}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investorProfile', 'editDescEng')}"/>
+        </ui:define>  
+        <p:editor useSeamText="true" escape="false" id="descEng#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investorProfile', 'editDescEng')}" label="#{msg.investorProfile_descEng}" required="false" disabled="false" value="#{investorProfileAction.investorProfile.descEng}"></p:editor> 
+      </s:decorate>  
+      <s:decorate id="descFreDecorate" rendered="#{ ! excludeDescFre == true}" template="/layout/edit.xhtml"> 
+        <ui:define name="label"> 
+          <h:outputText value="#{msg.investorProfile_descFre}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investorProfile', 'editDescFre')}"/>
+        </ui:define>  
+        <p:editor useSeamText="true" escape="false" id="descFre#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investorProfile', 'editDescFre')}" label="#{msg.investorProfile_descFre}" required="false" disabled="false" value="#{investorProfileAction.investorProfile.descFre}"></p:editor> 
+      </s:decorate>  
+      <s:decorate id="imageFileUriDecorate" rendered="#{ ! excludeImageFileUri == true}" template="/layout/edit.xhtml"> 
+        <ui:define name="label"> 
+          <h:outputText value="#{msg.investorProfile_imageFileUri}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investorProfile', 'editImageFileUri')}"/>
+        </ui:define>  
+        <h:inputText escape="false" id="imageFileUri#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investorProfile', 'editImageFileUri')}" label="#{msg.investorProfile_imageFileUri}" required="false" disabled="false" value="#{investorProfileAction.investorProfile.imageFileUri}"></h:inputText> 
+      </s:decorate>  
+      <s:decorate id="conservativeOrderDecorate" rendered="#{ ! excludeConservativeOrder == true}" template="/layout/edit.xhtml"> 
+        <ui:define name="label"> 
+          <h:outputText value="#{msg.investorProfile_conservativeOrder}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investorProfile', 'editConservativeOrder')}"/>
+        </ui:define>  
+        <p:spinner size="2" min="0" escape="false" id="conservativeOrder#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('investorProfile', 'editConservativeOrder')}" label="#{msg.investorProfile_conservativeOrder}" required="false" disabled="false" value="#{investorProfileAction.investorProfile.conservativeOrder}"></p:spinner> 
+      </s:decorate> 
+    </h:panelGrid>  
+    <br/>  
+    <br/> 
+  </h:panelGroup> 
+</ui:composition>
