@@ -1,0 +1,75 @@
+package com.oreon.proj.questionnaire;
+
+import javax.persistence.*;
+import org.witchcraft.base.entity.FileAttachment;
+import org.witchcraft.base.entity.BaseEntity;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.Filters;
+
+import javax.validation.constraints.*;
+
+import java.math.BigDecimal;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Date;
+
+@MappedSuperclass
+public class AnswerBase extends BaseEntity {
+
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@JoinColumn(name = "question_id", nullable = false, updatable = true, insertable = true)
+	private Question question;
+
+	@Lob
+	@Column(name = "text", unique = false)
+	private String text;
+
+	@Column(name = "score", unique = false)
+	private Integer score;
+
+	@Column(name = "answerType", unique = false)
+	private AnswerType answerType;
+
+	public void setQuestion(Question question) {
+		this.question = question;
+	}
+
+	public Question getQuestion() {
+		return question;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setScore(Integer score) {
+		this.score = score;
+	}
+
+	public Integer getScore() {
+		return score;
+	}
+
+	public void setAnswerType(AnswerType answerType) {
+		this.answerType = answerType;
+	}
+
+	public AnswerType getAnswerType() {
+		return answerType;
+	}
+
+	@Transient
+	public String getDisplayName() {
+		try {
+			return question + "";
+		} catch (Exception e) {
+			return "Exception - " + e.getMessage();
+		}
+	}
+
+}

@@ -154,71 +154,25 @@ public abstract class CustomerOrderActionBase extends BaseAction<CustomerOrder>
 
 	}
 
-	/** This function is responsible for loading associations for the given entity e.g. when viewing an order, we load the customer so
-	 * that customer can be shown on the customer tab within viewOrder.xhtml
-	 * @see org.witchcraft.seam.action.BaseAction#loadAssociations()
-	 */
-	public void loadAssociations() {
-
-		initListOrderItems();
-
-		addDefaultAssociations();
-
-		//wire();
-	}
-
-	protected List<com.oreon.proj.onepack.OrderItem> listOrderItems = new ArrayList<com.oreon.proj.onepack.OrderItem>();
-
-	void initListOrderItems() {
-
-		if (listOrderItems.isEmpty())
-			listOrderItems.addAll(getInstance().getOrderItems());
-
-	}
-
 	public List<com.oreon.proj.onepack.OrderItem> getListOrderItems() {
-
-		prePopulateListOrderItems();
-		return listOrderItems;
+		return getInstance().getOrderItems();
 	}
 
-	public void prePopulateListOrderItems() {
-	}
+	//public void prePopulateListOrderItems() {}
 
 	public void setListOrderItems(
 			List<com.oreon.proj.onepack.OrderItem> listOrderItems) {
-		this.listOrderItems = listOrderItems;
+		//this.listOrderItems = listOrderItems;
 	}
 
+	@Begin(join = true, flushMode = org.jboss.seam.annotations.FlushModeType.MANUAL)
 	public void deleteOrderItems(int index) {
-		listOrderItems.remove(index);
+		getListOrderItems().remove(index);
 	}
 
-	@Begin(join = true)
+	@Begin(join = true, flushMode = org.jboss.seam.annotations.FlushModeType.MANUAL)
 	public void addOrderItems() {
-
-		initListOrderItems();
-		OrderItem orderItems = new OrderItem();
-
-		orderItems.setCustomerOrder(getInstance());
-
-		getListOrderItems().add(orderItems);
-
-	}
-
-	public void updateComposedAssociations() {
-
-		if (listOrderItems != null) {
-			getInstance().getOrderItems().clear();
-			getInstance().getOrderItems().addAll(listOrderItems);
-		}
-		/*
-		 */
-	}
-
-	public void clearLists() {
-		listOrderItems.clear();
-
+		getInstance().addOrderItem(new com.oreon.proj.onepack.OrderItem());
 	}
 
 	public String viewCustomerOrder() {
