@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf">  
+  <h:form> 
+    <ui:include src="freeTypeSearchQuestionnaireComponent.xhtml"/>  
+    <br/>  
+    <p:panel header="Advanced Search" toggleable="true" collapsed="true"> 
+      <ui:include src="fieldSearchQuestionnaireComponent.xhtml"/>  
+      <div class="actionButtons"> 
+        <h:commandButton id="search" value="Search" view="/admin/entities/questionnaire/questionnaire/listQuestionnaire.xhtml"> 
+          <s:conversationPropagation type="join"/> 
+        </h:commandButton>  
+        <s:button propagation="none" id="reset" value="Reset" includePageParams="false"/> 
+      </div> 
+    </p:panel> 
+  </h:form> 
+</ui:composition>

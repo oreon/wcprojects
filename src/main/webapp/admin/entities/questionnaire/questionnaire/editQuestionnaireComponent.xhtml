@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf">  
+  <h:panelGroup id="editQuestionnaireComponentPanel"> 
+    <h:panelGrid columns="1" styleClass="editInfo" columnClasses="leftCol, rightCol"> 
+      <c:if test="${numColumns == null }"> 
+        <c:set var="numColumns" value="2"/> 
+      </c:if>  
+      <h:panelGrid columns="${numColumns}"> 
+        <f:facet name="header"> 
+          <h:outputText value="#{msg.Questionnaire}"/> 
+        </f:facet>  
+        <s:decorate id="nameDecorate" rendered="#{ ! excludeName == true}" template="/layout/edit.xhtml"> 
+          <ui:define name="label"> 
+            <h:outputText value="#{msg.questionnaire_name}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('questionnaire', 'editName')}"/>
+          </ui:define>  
+          <h:inputText escape="false" id="name#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('questionnaire', 'editName')}" label="#{msg.questionnaire_name}" required="true" disabled="false" value="#{questionnaireAction.questionnaire.name}"></h:inputText> 
+        </s:decorate> 
+      </h:panelGrid>  
+      <br/>  
+      <p:panel rendered="#{ ! excludeSections == true}"> 
+        <f:facet name="header"> 
+          <h:outputText value="#{msg.questionnaire_sections}"/> 
+        </f:facet>  
+        <p:commandButton action="#{questionnaireAction.addSections}" update="sections, :#{p:component('editQuestionnaireComponentPanel')}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('questionnaire', 'editSections')}" id="btnadd_sections" icon="ui-icon-plus"> 
+          <s:conversationId/> 
+        </p:commandButton>  
+        <p:dataTable id="sections" var="_section" tableStyle="width:auto" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('questionnaire', 'editSections')}" value="#{questionnaireAction.listSections}" rowIndexVar="rowIndex"> 
+          <p:column>
+            <f:facet name="header">
+              <h:outputText value="#{msg.section_name}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('section', 'editName')}"/>
+            </f:facet>  
+            <s:decorate id="nameDecorate" rendered="#{ ! excludeName == true}" template="/layout/editTableField.xhtml"> 
+              <ui:define name="label"></ui:define>  
+              <h:inputText escape="false" id="name#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('section', 'editName')}" label="#{msg.section_name}" required="true" disabled="false" value="#{_section.name}"> 
+                <f:converter converterId="witchcraft.ui.jsf.capitalizeConverter"/> 
+              </h:inputText> 
+            </s:decorate> 
+          </p:column>  
+          <p:column> 
+            <p:commandButton action="#{questionnaireAction.addSections}" update="sections, :#{p:component('editQuestionnaireComponentPanel')}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('section', 'editSections')}" id="btnadd_sections" icon="ui-icon-plus"> 
+              <s:conversationId/> 
+            </p:commandButton> 
+          </p:column>  
+          <p:column> 
+            <p:commandButton immediate="true" action="#{questionnaireAction.deleteSections(rowIndex)}" update="sections" process="@this" id="btndelete_sections" icon="ui-icon-close"> 
+              <s:conversationId/> 
+            </p:commandButton> 
+          </p:column> 
+        </p:dataTable> 
+      </p:panel>  
+      <br/> 
+    </h:panelGrid> 
+  </h:panelGroup> 
+</ui:composition>

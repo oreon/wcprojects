@@ -29,6 +29,9 @@ public class QuestionBase extends BaseEntity {
 	@OrderBy("id DESC")
 	private List<Answer> answers;
 
+	@Column(name = "answerType", unique = false)
+	private AnswerType answerType;
+
 	public void setText(String text) {
 		this.text = text;
 	}
@@ -69,10 +72,18 @@ public class QuestionBase extends BaseEntity {
 		return listAsString(answers);
 	}
 
+	public void setAnswerType(AnswerType answerType) {
+		this.answerType = answerType;
+	}
+
+	public AnswerType getAnswerType() {
+		return answerType;
+	}
+
 	@Transient
 	public String getDisplayName() {
 		try {
-			return text + "";
+			return text;
 		} catch (Exception e) {
 			return "Exception - " + e.getMessage();
 		}

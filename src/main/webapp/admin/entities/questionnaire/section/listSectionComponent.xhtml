@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf">  
+  <c:if test="${empty modalId}"> 
+    <c:set var="modalId" value="SectionModalPanel"/> 
+  </c:if>  
+  <c:if test="${empty listTitle}"> 
+    <c:set var="listTitle" value="Section Search Results (#{empty records ? 0 : (sectionList.paginated ? sectionList.resultCount : records.size)})"/> 
+  </c:if>  
+  <h3>${listTitle}</h3>  
+  <h:form> 
+    <ui:include src="/admin/entities/questionnaire/section/modalDlgSectionComponent.xhtml"> 
+      <ui:param name="modalId" value="${modalId}"/> 
+    </ui:include> 
+  </h:form>  
+  <h:form id="sectionForm"> 
+    <p:dataTable var="_section" value="#{records}" id="sectionList" paginator="true" lazy="true" rows="20" selectionMode="single" selection="#{sectionAction.section}" tableStyle="width:auto"> 
+      <p:ajax event="rowSelect" update=":#{p:component('editSectionPanel')}" oncomplete="PF('editSectionDialog').show()" listener="#{sectionAction.onRowSelect}"/>  
+      <p:column headerText="#{msg.Section} #{msg.id}" sortBy="#{section.id}" rendered="#{s:hasPermission('id', 'viewId' )}"> 
+        <h:link outcome="/admin/entities/questionnaire/section/viewSection.xhtml" rendered="#{s:hasPermission(_section, 'view')}" propagation="none"> 
+          <h:outputText value="#{_section.id}"/>  
+          <f:param name="sectionId" value="#{_section.id}"/> 
+        </h:link> 
+      </p:column>  
+      <p:column style="width:2%"> 
+        <p:rowToggler/> 
+      </p:column>  
+      <p:rowExpansion> 
+        <ui:include src="/admin/entities/questionnaire/question/miniListQuestionComponent.xhtml"> 
+          <ui:param name="records" value="#{_section.questions}"/>  
+          <ui:param name="excludeSection" value="true"/> 
+        </ui:include> 
+      </p:rowExpansion>  
+      <p:column headerText="#{msg.section_name}" sortBy="#{section.name}" rendered="#{ ! excludeName == true and ( skipPermissionCheck == 'true' || s:hasPermission('section', 'viewName')) }"> 
+        <h:outputText value="#{_section.name}" escape="false"/> 
+      </p:column>  
+      <p:column headerText="#{msg.section_questionnaire}" sortBy="#{section.questionnaire}" rendered="#{ ! excludeQuestionnaire == true and ( skipPermissionCheck == 'true' || s:hasPermission('section', 'viewQuestionnaire')) }"> 
+        <h:panelGroup> 
+          <h:link id="questionnairesection_questionnaire" escape="false" value="#{_section.questionnaire.displayName}" outcome="/admin/entities/questionnaire/questionnaire/viewQuestionnaire.xhtml" propagation="none"> 
+            <f:param name="questionnaireId" value="#{_section.questionnaire.id}"/>  
+            <f:param name="from" value="#{request.servletPath}"/> 
+          </h:link> 
+        </h:panelGroup> 
+      </p:column>  
+      <p:column rendered="#{s:hasPermission('_section', 'edit') and !_sectionCategory.archived}"> 
+        <h:link outcome="/admin/entities/questionnaire/section/editSection.xhtml" rendered="#{s:hasPermission(_section, 'edit')}"> 
+          <h:graphicImage value="/images/icons/edit.png" style="border: 0px" alt="edit"/>  
+          <f:param name="sectionId" value="#{_section.id}"/>  
+          <s:conversationId/> 
+        </h:link> 
+      </p:column>  
+      <p:column headerText="#{msg.dateCreated}" sortBy="#{section.dateCreated}" rendered="#{s:hasPermission('dateCreated', 'viewDateCreated' )}"> 
+        <h:outputText value="#{_section.dateCreated}"> 
+          <s:convertDateTime type="date" dateStyle="medium"/> 
+        </h:outputText> 
+      </p:column>  
+      <p:column rendered="#{s:hasPermission('_section', 'view') and !_sectionCategory.archived}"> 
+        <h:link outcome="/admin/entities/questionnaire/section/viewSection.xhtml" rendered="#{s:hasPermission(_section, 'view')}"> 
+          <h:graphicImage value="/images/icons/eye.png" style="border: 0px" alt="view"/>  
+          <f:param name="sectionId" value="#{_section.id}"/>  
+          <s:conversationId/> 
+        </h:link> 
+      </p:column>  
+      <p:column rendered="#{s:hasPermission('_section', 'edit') and !_sectionCategory.archived}"> 
+        <h:link outcome="/admin/entities/questionnaire/section/editSection.xhtml" rendered="#{s:hasPermission(_section, 'edit')}"> 
+          <h:graphicImage value="/images/icons/edit.png" style="border: 0px" alt="edit"/>  
+          <f:param name="sectionId" value="#{_section.id}"/>  
+          <s:conversationId/> 
+        </h:link> 
+      </p:column>  
+      <p:column rendered="#{s:hasPermission('sectionAction', 'archive')}" propagation="none"> 
+        <h:commandLink action="#{sectionAction.delete(_section)}" onclick="javascript:if(!confirm('Do you really want to permanently delete #{_section.displayName} ?')){ return false; } else { return true; }">Delete 
+          <f:param name="currentEntityId" value="#{_section.id}"/> 
+        </h:commandLink> 
+      </p:column> 
+    </p:dataTable> 
+  </h:form> 
+</ui:composition>

@@ -102,8 +102,6 @@ public abstract class AnswerListQueryBase extends BaseQuery<Answer, Long> {
 			"answer.score >= #{answerList.scoreRange.begin}",
 			"answer.score <= #{answerList.scoreRange.end}",
 
-			"answer.answerType = #{answerList.answer.answerType}",
-
 			"answer.dateCreated <= #{answerList.dateCreatedRange.end}",
 			"answer.dateCreated >= #{answerList.dateCreatedRange.begin}",};
 

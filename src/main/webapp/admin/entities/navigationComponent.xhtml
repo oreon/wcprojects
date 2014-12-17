@@ -59,32 +59,68 @@
         </h:commandLink>  
         <br/> 
       </p:tab>  
-      <p:tab title="Univeris.data" expanded="#{panelMenuStateBean.state['Univeris.data']}"> 
-        <h:commandLink value="InvestorProfile" action="investorProfile"> 
+      <p:tab title="Questionnaire" expanded="#{panelMenuStateBean.state['Questionnaire']}"> 
+        <h:commandLink value="Questionnaire" action="questionnaire"> 
           <s:conversationPropagation type="none"/> 
         </h:commandLink>  
-        <h:commandLink action="editInvestorProfile"> 
+        <h:commandLink action="editQuestionnaire"> 
           <h:graphicImage value="/images/icons/add.png" style="border: 0px" alt="create"/>  
           <s:conversationPropagation type="end"/>  
-          <f:param name="investorProfileId" value="0"/> 
+          <f:param name="questionnaireId" value="0"/> 
         </h:commandLink>  
         <br/>  
-        <h:commandLink value="InvestingGoal" action="investingGoal"> 
+        <h:commandLink value="Section" action="section"> 
           <s:conversationPropagation type="none"/> 
         </h:commandLink>  
-        <h:commandLink action="editInvestingGoal"> 
+        <h:commandLink action="editSection"> 
           <h:graphicImage value="/images/icons/add.png" style="border: 0px" alt="create"/>  
           <s:conversationPropagation type="end"/>  
-          <f:param name="investingGoalId" value="0"/> 
+          <f:param name="sectionId" value="0"/> 
         </h:commandLink>  
         <br/>  
-        <h:commandLink value="InvestingGoalPlanCode" action="investingGoalPlanCode"> 
+        <h:commandLink value="Question" action="question"> 
           <s:conversationPropagation type="none"/> 
         </h:commandLink>  
-        <h:commandLink action="editInvestingGoalPlanCode"> 
+        <h:commandLink action="editQuestion"> 
           <h:graphicImage value="/images/icons/add.png" style="border: 0px" alt="create"/>  
           <s:conversationPropagation type="end"/>  
-          <f:param name="investingGoalPlanCodeId" value="0"/> 
+          <f:param name="questionId" value="0"/> 
+        </h:commandLink>  
+        <br/>  
+        <h:commandLink value="Answer" action="answer"> 
+          <s:conversationPropagation type="none"/> 
+        </h:commandLink>  
+        <h:commandLink action="editAnswer"> 
+          <h:graphicImage value="/images/icons/add.png" style="border: 0px" alt="create"/>  
+          <s:conversationPropagation type="end"/>  
+          <f:param name="answerId" value="0"/> 
+        </h:commandLink>  
+        <br/>  
+        <h:commandLink value="AnsweredQuestion" action="answeredQuestion"> 
+          <s:conversationPropagation type="none"/> 
+        </h:commandLink>  
+        <h:commandLink action="editAnsweredQuestion"> 
+          <h:graphicImage value="/images/icons/add.png" style="border: 0px" alt="create"/>  
+          <s:conversationPropagation type="end"/>  
+          <f:param name="answeredQuestionId" value="0"/> 
+        </h:commandLink>  
+        <br/>  
+        <h:commandLink value="AnsweredQuestionnaire" action="answeredQuestionnaire"> 
+          <s:conversationPropagation type="none"/> 
+        </h:commandLink>  
+        <h:commandLink action="editAnsweredQuestionnaire"> 
+          <h:graphicImage value="/images/icons/add.png" style="border: 0px" alt="create"/>  
+          <s:conversationPropagation type="end"/>  
+          <f:param name="answeredQuestionnaireId" value="0"/> 
+        </h:commandLink>  
+        <br/>  
+        <h:commandLink value="AnswersProvided" action="answersProvided"> 
+          <s:conversationPropagation type="none"/> 
+        </h:commandLink>  
+        <h:commandLink action="editAnswersProvided"> 
+          <h:graphicImage value="/images/icons/add.png" style="border: 0px" alt="create"/>  
+          <s:conversationPropagation type="end"/>  
+          <f:param name="answersProvidedId" value="0"/> 
         </h:commandLink>  
         <br/> 
       </p:tab> 

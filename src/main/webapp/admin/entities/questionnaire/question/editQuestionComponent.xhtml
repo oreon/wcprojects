@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf">  
+  <h:panelGroup id="editQuestionComponentPanel"> 
+    <h:panelGrid columns="1" styleClass="editInfo" columnClasses="leftCol, rightCol"> 
+      <c:if test="${numColumns == null }"> 
+        <c:set var="numColumns" value="2"/> 
+      </c:if>  
+      <h:panelGrid columns="${numColumns}"> 
+        <f:facet name="header"> 
+          <h:outputText value="#{msg.Question}"/> 
+        </f:facet>  
+        <s:decorate id="textDecorate" rendered="#{ ! excludeText == true}" template="/layout/edit.xhtml"> 
+          <ui:define name="label"> 
+            <h:outputText value="#{msg.question_text}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('question', 'editText')}"/>
+          </ui:define>  
+          <p:editor useSeamText="true" width="400" height="130" escape="false" id="text#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('question', 'editText')}" label="#{msg.question_text}" required="false" disabled="false" value="#{questionAction.question.text}"></p:editor> 
+        </s:decorate>  
+        <s:decorate id="answerTypeDecorate" rendered="#{ ! excludeAnswerType == true}" template="/layout/edit.xhtml"> 
+          <ui:define name="label"> 
+            <h:outputText value="#{msg.question_answerType}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('question', 'editAnswerType')}"/>
+          </ui:define>  
+          <h:selectOneMenu id="answerType" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('question', 'editAnswerType')}" value="#{questionAction.question.answerType}" required="false" label="#{msg.question_answerType}"> 
+            <f:selectItem itemLabel="Please Select..." itemValue=""/>  
+            <f:selectItem itemValue="SINGLE" itemLabel="#{msg.SINGLE}"/>  
+            <f:selectItem itemValue="MULTIPLE" itemLabel="#{msg.MULTIPLE}"/> 
+          </h:selectOneMenu> 
+        </s:decorate>  
+        <s:decorate id="sectionIdDecorate" rendered="#{ ! excludeSection == true}" template="/layout/edit.xhtml"> 
+          <ui:define name="label"> 
+            <h:outputText value="#{msg.question_section}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('question', 'editSection')}"/>
+          </ui:define>  
+          <p:selectOneMenu id="sectionId" label="#{msg.question_section}" value="#{questionAction.question.section}" required="true" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('question', 'editSection')}" disabled="false" converter="#{sectionList.converter}"> 
+            <f:selectItem itemLabel="Select One" itemValue=""/>  
+            <f:selectItems value="#{sectionList.fetchAll()}" var="itemIter" itemLabel="#{itemIter.displayName}" itemValue="#{itemIter}"/> 
+          </p:selectOneMenu> 
+        </s:decorate> 
+      </h:panelGrid>  
+      <br/>  
+      <p:panel rendered="#{ ! excludeAnswers == true}"> 
+        <f:facet name="header"> 
+          <h:outputText value="#{msg.question_answers}"/> 
+        </f:facet>  
+        <p:commandButton action="#{questionAction.addAnswers}" update="answers, :#{p:component('editQuestionComponentPanel')}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('question', 'editAnswers')}" id="btnadd_answers" icon="ui-icon-plus"> 
+          <s:conversationId/> 
+        </p:commandButton>  
+        <p:dataTable id="answers" var="_answer" tableStyle="width:auto" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('question', 'editAnswers')}" value="#{questionAction.listAnswers}" rowIndexVar="rowIndex"> 
+          <p:column>
+            <f:facet name="header">
+              <h:outputText value="#{msg.answer_text}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answer', 'editText')}"/>
+            </f:facet>  
+            <s:decorate id="textDecorate" rendered="#{ ! excludeText == true}" template="/layout/editTableField.xhtml"> 
+              <ui:define name="label"></ui:define>  
+              <p:editor useSeamText="true" width="400" height="130" escape="false" id="text#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answer', 'editText')}" label="#{msg.answer_text}" required="false" disabled="false" value="#{_answer.text}"></p:editor> 
+            </s:decorate> 
+          </p:column>  
+          <p:column>
+            <f:facet name="header">
+              <h:outputText value="#{msg.answer_score}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answer', 'editScore')}"/>
+            </f:facet>  
+            <s:decorate id="scoreDecorate" rendered="#{ ! excludeScore == true}" template="/layout/editTableField.xhtml"> 
+              <ui:define name="label"></ui:define>  
+              <p:spinner size="2" min="0" escape="false" id="score#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answer', 'editScore')}" label="#{msg.answer_score}" required="false" disabled="false" value="#{_answer.score}"></p:spinner> 
+            </s:decorate> 
+          </p:column>  
+          <p:column> 
+            <p:commandButton action="#{questionAction.addAnswers}" update="answers, :#{p:component('editQuestionComponentPanel')}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answer', 'editAnswers')}" id="btnadd_answers" icon="ui-icon-plus"> 
+              <s:conversationId/> 
+            </p:commandButton> 
+          </p:column>  
+          <p:column> 
+            <p:commandButton immediate="true" action="#{questionAction.deleteAnswers(rowIndex)}" update="answers" process="@this" id="btndelete_answers" icon="ui-icon-close"> 
+              <s:conversationId/> 
+            </p:commandButton> 
+          </p:column> 
+        </p:dataTable> 
+      </p:panel>  
+      <br/> 
+    </h:panelGrid> 
+  </h:panelGroup> 
+</ui:composition>

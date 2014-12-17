@@ -92,7 +92,7 @@ public class CustomerOrderBase extends BaseEntity {
 	@Transient
 	public String getDisplayName() {
 		try {
-			return notes + "";
+			return notes;
 		} catch (Exception e) {
 			return "Exception - " + e.getMessage();
 		}

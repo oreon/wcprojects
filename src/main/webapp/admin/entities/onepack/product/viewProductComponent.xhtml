@@ -2,18 +2,19 @@
 
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf">  
   <h:panelGroup id="${panelId == null ? 'viewProductPanel' : panelId}"> 
-    <h:panelGrid columns="1"/>  
-    <c:if test="${numColumns == null }"> 
-      <c:set var="numColumns" value="2"/> 
-    </c:if>  
-    <h:panelGrid columns="${numColumns}" styleClass="viewInfo" columnClasses="leftCol, rightCol"> 
-      <f:facet name="header"> 
-        <h:outputText value="#{msg.Product}"/> 
-      </f:facet>  
-      <h:outputText value="#{msg.product_name}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('product', 'viewName')}"/>  
-      <h:outputText value="#{product.name}" escape="false"/> 
-    </h:panelGrid>  
-    <br/>  
-    <br/> 
+    <h:panelGrid columns="1" styleClass="viewInfo" columnClasses="leftCol, rightCol"> 
+      <c:if test="${numColumns == null }"> 
+        <c:set var="numColumns" value="2"/> 
+      </c:if>  
+      <h:panelGrid columns="${numColumns}"> 
+        <f:facet name="header"> 
+          <h:outputText value="#{msg.Product}"/> 
+        </f:facet>  
+        <h:outputText value="#{msg.product_name}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('product', 'viewName')}"/>  
+        <h:outputText value="#{product.name}" escape="false"/> 
+      </h:panelGrid>  
+      <br/>  
+      <br/> 
+    </h:panelGrid> 
   </h:panelGroup> 
 </ui:composition>

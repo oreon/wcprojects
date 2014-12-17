@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf" template="/admin/template.xhtml">  
+  <ui:define name="content"> 
+    <h:panelGroup rendered="#{answeredQuestionnaireAction.hasCustomView}"> 
+      <!--PROTECTED REGION ID(EDITABLE_RGN_VIEW_questionnaire_AnsweredQuestionnaire) ENABLED START-->  
+      <!--PROTECTED REGION END--> 
+    </h:panelGroup>  
+    <h:panelGroup rendered="#{!answeredQuestionnaireAction.hasCustomView}"> 
+      <h:form> 
+        <p:tabView dynamic="true" cache="true"> 
+          <p:tab title="AnsweredQuestionnaire"> 
+            <div id="printable"> 
+              <ui:include src="/admin/entities/questionnaire/answeredQuestionnaire/viewAnsweredQuestionnaireComponent.xhtml"> 
+                <ui:param name="answeredQuestionnaire" value="#{answeredQuestionnaireAction.instance}"/> 
+              </ui:include> 
+            </div>  
+            <div class="buttonBox"> 
+              <h:commandButton value="Edit" rendered="#{s:hasPermission(answeredQuestionnaireAction.instance, 'edit')}" action="edit"></h:commandButton>  
+              <h:outputText value=" "/>  
+              <h:commandButton value="Back To Listing" action="#{answeredQuestionnaireAction.cancel}"> 
+                <s:conversationId/> 
+              </h:commandButton> 
+            </div> 
+          </p:tab>  
+          <p:tab title="Questionnaire" rendered="#{answeredQuestionnaireAction.instance.questionnaire != null}"> 
+            <h:form> 
+              <ui:include src="/admin/entities/questionnaire/questionnaire/viewQuestionnaireComponent.xhtml"> 
+                <ui:param name="questionnaire" value="#{answeredQuestionnaireAction.instance.questionnaire}"/> 
+              </ui:include> 
+            </h:form> 
+          </p:tab>  
+          <p:tab title="Customer" rendered="#{answeredQuestionnaireAction.instance.customer != null}"> 
+            <h:form> 
+              <ui:include src="/admin/entities/onepack/customer/viewCustomerComponent.xhtml"> 
+                <ui:param name="customer" value="#{answeredQuestionnaireAction.instance.customer}"/> 
+              </ui:include> 
+            </h:form> 
+          </p:tab> 
+        </p:tabView>  
+        <div class="buttonBox"></div> 
+      </h:form>  
+      <br/>  
+      <p:tabView dynamic="true" cache="true"></p:tabView>  
+      <br/>  
+      <p:tabView dynamic="true" cache="true"> 
+        <p:tab title="Notes"> 
+          <wc:comments backingAction="#{answeredQuestionnaireAction}"/> 
+        </p:tab> 
+      </p:tabView> 
+    </h:panelGroup> 
+  </ui:define> 
+</ui:composition>

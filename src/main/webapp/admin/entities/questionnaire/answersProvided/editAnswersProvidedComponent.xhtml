@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf">  
+  <h:panelGroup id="editAnswersProvidedComponentPanel"> 
+    <h:panelGrid columns="1" styleClass="editInfo" columnClasses="leftCol, rightCol"> 
+      <c:if test="${numColumns == null }"> 
+        <c:set var="numColumns" value="2"/> 
+      </c:if>  
+      <h:panelGrid columns="${numColumns}"> 
+        <f:facet name="header"> 
+          <h:outputText value="#{msg.AnswersProvided}"/> 
+        </f:facet>  
+        <s:decorate id="answeredQuestionIdDecorate" rendered="#{ ! excludeAnsweredQuestion == true}" template="/layout/edit.xhtml"> 
+          <ui:define name="label"> 
+            <h:outputText value="#{msg.answersProvided_answeredQuestion}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answersProvided', 'editAnsweredQuestion')}"/>
+          </ui:define>  
+          <p:selectOneMenu id="answeredQuestionId" label="#{msg.answersProvided_answeredQuestion}" value="#{answersProvidedAction.answersProvided.answeredQuestion}" required="true" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answersProvided', 'editAnsweredQuestion')}" disabled="false" converter="#{answeredQuestionList.converter}"> 
+            <f:selectItem itemLabel="Select One" itemValue=""/>  
+            <f:selectItems value="#{answeredQuestionList.fetchAll()}" var="itemIter" itemLabel="#{itemIter.displayName}" itemValue="#{itemIter}"/> 
+          </p:selectOneMenu> 
+        </s:decorate>  
+        <s:decorate id="answerIdDecorate" rendered="#{ ! excludeAnswer == true}" template="/layout/edit.xhtml"> 
+          <ui:define name="label"> 
+            <h:outputText value="#{msg.answersProvided_answer}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answersProvided', 'editAnswer')}"/>
+          </ui:define>  
+          <p:selectOneMenu id="answerId" label="#{msg.answersProvided_answer}" value="#{answersProvidedAction.answersProvided.answer}" required="true" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answersProvided', 'editAnswer')}" disabled="false" converter="#{answerList.converter}"> 
+            <f:selectItem itemLabel="Select One" itemValue=""/>  
+            <f:selectItems value="#{answerList.fetchAll()}" var="itemIter" itemLabel="#{itemIter.displayName}" itemValue="#{itemIter}"/> 
+          </p:selectOneMenu> 
+        </s:decorate> 
+      </h:panelGrid>  
+      <br/>  
+      <br/> 
+    </h:panelGrid> 
+  </h:panelGroup> 
+</ui:composition>

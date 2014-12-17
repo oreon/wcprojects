@@ -123,40 +123,88 @@
                 <redirect view-id="/admin/entities/onepack/orderItem/editOrderItem.xhtml" />
             </rule>
         
-            <rule if-outcome="investorProfile">
-                <redirect view-id="/admin/entities/univeris.data/investorProfile/listInvestorProfile.xhtml" />
+            <rule if-outcome="questionnaire">
+                <redirect view-id="/admin/entities/questionnaire/questionnaire/listQuestionnaire.xhtml" />
             </rule>
             
-            <rule if-outcome="viewInvestorProfile">
-                <redirect view-id="/admin/entities/univeris.data/investorProfile/viewInvestorProfile.xhtml" />
+            <rule if-outcome="viewQuestionnaire">
+                <redirect view-id="/admin/entities/questionnaire/questionnaire/viewQuestionnaire.xhtml" />
             </rule>
             
-            <rule if-outcome="editInvestorProfile">
-                <redirect view-id="/admin/entities/univeris.data/investorProfile/editInvestorProfile.xhtml" />
+            <rule if-outcome="editQuestionnaire">
+                <redirect view-id="/admin/entities/questionnaire/questionnaire/editQuestionnaire.xhtml" />
             </rule>
         
-            <rule if-outcome="investingGoal">
-                <redirect view-id="/admin/entities/univeris.data/investingGoal/listInvestingGoal.xhtml" />
+            <rule if-outcome="section">
+                <redirect view-id="/admin/entities/questionnaire/section/listSection.xhtml" />
             </rule>
             
-            <rule if-outcome="viewInvestingGoal">
-                <redirect view-id="/admin/entities/univeris.data/investingGoal/viewInvestingGoal.xhtml" />
+            <rule if-outcome="viewSection">
+                <redirect view-id="/admin/entities/questionnaire/section/viewSection.xhtml" />
             </rule>
             
-            <rule if-outcome="editInvestingGoal">
-                <redirect view-id="/admin/entities/univeris.data/investingGoal/editInvestingGoal.xhtml" />
+            <rule if-outcome="editSection">
+                <redirect view-id="/admin/entities/questionnaire/section/editSection.xhtml" />
             </rule>
         
-            <rule if-outcome="investingGoalPlanCode">
-                <redirect view-id="/admin/entities/univeris.data/investingGoalPlanCode/listInvestingGoalPlanCode.xhtml" />
+            <rule if-outcome="question">
+                <redirect view-id="/admin/entities/questionnaire/question/listQuestion.xhtml" />
             </rule>
             
-            <rule if-outcome="viewInvestingGoalPlanCode">
-                <redirect view-id="/admin/entities/univeris.data/investingGoalPlanCode/viewInvestingGoalPlanCode.xhtml" />
+            <rule if-outcome="viewQuestion">
+                <redirect view-id="/admin/entities/questionnaire/question/viewQuestion.xhtml" />
             </rule>
             
-            <rule if-outcome="editInvestingGoalPlanCode">
-                <redirect view-id="/admin/entities/univeris.data/investingGoalPlanCode/editInvestingGoalPlanCode.xhtml" />
+            <rule if-outcome="editQuestion">
+                <redirect view-id="/admin/entities/questionnaire/question/editQuestion.xhtml" />
+            </rule>
+        
+            <rule if-outcome="answer">
+                <redirect view-id="/admin/entities/questionnaire/answer/listAnswer.xhtml" />
+            </rule>
+            
+            <rule if-outcome="viewAnswer">
+                <redirect view-id="/admin/entities/questionnaire/answer/viewAnswer.xhtml" />
+            </rule>
+            
+            <rule if-outcome="editAnswer">
+                <redirect view-id="/admin/entities/questionnaire/answer/editAnswer.xhtml" />
+            </rule>
+        
+            <rule if-outcome="answeredQuestion">
+                <redirect view-id="/admin/entities/questionnaire/answeredQuestion/listAnsweredQuestion.xhtml" />
+            </rule>
+            
+            <rule if-outcome="viewAnsweredQuestion">
+                <redirect view-id="/admin/entities/questionnaire/answeredQuestion/viewAnsweredQuestion.xhtml" />
+            </rule>
+            
+            <rule if-outcome="editAnsweredQuestion">
+                <redirect view-id="/admin/entities/questionnaire/answeredQuestion/editAnsweredQuestion.xhtml" />
+            </rule>
+        
+            <rule if-outcome="answeredQuestionnaire">
+                <redirect view-id="/admin/entities/questionnaire/answeredQuestionnaire/listAnsweredQuestionnaire.xhtml" />
+            </rule>
+            
+            <rule if-outcome="viewAnsweredQuestionnaire">
+                <redirect view-id="/admin/entities/questionnaire/answeredQuestionnaire/viewAnsweredQuestionnaire.xhtml" />
+            </rule>
+            
+            <rule if-outcome="editAnsweredQuestionnaire">
+                <redirect view-id="/admin/entities/questionnaire/answeredQuestionnaire/editAnsweredQuestionnaire.xhtml" />
+            </rule>
+        
+            <rule if-outcome="answersProvided">
+                <redirect view-id="/admin/entities/questionnaire/answersProvided/listAnswersProvided.xhtml" />
+            </rule>
+            
+            <rule if-outcome="viewAnswersProvided">
+                <redirect view-id="/admin/entities/questionnaire/answersProvided/viewAnswersProvided.xhtml" />
+            </rule>
+            
+            <rule if-outcome="editAnswersProvided">
+                <redirect view-id="/admin/entities/questionnaire/answersProvided/editAnswersProvided.xhtml" />
             </rule>
         
         </navigation>
@@ -610,94 +658,64 @@
 	
 	
     
-    <page view-id="/admin/entities/univeris.data/investorProfile/editInvestorProfile.xhtml"  >
-    	<!-- <description>Edit InvestorProfile: #{investorProfile.displayName}</description> -->
-    	<restrict>#{s:hasPermission('investorProfile', 'edit')}</restrict>
+    <page view-id="/admin/entities/questionnaire/questionnaire/editQuestionnaire.xhtml"  >
+    	<!-- <description>Edit Questionnaire: #{questionnaire.displayName}</description> -->
+    	<restrict>#{s:hasPermission('questionnaire', 'edit')}</restrict>
     	<begin-conversation join="true"/>
     	<navigation> 
 			 <rule if-outcome="save">
- 				<redirect view-id="/admin/entities/univeris.data/investorProfile/viewInvestorProfile.xhtml" />
+ 				<redirect view-id="/admin/entities/questionnaire/questionnaire/viewQuestionnaire.xhtml" />
             </rule>	
              <rule if-outcome="cancel">
- 				<redirect view-id="/admin/entities/univeris.data/investorProfile/listInvestorProfile.xhtml" />
+ 				<redirect view-id="/admin/entities/questionnaire/questionnaire/listQuestionnaire.xhtml" />
             </rule>			
 		</navigation>
-		<param name="investorProfileId" value="#{investorProfileAction.investorProfileId}" />
+		<param name="questionnaireId" value="#{questionnaireAction.questionnaireId}" />
 		
 	</page>
 	
-	 <page view-id="/admin/entities/univeris.data/investorProfile/viewInvestorProfile.xhtml"  action="#{redirect.captureCurrentView()}">
-	 	<!-- <description>View InvestorProfile: #{investorProfile.displayName}</description> -->
-	 	<restrict>#{s:hasPermission('investorProfile', 'view')}</restrict>
+	 <page view-id="/admin/entities/questionnaire/questionnaire/viewQuestionnaire.xhtml"  action="#{redirect.captureCurrentView()}">
+	 	<!-- <description>View Questionnaire: #{questionnaire.displayName}</description> -->
+	 	<restrict>#{s:hasPermission('questionnaire', 'view')}</restrict>
 	 	<navigation> 
 			 <rule if-outcome="edit">
 			 	
- 				<redirect view-id="/admin/entities/univeris.data/investorProfile/editInvestorProfile.xhtml" />
+ 				<redirect view-id="/admin/entities/questionnaire/questionnaire/editQuestionnaire.xhtml" />
             </rule>	
              <rule if-outcome="cancel">
              	
- 				<redirect view-id="/admin/entities/univeris.data/investorProfile/listInvestorProfile.xhtml" />
+ 				<redirect view-id="/admin/entities/questionnaire/questionnaire/listQuestionnaire.xhtml" />
             </rule>			
 		</navigation>
-		<param name="investorProfileId" value="#{investorProfileAction.investorProfileId}" />
+		<param name="questionnaireId" value="#{questionnaireAction.questionnaireId}" />
 	</page>
 	
-	<page view-id="/admin/entities/univeris.data/investorProfile/listInvestorProfile.xhtml" action="#{redirect.captureCurrentView()}" >
-		<restrict>#{s:hasPermission('investorProfile', 'view')}</restrict>
+	<page view-id="/admin/entities/questionnaire/questionnaire/listQuestionnaire.xhtml" action="#{redirect.captureCurrentView()}" >
+		<restrict>#{s:hasPermission('questionnaire', 'view')}</restrict>
 		<navigation>
-			<rule if-outcome="viewInvestorProfile">
+			<rule if-outcome="viewQuestionnaire">
 				
-				<redirect view-id="/admin/entities/univeris.data/investorProfile/viewInvestorProfile.xhtml" />
+				<redirect view-id="/admin/entities/questionnaire/questionnaire/viewQuestionnaire.xhtml" />
 			</rule> 
 			 <rule if-outcome="edit">
 			 	
- 				<redirect view-id="/admin/entities/univeris.data/investorProfile/editInvestorProfile.xhtml" />
+ 				<redirect view-id="/admin/entities/questionnaire/questionnaire/editQuestionnaire.xhtml" />
             </rule>			
             <rule if-outcome="textSearch"> 
-        		<redirect view-id="/admin/entities/univeris.data/investorProfile/textSearchResultsInvestorProfile.xhtml"/> 
+        		<redirect view-id="/admin/entities/questionnaire/questionnaire/textSearchResultsQuestionnaire.xhtml"/> 
       		</rule>
 		</navigation>
 		
-		<param name="firstResult" value="#{investorProfileList.firstResult}" />
-		<param name="sort" value="#{investorProfileList.orderColumn}" />
-		<param name="dir" value="#{investorProfileList.orderDirection}" />
+		<param name="firstResult" value="#{questionnaireList.firstResult}" />
+		<param name="sort" value="#{questionnaireList.orderColumn}" />
+		<param name="dir" value="#{questionnaireList.orderDirection}" />
 
 		<param name="from" />
-		<param name="id" value="#{investorProfileList.investorProfile.id}" />
+		<param name="id" value="#{questionnaireList.questionnaire.id}" />
 	
 		
 			
-				<param name="nameEng" value="#{investorProfileList.investorProfile.nameEng}"  validateModel="false" />
-			
-		
-	
-		
-			
-				<param name="nameFre" value="#{investorProfileList.investorProfile.nameFre}"  validateModel="false" />
-			
-		
-	
-		
-			
-				<param name="descEng" value="#{investorProfileList.investorProfile.descEng}"  validateModel="false" />
-			
-		
-	
-		
-			
-				<param name="descFre" value="#{investorProfileList.investorProfile.descFre}"  validateModel="false" />
-			
-		
-	
-		
-			
-				<param name="imageFileUri" value="#{investorProfileList.investorProfile.imageFileUri}"  validateModel="false" />
-			
-		
-	
-		
-			
-				<param name="conservativeOrder" value="#{investorProfileList.investorProfile.conservativeOrder}"  validateModel="false" />
+				<param name="name" value="#{questionnaireList.questionnaire.name}"  validateModel="false" />
 			
 		
 	
@@ -706,89 +724,71 @@
 	
 	
     
-    <page view-id="/admin/entities/univeris.data/investingGoal/editInvestingGoal.xhtml"  >
-    	<!-- <description>Edit InvestingGoal: #{investingGoal.displayName}</description> -->
-    	<restrict>#{s:hasPermission('investingGoal', 'edit')}</restrict>
+    <page view-id="/admin/entities/questionnaire/section/editSection.xhtml"  >
+    	<!-- <description>Edit Section: #{section.displayName}</description> -->
+    	<restrict>#{s:hasPermission('section', 'edit')}</restrict>
     	<begin-conversation join="true"/>
     	<navigation> 
 			 <rule if-outcome="save">
- 				<redirect view-id="/admin/entities/univeris.data/investingGoal/viewInvestingGoal.xhtml" />
+ 				<redirect view-id="/admin/entities/questionnaire/section/viewSection.xhtml" />
             </rule>	
              <rule if-outcome="cancel">
- 				<redirect view-id="/admin/entities/univeris.data/investingGoal/listInvestingGoal.xhtml" />
+ 				<redirect view-id="/admin/entities/questionnaire/section/listSection.xhtml" />
             </rule>			
 		</navigation>
-		<param name="investingGoalId" value="#{investingGoalAction.investingGoalId}" />
+		<param name="sectionId" value="#{sectionAction.sectionId}" />
 		
 	</page>
 	
-	 <page view-id="/admin/entities/univeris.data/investingGoal/viewInvestingGoal.xhtml"  action="#{redirect.captureCurrentView()}">
-	 	<!-- <description>View InvestingGoal: #{investingGoal.displayName}</description> -->
-	 	<restrict>#{s:hasPermission('investingGoal', 'view')}</restrict>
+	 <page view-id="/admin/entities/questionnaire/section/viewSection.xhtml"  action="#{redirect.captureCurrentView()}">
+	 	<!-- <description>View Section: #{section.displayName}</description> -->
+	 	<restrict>#{s:hasPermission('section', 'view')}</restrict>
 	 	<navigation> 
 			 <rule if-outcome="edit">
 			 	
- 				<redirect view-id="/admin/entities/univeris.data/investingGoal/editInvestingGoal.xhtml" />
+ 				<redirect view-id="/admin/entities/questionnaire/section/editSection.xhtml" />
             </rule>	
              <rule if-outcome="cancel">
              	
- 				<redirect view-id="/admin/entities/univeris.data/investingGoal/listInvestingGoal.xhtml" />
+ 				<redirect view-id="/admin/entities/questionnaire/section/listSection.xhtml" />
             </rule>			
 		</navigation>
-		<param name="investingGoalId" value="#{investingGoalAction.investingGoalId}" />
+		<param name="sectionId" value="#{sectionAction.sectionId}" />
 	</page>
 	
-	<page view-id="/admin/entities/univeris.data/investingGoal/listInvestingGoal.xhtml" action="#{redirect.captureCurrentView()}" >
-		<restrict>#{s:hasPermission('investingGoal', 'view')}</restrict>
+	<page view-id="/admin/entities/questionnaire/section/listSection.xhtml" action="#{redirect.captureCurrentView()}" >
+		<restrict>#{s:hasPermission('section', 'view')}</restrict>
 		<navigation>
-			<rule if-outcome="viewInvestingGoal">
+			<rule if-outcome="viewSection">
 				
-				<redirect view-id="/admin/entities/univeris.data/investingGoal/viewInvestingGoal.xhtml" />
+				<redirect view-id="/admin/entities/questionnaire/section/viewSection.xhtml" />
 			</rule> 
 			 <rule if-outcome="edit">
 			 	
- 				<redirect view-id="/admin/entities/univeris.data/investingGoal/editInvestingGoal.xhtml" />
+ 				<redirect view-id="/admin/entities/questionnaire/section/editSection.xhtml" />
             </rule>			
             <rule if-outcome="textSearch"> 
-        		<redirect view-id="/admin/entities/univeris.data/investingGoal/textSearchResultsInvestingGoal.xhtml"/> 
+        		<redirect view-id="/admin/entities/questionnaire/section/textSearchResultsSection.xhtml"/> 
       		</rule>
 		</navigation>
 		
-		<param name="firstResult" value="#{investingGoalList.firstResult}" />
-		<param name="sort" value="#{investingGoalList.orderColumn}" />
-		<param name="dir" value="#{investingGoalList.orderDirection}" />
+		<param name="firstResult" value="#{sectionList.firstResult}" />
+		<param name="sort" value="#{sectionList.orderColumn}" />
+		<param name="dir" value="#{sectionList.orderDirection}" />
 
 		<param name="from" />
-		<param name="id" value="#{investingGoalList.investingGoal.id}" />
+		<param name="id" value="#{sectionList.section.id}" />
 	
 		
 			
-				<param name="nameEng" value="#{investingGoalList.investingGoal.nameEng}"  validateModel="false" />
-			
-		
-	
-		
-			
-				<param name="nameFre" value="#{investingGoalList.investingGoal.nameFre}"  validateModel="false" />
-			
-		
-	
-		
-			
-				<param name="imageFileIri" value="#{investingGoalList.investingGoal.imageFileIri}"  validateModel="false" />
-			
-		
-	
-		
-			
-				<param name="isDefault" value="#{investingGoalList.investingGoal.isDefault}"  validateModel="false" />
+				<param name="name" value="#{sectionList.section.name}"  validateModel="false" />
 			
 		
 	
 		
 			
 				
-				<param name="investingGoalPlanCodeId" value="#{investingGoalList.investingGoalPlanCodeId}"  validateModel="false" />
+				<param name="questionnaireId" value="#{sectionList.questionnaireId}"  validateModel="false" />
 				
 			
 		
@@ -798,64 +798,398 @@
 	
 	
     
-    <page view-id="/admin/entities/univeris.data/investingGoalPlanCode/editInvestingGoalPlanCode.xhtml"  >
-    	<!-- <description>Edit InvestingGoalPlanCode: #{investingGoalPlanCode.displayName}</description> -->
-    	<restrict>#{s:hasPermission('investingGoalPlanCode', 'edit')}</restrict>
+    <page view-id="/admin/entities/questionnaire/question/editQuestion.xhtml"  >
+    	<!-- <description>Edit Question: #{question.displayName}</description> -->
+    	<restrict>#{s:hasPermission('question', 'edit')}</restrict>
     	<begin-conversation join="true"/>
     	<navigation> 
 			 <rule if-outcome="save">
- 				<redirect view-id="/admin/entities/univeris.data/investingGoalPlanCode/viewInvestingGoalPlanCode.xhtml" />
+ 				<redirect view-id="/admin/entities/questionnaire/question/viewQuestion.xhtml" />
             </rule>	
              <rule if-outcome="cancel">
- 				<redirect view-id="/admin/entities/univeris.data/investingGoalPlanCode/listInvestingGoalPlanCode.xhtml" />
+ 				<redirect view-id="/admin/entities/questionnaire/question/listQuestion.xhtml" />
             </rule>			
 		</navigation>
-		<param name="investingGoalPlanCodeId" value="#{investingGoalPlanCodeAction.investingGoalPlanCodeId}" />
+		<param name="questionId" value="#{questionAction.questionId}" />
 		
 	</page>
 	
-	 <page view-id="/admin/entities/univeris.data/investingGoalPlanCode/viewInvestingGoalPlanCode.xhtml"  action="#{redirect.captureCurrentView()}">
-	 	<!-- <description>View InvestingGoalPlanCode: #{investingGoalPlanCode.displayName}</description> -->
-	 	<restrict>#{s:hasPermission('investingGoalPlanCode', 'view')}</restrict>
+	 <page view-id="/admin/entities/questionnaire/question/viewQuestion.xhtml"  action="#{redirect.captureCurrentView()}">
+	 	<!-- <description>View Question: #{question.displayName}</description> -->
+	 	<restrict>#{s:hasPermission('question', 'view')}</restrict>
 	 	<navigation> 
 			 <rule if-outcome="edit">
 			 	
- 				<redirect view-id="/admin/entities/univeris.data/investingGoalPlanCode/editInvestingGoalPlanCode.xhtml" />
+ 				<redirect view-id="/admin/entities/questionnaire/question/editQuestion.xhtml" />
             </rule>	
              <rule if-outcome="cancel">
              	
- 				<redirect view-id="/admin/entities/univeris.data/investingGoalPlanCode/listInvestingGoalPlanCode.xhtml" />
+ 				<redirect view-id="/admin/entities/questionnaire/question/listQuestion.xhtml" />
             </rule>			
 		</navigation>
-		<param name="investingGoalPlanCodeId" value="#{investingGoalPlanCodeAction.investingGoalPlanCodeId}" />
+		<param name="questionId" value="#{questionAction.questionId}" />
 	</page>
 	
-	<page view-id="/admin/entities/univeris.data/investingGoalPlanCode/listInvestingGoalPlanCode.xhtml" action="#{redirect.captureCurrentView()}" >
-		<restrict>#{s:hasPermission('investingGoalPlanCode', 'view')}</restrict>
+	<page view-id="/admin/entities/questionnaire/question/listQuestion.xhtml" action="#{redirect.captureCurrentView()}" >
+		<restrict>#{s:hasPermission('question', 'view')}</restrict>
 		<navigation>
-			<rule if-outcome="viewInvestingGoalPlanCode">
+			<rule if-outcome="viewQuestion">
 				
-				<redirect view-id="/admin/entities/univeris.data/investingGoalPlanCode/viewInvestingGoalPlanCode.xhtml" />
+				<redirect view-id="/admin/entities/questionnaire/question/viewQuestion.xhtml" />
 			</rule> 
 			 <rule if-outcome="edit">
 			 	
- 				<redirect view-id="/admin/entities/univeris.data/investingGoalPlanCode/editInvestingGoalPlanCode.xhtml" />
+ 				<redirect view-id="/admin/entities/questionnaire/question/editQuestion.xhtml" />
             </rule>			
             <rule if-outcome="textSearch"> 
-        		<redirect view-id="/admin/entities/univeris.data/investingGoalPlanCode/textSearchResultsInvestingGoalPlanCode.xhtml"/> 
+        		<redirect view-id="/admin/entities/questionnaire/question/textSearchResultsQuestion.xhtml"/> 
       		</rule>
 		</navigation>
 		
-		<param name="firstResult" value="#{investingGoalPlanCodeList.firstResult}" />
-		<param name="sort" value="#{investingGoalPlanCodeList.orderColumn}" />
-		<param name="dir" value="#{investingGoalPlanCodeList.orderDirection}" />
+		<param name="firstResult" value="#{questionList.firstResult}" />
+		<param name="sort" value="#{questionList.orderColumn}" />
+		<param name="dir" value="#{questionList.orderDirection}" />
 
 		<param name="from" />
-		<param name="id" value="#{investingGoalPlanCodeList.investingGoalPlanCode.id}" />
+		<param name="id" value="#{questionList.question.id}" />
 	
 		
 			
-				<param name="investingGoalCode" value="#{investingGoalPlanCodeList.investingGoalPlanCode.investingGoalCode}"  validateModel="false" />
+				<param name="text" value="#{questionList.question.text}"  validateModel="false" />
+			
+		
+	
+		
+			
+				
+				<param name="sectionId" value="#{questionList.sectionId}"  validateModel="false" />
+				
+			
+		
+	
+		
+			
+				<param name="answerType" value="#{questionList.question.answerType}"  validateModel="false" />
+			
+		
+	
+	</page>
+	
+	
+	
+    
+    <page view-id="/admin/entities/questionnaire/answer/editAnswer.xhtml"  >
+    	<!-- <description>Edit Answer: #{answer.displayName}</description> -->
+    	<restrict>#{s:hasPermission('answer', 'edit')}</restrict>
+    	<begin-conversation join="true"/>
+    	<navigation> 
+			 <rule if-outcome="save">
+ 				<redirect view-id="/admin/entities/questionnaire/answer/viewAnswer.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+ 				<redirect view-id="/admin/entities/questionnaire/answer/listAnswer.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="answerId" value="#{answerAction.answerId}" />
+		
+	</page>
+	
+	 <page view-id="/admin/entities/questionnaire/answer/viewAnswer.xhtml"  action="#{redirect.captureCurrentView()}">
+	 	<!-- <description>View Answer: #{answer.displayName}</description> -->
+	 	<restrict>#{s:hasPermission('answer', 'view')}</restrict>
+	 	<navigation> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/questionnaire/answer/editAnswer.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+             	
+ 				<redirect view-id="/admin/entities/questionnaire/answer/listAnswer.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="answerId" value="#{answerAction.answerId}" />
+	</page>
+	
+	<page view-id="/admin/entities/questionnaire/answer/listAnswer.xhtml" action="#{redirect.captureCurrentView()}" >
+		<restrict>#{s:hasPermission('answer', 'view')}</restrict>
+		<navigation>
+			<rule if-outcome="viewAnswer">
+				
+				<redirect view-id="/admin/entities/questionnaire/answer/viewAnswer.xhtml" />
+			</rule> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/questionnaire/answer/editAnswer.xhtml" />
+            </rule>			
+            <rule if-outcome="textSearch"> 
+        		<redirect view-id="/admin/entities/questionnaire/answer/textSearchResultsAnswer.xhtml"/> 
+      		</rule>
+		</navigation>
+		
+		<param name="firstResult" value="#{answerList.firstResult}" />
+		<param name="sort" value="#{answerList.orderColumn}" />
+		<param name="dir" value="#{answerList.orderDirection}" />
+
+		<param name="from" />
+		<param name="id" value="#{answerList.answer.id}" />
+	
+		
+			
+				
+				<param name="questionId" value="#{answerList.questionId}"  validateModel="false" />
+				
+			
+		
+	
+		
+			
+				<param name="text" value="#{answerList.answer.text}"  validateModel="false" />
+			
+		
+	
+		
+			
+				<param name="score" value="#{answerList.answer.score}"  validateModel="false" />
+			
+		
+	
+	</page>
+	
+	
+	
+    
+    <page view-id="/admin/entities/questionnaire/answeredQuestion/editAnsweredQuestion.xhtml"  >
+    	<!-- <description>Edit AnsweredQuestion: #{answeredQuestion.displayName}</description> -->
+    	<restrict>#{s:hasPermission('answeredQuestion', 'edit')}</restrict>
+    	<begin-conversation join="true"/>
+    	<navigation> 
+			 <rule if-outcome="save">
+ 				<redirect view-id="/admin/entities/questionnaire/answeredQuestion/viewAnsweredQuestion.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+ 				<redirect view-id="/admin/entities/questionnaire/answeredQuestion/listAnsweredQuestion.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="answeredQuestionId" value="#{answeredQuestionAction.answeredQuestionId}" />
+		
+	</page>
+	
+	 <page view-id="/admin/entities/questionnaire/answeredQuestion/viewAnsweredQuestion.xhtml"  action="#{redirect.captureCurrentView()}">
+	 	<!-- <description>View AnsweredQuestion: #{answeredQuestion.displayName}</description> -->
+	 	<restrict>#{s:hasPermission('answeredQuestion', 'view')}</restrict>
+	 	<navigation> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/questionnaire/answeredQuestion/editAnsweredQuestion.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+             	
+ 				<redirect view-id="/admin/entities/questionnaire/answeredQuestion/listAnsweredQuestion.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="answeredQuestionId" value="#{answeredQuestionAction.answeredQuestionId}" />
+	</page>
+	
+	<page view-id="/admin/entities/questionnaire/answeredQuestion/listAnsweredQuestion.xhtml" action="#{redirect.captureCurrentView()}" >
+		<restrict>#{s:hasPermission('answeredQuestion', 'view')}</restrict>
+		<navigation>
+			<rule if-outcome="viewAnsweredQuestion">
+				
+				<redirect view-id="/admin/entities/questionnaire/answeredQuestion/viewAnsweredQuestion.xhtml" />
+			</rule> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/questionnaire/answeredQuestion/editAnsweredQuestion.xhtml" />
+            </rule>			
+            <rule if-outcome="textSearch"> 
+        		<redirect view-id="/admin/entities/questionnaire/answeredQuestion/textSearchResultsAnsweredQuestion.xhtml"/> 
+      		</rule>
+		</navigation>
+		
+		<param name="firstResult" value="#{answeredQuestionList.firstResult}" />
+		<param name="sort" value="#{answeredQuestionList.orderColumn}" />
+		<param name="dir" value="#{answeredQuestionList.orderDirection}" />
+
+		<param name="from" />
+		<param name="id" value="#{answeredQuestionList.answeredQuestion.id}" />
+	
+		
+			
+				
+				<param name="questionId" value="#{answeredQuestionList.questionId}"  validateModel="false" />
+				
+			
+		
+	
+		
+			
+				
+				<param name="answeredQuestionnaireId" value="#{answeredQuestionList.answeredQuestionnaireId}"  validateModel="false" />
+				
+			
+		
+	
+	</page>
+	
+	
+	
+    
+    <page view-id="/admin/entities/questionnaire/answeredQuestionnaire/editAnsweredQuestionnaire.xhtml"  >
+    	<!-- <description>Edit AnsweredQuestionnaire: #{answeredQuestionnaire.displayName}</description> -->
+    	<restrict>#{s:hasPermission('answeredQuestionnaire', 'edit')}</restrict>
+    	<begin-conversation join="true"/>
+    	<navigation> 
+			 <rule if-outcome="save">
+ 				<redirect view-id="/admin/entities/questionnaire/answeredQuestionnaire/viewAnsweredQuestionnaire.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+ 				<redirect view-id="/admin/entities/questionnaire/answeredQuestionnaire/listAnsweredQuestionnaire.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="answeredQuestionnaireId" value="#{answeredQuestionnaireAction.answeredQuestionnaireId}" />
+		
+	</page>
+	
+	 <page view-id="/admin/entities/questionnaire/answeredQuestionnaire/viewAnsweredQuestionnaire.xhtml"  action="#{redirect.captureCurrentView()}">
+	 	<!-- <description>View AnsweredQuestionnaire: #{answeredQuestionnaire.displayName}</description> -->
+	 	<restrict>#{s:hasPermission('answeredQuestionnaire', 'view')}</restrict>
+	 	<navigation> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/questionnaire/answeredQuestionnaire/editAnsweredQuestionnaire.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+             	
+ 				<redirect view-id="/admin/entities/questionnaire/answeredQuestionnaire/listAnsweredQuestionnaire.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="answeredQuestionnaireId" value="#{answeredQuestionnaireAction.answeredQuestionnaireId}" />
+	</page>
+	
+	<page view-id="/admin/entities/questionnaire/answeredQuestionnaire/listAnsweredQuestionnaire.xhtml" action="#{redirect.captureCurrentView()}" >
+		<restrict>#{s:hasPermission('answeredQuestionnaire', 'view')}</restrict>
+		<navigation>
+			<rule if-outcome="viewAnsweredQuestionnaire">
+				
+				<redirect view-id="/admin/entities/questionnaire/answeredQuestionnaire/viewAnsweredQuestionnaire.xhtml" />
+			</rule> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/questionnaire/answeredQuestionnaire/editAnsweredQuestionnaire.xhtml" />
+            </rule>			
+            <rule if-outcome="textSearch"> 
+        		<redirect view-id="/admin/entities/questionnaire/answeredQuestionnaire/textSearchResultsAnsweredQuestionnaire.xhtml"/> 
+      		</rule>
+		</navigation>
+		
+		<param name="firstResult" value="#{answeredQuestionnaireList.firstResult}" />
+		<param name="sort" value="#{answeredQuestionnaireList.orderColumn}" />
+		<param name="dir" value="#{answeredQuestionnaireList.orderDirection}" />
+
+		<param name="from" />
+		<param name="id" value="#{answeredQuestionnaireList.answeredQuestionnaire.id}" />
+	
+		
+			
+				
+				<param name="questionnaireId" value="#{answeredQuestionnaireList.questionnaireId}"  validateModel="false" />
+				
+			
+		
+	
+		
+			
+				
+				<param name="customerId" value="#{answeredQuestionnaireList.customerId}"  validateModel="false" />
+				
+			
+		
+	
+		
+			
+				<param name="remarks" value="#{answeredQuestionnaireList.answeredQuestionnaire.remarks}"  validateModel="false" />
+			
+		
+	
+		
+			
+				<param name="defaultScore" value="#{answeredQuestionnaireList.answeredQuestionnaire.defaultScore}"  validateModel="false" />
+			
+		
+	
+	</page>
+	
+	
+	
+    
+    <page view-id="/admin/entities/questionnaire/answersProvided/editAnswersProvided.xhtml"  >
+    	<!-- <description>Edit AnswersProvided: #{answersProvided.displayName}</description> -->
+    	<restrict>#{s:hasPermission('answersProvided', 'edit')}</restrict>
+    	<begin-conversation join="true"/>
+    	<navigation> 
+			 <rule if-outcome="save">
+ 				<redirect view-id="/admin/entities/questionnaire/answersProvided/viewAnswersProvided.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+ 				<redirect view-id="/admin/entities/questionnaire/answersProvided/listAnswersProvided.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="answersProvidedId" value="#{answersProvidedAction.answersProvidedId}" />
+		
+	</page>
+	
+	 <page view-id="/admin/entities/questionnaire/answersProvided/viewAnswersProvided.xhtml"  action="#{redirect.captureCurrentView()}">
+	 	<!-- <description>View AnswersProvided: #{answersProvided.displayName}</description> -->
+	 	<restrict>#{s:hasPermission('answersProvided', 'view')}</restrict>
+	 	<navigation> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/questionnaire/answersProvided/editAnswersProvided.xhtml" />
+            </rule>	
+             <rule if-outcome="cancel">
+             	
+ 				<redirect view-id="/admin/entities/questionnaire/answersProvided/listAnswersProvided.xhtml" />
+            </rule>			
+		</navigation>
+		<param name="answersProvidedId" value="#{answersProvidedAction.answersProvidedId}" />
+	</page>
+	
+	<page view-id="/admin/entities/questionnaire/answersProvided/listAnswersProvided.xhtml" action="#{redirect.captureCurrentView()}" >
+		<restrict>#{s:hasPermission('answersProvided', 'view')}</restrict>
+		<navigation>
+			<rule if-outcome="viewAnswersProvided">
+				
+				<redirect view-id="/admin/entities/questionnaire/answersProvided/viewAnswersProvided.xhtml" />
+			</rule> 
+			 <rule if-outcome="edit">
+			 	
+ 				<redirect view-id="/admin/entities/questionnaire/answersProvided/editAnswersProvided.xhtml" />
+            </rule>			
+            <rule if-outcome="textSearch"> 
+        		<redirect view-id="/admin/entities/questionnaire/answersProvided/textSearchResultsAnswersProvided.xhtml"/> 
+      		</rule>
+		</navigation>
+		
+		<param name="firstResult" value="#{answersProvidedList.firstResult}" />
+		<param name="sort" value="#{answersProvidedList.orderColumn}" />
+		<param name="dir" value="#{answersProvidedList.orderDirection}" />
+
+		<param name="from" />
+		<param name="id" value="#{answersProvidedList.answersProvided.id}" />
+	
+		
+			
+				
+				<param name="answeredQuestionId" value="#{answersProvidedList.answeredQuestionId}"  validateModel="false" />
+				
+			
+		
+	
+		
+			
+				
+				<param name="answerId" value="#{answersProvidedList.answerId}"  validateModel="false" />
+				
 			
 		
 	
