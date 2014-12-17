@@ -155,26 +155,6 @@ public abstract class OrderItemActionBase extends BaseAction<OrderItem>
 
 	}
 
-	/** This function is responsible for loading associations for the given entity e.g. when viewing an order, we load the customer so
-	 * that customer can be shown on the customer tab within viewOrder.xhtml
-	 * @see org.witchcraft.seam.action.BaseAction#loadAssociations()
-	 */
-	public void loadAssociations() {
-
-		addDefaultAssociations();
-
-		//wire();
-	}
-
-	public void updateComposedAssociations() {
-		/*
-		 */
-	}
-
-	public void clearLists() {
-
-	}
-
 	public String viewOrderItem() {
 		load(currentEntityId);
 		return "viewOrderItem";

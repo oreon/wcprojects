@@ -131,64 +131,25 @@ public abstract class DepartmentActionBase extends BaseAction<Department>
 		return executeSingleResultNamedQuery("department.findByUnqName", name);
 	}
 
-	/** This function is responsible for loading associations for the given entity e.g. when viewing an order, we load the customer so
-	 * that customer can be shown on the customer tab within viewOrder.xhtml
-	 * @see org.witchcraft.seam.action.BaseAction#loadAssociations()
-	 */
-	public void loadAssociations() {
-
-		addDefaultAssociations();
-
-		//wire();
-	}
-
-	protected List<com.oreon.proj.onepack.Employee> listEmployees = new ArrayList<com.oreon.proj.onepack.Employee>();
-
-	void initListEmployees() {
-
-		if (listEmployees.isEmpty())
-			listEmployees.addAll(getInstance().getEmployees());
-
-	}
-
 	public List<com.oreon.proj.onepack.Employee> getListEmployees() {
-
-		prePopulateListEmployees();
-		return listEmployees;
+		return getInstance().getEmployees();
 	}
 
-	public void prePopulateListEmployees() {
-	}
+	//public void prePopulateListEmployees() {}
 
 	public void setListEmployees(
 			List<com.oreon.proj.onepack.Employee> listEmployees) {
-		this.listEmployees = listEmployees;
+		//this.listEmployees = listEmployees;
 	}
 
+	@Begin(join = true, flushMode = org.jboss.seam.annotations.FlushModeType.MANUAL)
 	public void deleteEmployees(int index) {
-		listEmployees.remove(index);
+		getListEmployees().remove(index);
 	}
 
-	@Begin(join = true)
+	@Begin(join = true, flushMode = org.jboss.seam.annotations.FlushModeType.MANUAL)
 	public void addEmployees() {
-
-		initListEmployees();
-		Employee employees = new Employee();
-
-		employees.setDepartment(getInstance());
-
-		getListEmployees().add(employees);
-
-	}
-
-	public void updateComposedAssociations() {
-		/*
-		 */
-	}
-
-	public void clearLists() {
-		listEmployees.clear();
-
+		getInstance().addEmployee(new com.oreon.proj.onepack.Employee());
 	}
 
 	public String viewDepartment() {

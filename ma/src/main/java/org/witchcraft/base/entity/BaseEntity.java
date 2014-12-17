@@ -226,6 +226,26 @@ public class BaseEntity implements Serializable{
 
 	}
 	
+	
+	protected <T extends BaseEntity> String listAsString(List<T> listItems) {
+		StringBuilder result = new StringBuilder();
+		int count = 0;
+		
+		for (T t: listItems) {
+			++count;
+			result.append(t.getDisplayName() );
+			if(count < listItems.size()){
+				result.append(", ");
+			}
+			if(count > 10 ){
+				result.append("...."); 
+				break; 
+			}
+		}
+		
+		return result.toString();
+	}
+	
 /*
 	public Object onCycleDetected(Context context) {
 		return null;

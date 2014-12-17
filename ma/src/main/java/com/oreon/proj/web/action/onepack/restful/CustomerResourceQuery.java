@@ -23,15 +23,8 @@ import java.util.List;
 
 import com.oreon.proj.onepack.Customer;
 
-@Name("customerResourceQuery")
-@Path("customer")
+//@Name("customerResourceQuery")
+//@Path("customer")
 public class CustomerResourceQuery extends ResourceQuery<Customer> {
-	
-	@Override
-	@Produces("text/plain")
-	public List<Customer> getEntityList(int start, int show) {
-		// TODO Auto-generated method stub
-		return super.getEntityList(start, show);
-	}
 
 }
