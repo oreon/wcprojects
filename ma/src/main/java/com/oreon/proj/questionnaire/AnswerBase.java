@@ -28,9 +28,6 @@ public class AnswerBase extends BaseEntity {
 	@Column(name = "score", unique = false)
 	private Integer score;
 
-	@Column(name = "answerType", unique = false)
-	private AnswerType answerType;
-
 	public void setQuestion(Question question) {
 		this.question = question;
 	}
@@ -55,18 +52,10 @@ public class AnswerBase extends BaseEntity {
 		return score;
 	}
 
-	public void setAnswerType(AnswerType answerType) {
-		this.answerType = answerType;
-	}
-
-	public AnswerType getAnswerType() {
-		return answerType;
-	}
-
 	@Transient
 	public String getDisplayName() {
 		try {
-			return question + "";
+			return text;
 		} catch (Exception e) {
 			return "Exception - " + e.getMessage();
 		}

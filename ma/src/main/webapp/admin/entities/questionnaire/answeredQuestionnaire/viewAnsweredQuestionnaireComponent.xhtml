@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf">  
+  <h:panelGroup id="${panelId == null ? 'viewAnsweredQuestionnairePanel' : panelId}"> 
+    <h:panelGrid columns="1" styleClass="viewInfo" columnClasses="leftCol, rightCol"> 
+      <c:if test="${numColumns == null }"> 
+        <c:set var="numColumns" value="2"/> 
+      </c:if>  
+      <h:panelGrid columns="${numColumns}"> 
+        <f:facet name="header"> 
+          <h:outputText value="#{msg.AnsweredQuestionnaire}"/> 
+        </f:facet>  
+        <h:outputText value="#{msg.answeredQuestionnaire_remarks}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestionnaire', 'viewRemarks')}"/>  
+        <h:outputText value="#{answeredQuestionnaire.remarks}" escape="false"/>  
+        <h:outputText value="#{msg.answeredQuestionnaire_defaultScore}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestionnaire', 'viewDefaultScore')}"/>  
+        <h:outputText value="#{answeredQuestionnaire.defaultScore}" escape="false"/>  
+        <h:outputText value="#{msg.answeredQuestionnaire_questionnaire}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestionnaire', 'viewQuestionnaire')}"/>  
+        <h:panelGroup> 
+          <h:link id="questionnaireansweredQuestionnaire_questionnaire" escape="false" value="#{answeredQuestionnaire.questionnaire.displayName}" outcome="/admin/entities/questionnaire/questionnaire/viewQuestionnaire.xhtml" propagation="none"> 
+            <f:param name="questionnaireId" value="#{answeredQuestionnaire.questionnaire.id}"/>  
+            <f:param name="from" value="#{request.servletPath}"/> 
+          </h:link> 
+        </h:panelGroup>  
+        <h:outputText value="#{msg.answeredQuestionnaire_customer}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestionnaire', 'viewCustomer')}"/>  
+        <h:panelGroup> 
+          <h:link id="customeransweredQuestionnaire_customer" escape="false" value="#{answeredQuestionnaire.customer.displayName}" outcome="/admin/entities/onepack/customer/viewCustomer.xhtml" propagation="none"> 
+            <f:param name="customerId" value="#{answeredQuestionnaire.customer.id}"/>  
+            <f:param name="from" value="#{request.servletPath}"/> 
+          </h:link> 
+        </h:panelGroup> 
+      </h:panelGrid>  
+      <br/>  
+      <p:panel rendered="#{ ! excludeAnsweredQuestions == true}"> 
+        <f:facet name="header"> 
+          <h:outputText value="#{msg.answeredQuestionnaire_answeredQuestions}"/> 
+        </f:facet>  
+        <ui:include src="/admin/entities/questionnaire/answeredQuestion/miniListAnsweredQuestionComponent.xhtml"> 
+          <ui:param name="records" value="#{answeredQuestionnaire.answeredQuestions}"/>  
+          <ui:param name="excludeAnsweredQuestionnaire" value="true"/> 
+        </ui:include> 
+      </p:panel>  
+      <br/> 
+    </h:panelGrid> 
+  </h:panelGroup> 
+</ui:composition>

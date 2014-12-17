@@ -90,6 +90,8 @@ public abstract class QuestionListQueryBase extends BaseQuery<Question, Long> {
 
 			"question.section.id = #{questionList.question.section.id}",
 
+			"question.answerType = #{questionList.question.answerType}",
+
 			"question.dateCreated <= #{questionList.dateCreatedRange.end}",
 			"question.dateCreated >= #{questionList.dateCreatedRange.begin}",};
 

@@ -14,9 +14,9 @@
     </ui:include> 
   </h:form>  
   <h:form id="employeeForm"> 
-    <p:dataTable var="_employee" value="#{records}" id="employeeList" paginator="true" lazy="true" rows="10" selectionMode="single" selection="#{employeeAction.employee}"> 
+    <p:dataTable var="_employee" value="#{records}" id="employeeList" paginator="true" lazy="true" rows="20" selectionMode="single" selection="#{employeeAction.employee}" tableStyle="width:auto"> 
       <p:ajax event="rowSelect" update=":#{p:component('editEmployeePanel')}" oncomplete="PF('editEmployeeDialog').show()" listener="#{employeeAction.onRowSelect}"/>  
-      <p:column headerText="#{msg.id}" sortBy="#{employee.id}" rendered="#{s:hasPermission('id', 'viewId' )}"> 
+      <p:column headerText="#{msg.Employee} #{msg.id}" sortBy="#{employee.id}" rendered="#{s:hasPermission('id', 'viewId' )}"> 
         <h:link outcome="/admin/entities/onepack/employee/viewEmployee.xhtml" rendered="#{s:hasPermission(_employee, 'view')}" propagation="none"> 
           <h:outputText value="#{_employee.id}"/>  
           <f:param name="employeeId" value="#{_employee.id}"/> 
@@ -27,17 +27,7 @@
           <h:link id="departmentemployee_department" escape="false" value="#{_employee.department.displayName}" outcome="/admin/entities/onepack/department/viewDepartment.xhtml" propagation="none"> 
             <f:param name="departmentId" value="#{_employee.department.id}"/>  
             <f:param name="from" value="#{request.servletPath}"/> 
-          </h:link>  
-          <p:overlayPanel for="departmentemployee_department" showEvent="mouseover" hideEffect="fade" dynamic="false"> 
-            <h:form> 
-              <ui:include src="/admin/entities/onepack/department/viewDepartmentComponent.xhtml"> 
-                <ui:param name="department" value="#{_employee.department}"/>  
-                <ui:param name="numColumns" value="4"/>  
-                <ui:param name="panelId" value="departmentEmployees"/>  
-                <ui:param name="excludeEmployees" value="true"/> 
-              </ui:include> 
-            </h:form> 
-          </p:overlayPanel> 
+          </h:link> 
         </h:panelGroup> 
       </p:column>  
       <p:column headerText="#{msg.employee_firstName}" sortBy="#{employee.firstName}" rendered="#{ ! excludeFirstName == true and ( skipPermissionCheck == 'true' || s:hasPermission('employee', 'viewFirstName')) }"> 
@@ -45,6 +35,13 @@
       </p:column>  
       <p:column headerText="#{msg.employee_lastName}" sortBy="#{employee.lastName}" rendered="#{ ! excludeLastName == true and ( skipPermissionCheck == 'true' || s:hasPermission('employee', 'viewLastName')) }"> 
         <h:outputText value="#{_employee.lastName}" escape="false"/> 
+      </p:column>  
+      <p:column rendered="#{s:hasPermission('_employee', 'edit') and !_employeeCategory.archived}"> 
+        <h:link outcome="/admin/entities/onepack/employee/editEmployee.xhtml" rendered="#{s:hasPermission(_employee, 'edit')}"> 
+          <h:graphicImage value="/images/icons/edit.png" style="border: 0px" alt="edit"/>  
+          <f:param name="employeeId" value="#{_employee.id}"/>  
+          <s:conversationId/> 
+        </h:link> 
       </p:column>  
       <p:column headerText="#{msg.dateCreated}" sortBy="#{employee.dateCreated}" rendered="#{s:hasPermission('dateCreated', 'viewDateCreated' )}"> 
         <h:outputText value="#{_employee.dateCreated}"> 

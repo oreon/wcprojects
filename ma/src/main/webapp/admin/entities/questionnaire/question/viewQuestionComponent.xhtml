@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf">  
+  <h:panelGroup id="${panelId == null ? 'viewQuestionPanel' : panelId}"> 
+    <h:panelGrid columns="1" styleClass="viewInfo" columnClasses="leftCol, rightCol"> 
+      <c:if test="${numColumns == null }"> 
+        <c:set var="numColumns" value="2"/> 
+      </c:if>  
+      <h:panelGrid columns="${numColumns}"> 
+        <f:facet name="header"> 
+          <h:outputText value="#{msg.Question}"/> 
+        </f:facet>  
+        <h:outputText value="#{msg.question_text}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('question', 'viewText')}"/>  
+        <h:outputText value="#{question.text}" escape="false"/>  
+        <h:outputText value="#{msg.question_answerType}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('question', 'viewAnswerType')}"/>  
+        <h:outputText value="#{question.answerType}" escape="false"/>  
+        <h:outputText value="#{msg.question_section}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('question', 'viewSection')}"/>  
+        <h:panelGroup> 
+          <h:link id="sectionquestion_section" escape="false" value="#{question.section.displayName}" outcome="/admin/entities/questionnaire/section/viewSection.xhtml" propagation="none"> 
+            <f:param name="sectionId" value="#{question.section.id}"/>  
+            <f:param name="from" value="#{request.servletPath}"/> 
+          </h:link> 
+        </h:panelGroup> 
+      </h:panelGrid>  
+      <br/>  
+      <p:panel rendered="#{ ! excludeAnswers == true}"> 
+        <f:facet name="header"> 
+          <h:outputText value="#{msg.question_answers}"/> 
+        </f:facet>  
+        <ui:include src="/admin/entities/questionnaire/answer/miniListAnswerComponent.xhtml"> 
+          <ui:param name="records" value="#{question.answers}"/>  
+          <ui:param name="excludeQuestion" value="true"/> 
+        </ui:include> 
+      </p:panel>  
+      <br/> 
+    </h:panelGrid> 
+  </h:panelGroup> 
+</ui:composition>

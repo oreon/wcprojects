@@ -14,9 +14,9 @@
     </ui:include> 
   </h:form>  
   <h:form id="orderItemForm"> 
-    <p:dataTable var="_orderItem" value="#{records}" id="orderItemList" paginator="true" lazy="true" rows="10" selectionMode="single" selection="#{orderItemAction.orderItem}"> 
+    <p:dataTable var="_orderItem" value="#{records}" id="orderItemList" paginator="true" lazy="true" rows="20" selectionMode="single" selection="#{orderItemAction.orderItem}" tableStyle="width:auto"> 
       <p:ajax event="rowSelect" update=":#{p:component('editOrderItemPanel')}" oncomplete="PF('editOrderItemDialog').show()" listener="#{orderItemAction.onRowSelect}"/>  
-      <p:column headerText="#{msg.id}" sortBy="#{orderItem.id}" rendered="#{s:hasPermission('id', 'viewId' )}"> 
+      <p:column headerText="#{msg.OrderItem} #{msg.id}" sortBy="#{orderItem.id}" rendered="#{s:hasPermission('id', 'viewId' )}"> 
         <h:link outcome="/admin/entities/onepack/orderItem/viewOrderItem.xhtml" rendered="#{s:hasPermission(_orderItem, 'view')}" propagation="none"> 
           <h:outputText value="#{_orderItem.id}"/>  
           <f:param name="orderItemId" value="#{_orderItem.id}"/> 
@@ -30,17 +30,7 @@
           <h:link id="productorderItem_product" escape="false" value="#{_orderItem.product.displayName}" outcome="/admin/entities/onepack/product/viewProduct.xhtml" propagation="none"> 
             <f:param name="productId" value="#{_orderItem.product.id}"/>  
             <f:param name="from" value="#{request.servletPath}"/> 
-          </h:link>  
-          <p:overlayPanel for="productorderItem_product" showEvent="mouseover" hideEffect="fade" dynamic="false"> 
-            <h:form> 
-              <ui:include src="/admin/entities/onepack/product/viewProductComponent.xhtml"> 
-                <ui:param name="product" value="#{_orderItem.product}"/>  
-                <ui:param name="numColumns" value="4"/>  
-                <ui:param name="panelId" value="product"/>  
-                <ui:param name="exclude" value="true"/> 
-              </ui:include> 
-            </h:form> 
-          </p:overlayPanel> 
+          </h:link> 
         </h:panelGroup> 
       </p:column>  
       <p:column headerText="#{msg.orderItem_customerOrder}" sortBy="#{orderItem.customerOrder}" rendered="#{ ! excludeCustomerOrder == true and ( skipPermissionCheck == 'true' || s:hasPermission('orderItem', 'viewCustomerOrder')) }"> 
@@ -48,18 +38,15 @@
           <h:link id="customerOrderorderItem_customerOrder" escape="false" value="#{_orderItem.customerOrder.displayName}" outcome="/admin/entities/onepack/customerOrder/viewCustomerOrder.xhtml" propagation="none"> 
             <f:param name="customerOrderId" value="#{_orderItem.customerOrder.id}"/>  
             <f:param name="from" value="#{request.servletPath}"/> 
-          </h:link>  
-          <p:overlayPanel for="customerOrderorderItem_customerOrder" showEvent="mouseover" hideEffect="fade" dynamic="false"> 
-            <h:form> 
-              <ui:include src="/admin/entities/onepack/customerOrder/viewCustomerOrderComponent.xhtml"> 
-                <ui:param name="customerOrder" value="#{_orderItem.customerOrder}"/>  
-                <ui:param name="numColumns" value="4"/>  
-                <ui:param name="panelId" value="customerOrderOrderItems"/>  
-                <ui:param name="excludeOrderItems" value="true"/> 
-              </ui:include> 
-            </h:form> 
-          </p:overlayPanel> 
+          </h:link> 
         </h:panelGroup> 
+      </p:column>  
+      <p:column rendered="#{s:hasPermission('_orderItem', 'edit') and !_orderItemCategory.archived}"> 
+        <h:link outcome="/admin/entities/onepack/orderItem/editOrderItem.xhtml" rendered="#{s:hasPermission(_orderItem, 'edit')}"> 
+          <h:graphicImage value="/images/icons/edit.png" style="border: 0px" alt="edit"/>  
+          <f:param name="orderItemId" value="#{_orderItem.id}"/>  
+          <s:conversationId/> 
+        </h:link> 
       </p:column>  
       <p:column headerText="#{msg.dateCreated}" sortBy="#{orderItem.dateCreated}" rendered="#{s:hasPermission('dateCreated', 'viewDateCreated' )}"> 
         <h:outputText value="#{_orderItem.dateCreated}"> 

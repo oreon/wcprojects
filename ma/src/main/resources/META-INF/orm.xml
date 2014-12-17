@@ -1,51 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">  
-  <description/>  
-  <!--  Employee  JPA Configurations -->  
-  <entity class="com.oreon.proj.onepack.Employee" name="Employee"> 
-    <table name="employee"></table> 
-  </entity>  
-  <!--  Department  JPA Configurations -->  
-  <entity class="com.oreon.proj.onepack.Department" name="Department"> 
-    <table name="department"> 
-      <unique-constraint> 
-        <column-name>name</column-name>  
-        <column-name>tenant</column-name> 
-      </unique-constraint> 
-    </table>  
-    <named-query name="department.findByUnqName"> 
-      <query> <![CDATA[
-			select u from Department u where u.name = ?1
-			]]> </query> 
-    </named-query> 
-  </entity>  
-  <!--  Customer  JPA Configurations -->  
-  <entity class="com.oreon.proj.onepack.Customer" name="Customer"> 
-    <table name="customer"></table> 
-  </entity>  
-  <!--  CustomerOrder  JPA Configurations -->  
-  <entity class="com.oreon.proj.onepack.CustomerOrder" name="CustomerOrder"> 
-    <table name="customerorder"></table> 
-  </entity>  
-  <!--  Product  JPA Configurations -->  
-  <entity class="com.oreon.proj.onepack.Product" name="Product"> 
-    <table name="product"></table> 
-  </entity>  
-  <!--  OrderItem  JPA Configurations -->  
-  <entity class="com.oreon.proj.onepack.OrderItem" name="OrderItem"> 
-    <table name="orderitem"></table> 
-  </entity>  
-  <!--  InvestorProfile  JPA Configurations -->  
-  <entity class="com.oreon.proj.univeris.data.InvestorProfile" name="InvestorProfile"> 
-    <table name="investorprofile"></table> 
-  </entity>  
-  <!--  InvestingGoal  JPA Configurations -->  
-  <entity class="com.oreon.proj.univeris.data.InvestingGoal" name="InvestingGoal"> 
-    <table name="investinggoal"></table> 
-  </entity>  
-  <!--  InvestingGoalPlanCode  JPA Configurations -->  
-  <entity class="com.oreon.proj.univeris.data.InvestingGoalPlanCode" name="InvestingGoalPlanCode"> 
-    <table name="investinggoalplancode"></table> 
-  </entity> 
+<?xml version="1.0" encoding="UTF-8" ?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
+	version="1.0">
+	<description></description>
+	
+	
 </entity-mappings>
+	

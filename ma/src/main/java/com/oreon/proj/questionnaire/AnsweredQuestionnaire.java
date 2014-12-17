@@ -1,15 +1,17 @@
 package com.oreon.proj.questionnaire;
 
 import javax.persistence.*;
+
 import org.witchcraft.base.entity.FileAttachment;
 import org.witchcraft.base.entity.BaseEntity;
+import org.apache.commons.beanutils.BeanUtils;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.Filters;
+import org.hibernate.annotations.Formula;
 
 import javax.validation.constraints.*;
 
 import java.math.BigDecimal;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
@@ -26,4 +28,14 @@ public class AnsweredQuestionnaire extends AnsweredQuestionnaireBase
 		implements
 			java.io.Serializable {
 	private static final long serialVersionUID = -1880888387L;
+	
+	
+	@Override
+	@Formula(value="(select sum(a.score) from answer a, answersprovided p , answeredquestion q where p.answer_id = a.id and p.answeredQuestion_id = q.id and q.answeredQuestionnaire_id= id")
+	public Integer getDefaultScore() {
+		// TODO Auto-generated method stub
+		return super.getDefaultScore();
+		
+		
+	}
 }

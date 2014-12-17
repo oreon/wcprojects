@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf">  
+  <p:commandButton type="button" onclick="jQuery('.ui-row-toggler').click()" value="Expand/Collapse"/>  
+  <p:dataTable var="_answersProvided" value="#{records}" tableStyle="width:auto"> 
+    <p:column headerText="#{msg.AnswersProvided} #{msg.id}" sortBy="#{answersProvided.id}" rendered="#{s:hasPermission('id', 'viewId' )}"> 
+      <h:link outcome="/admin/entities/questionnaire/answersProvided/viewAnswersProvided.xhtml" rendered="#{s:hasPermission(_answersProvided, 'view')}" propagation="none"> 
+        <h:outputText value="#{_answersProvided.id}"/>  
+        <f:param name="answersProvidedId" value="#{_answersProvided.id}"/> 
+      </h:link> 
+    </p:column>  
+    <p:column headerText="#{msg.answersProvided_answeredQuestion}" sortBy="#{answersProvided.answeredQuestion}" rendered="#{ ! excludeAnsweredQuestion == true and ( skipPermissionCheck == 'true' || s:hasPermission('answersProvided', 'viewAnsweredQuestion')) }"> 
+      <h:panelGroup> 
+        <h:link id="answeredQuestionanswersProvided_answeredQuestion" escape="false" value="#{_answersProvided.answeredQuestion.displayName}" outcome="/admin/entities/questionnaire/answeredQuestion/viewAnsweredQuestion.xhtml" propagation="none"> 
+          <f:param name="answeredQuestionId" value="#{_answersProvided.answeredQuestion.id}"/>  
+          <f:param name="from" value="#{request.servletPath}"/> 
+        </h:link> 
+      </h:panelGroup> 
+    </p:column>  
+    <p:column headerText="#{msg.answersProvided_answer}" sortBy="#{answersProvided.answer}" rendered="#{ ! excludeAnswer == true and ( skipPermissionCheck == 'true' || s:hasPermission('answersProvided', 'viewAnswer')) }"> 
+      <h:panelGroup> 
+        <h:link id="answeranswersProvided_answer" escape="false" value="#{_answersProvided.answer.displayName}" outcome="/admin/entities/questionnaire/answer/viewAnswer.xhtml" propagation="none"> 
+          <f:param name="answerId" value="#{_answersProvided.answer.id}"/>  
+          <f:param name="from" value="#{request.servletPath}"/> 
+        </h:link> 
+      </h:panelGroup> 
+    </p:column>  
+    <p:column rendered="#{s:hasPermission('_answersProvided', 'edit') and !_answersProvidedCategory.archived}"> 
+      <h:link outcome="/admin/entities/questionnaire/answersProvided/editAnswersProvided.xhtml" rendered="#{s:hasPermission(_answersProvided, 'edit')}"> 
+        <h:graphicImage value="/images/icons/edit.png" style="border: 0px" alt="edit"/>  
+        <f:param name="answersProvidedId" value="#{_answersProvided.id}"/>  
+        <s:conversationId/> 
+      </h:link> 
+    </p:column> 
+  </p:dataTable> 
+</ui:composition>

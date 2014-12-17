@@ -1,0 +1,42 @@
+
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:wc="http://witchcraft.sourceforge.net/jsf"
+	template = "/admin/template.xhtml" >	
+	
+	<ui:define name="content">
+		<h:form>
+		
+		
+		
+	
+		<div id="printable" >
+			<ui:include src="/admin/entities/questionnaire/answer/editAnswerComponent.xhtml" >
+				<ui:param name="answer" value="#{answerAction.instance}"/>
+			</ui:include>
+		</div>
+		
+	<div class="buttonBox">
+		
+		<h:commandButton value="Save" action="#{answerAction.save(true)}" >
+			<s:conversationId/>
+		</h:commandButton>  
+		<h:outputText value=" " /> 
+		<h:commandButton value="Cancel" immediate="true" action="#{answerAction.cancel}" >
+		</h:commandButton>  
+		
+	</div>
+
+		</h:form>
+		
+	</ui:define> 
+	
+	
+</ui:composition>

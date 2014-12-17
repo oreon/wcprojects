@@ -14,9 +14,9 @@
     </ui:include> 
   </h:form>  
   <h:form id="customerForm"> 
-    <p:dataTable var="_customer" value="#{records}" id="customerList" paginator="true" lazy="true" rows="10" selectionMode="single" selection="#{customerAction.customer}"> 
+    <p:dataTable var="_customer" value="#{records}" id="customerList" paginator="true" lazy="true" rows="20" selectionMode="single" selection="#{customerAction.customer}" tableStyle="width:auto"> 
       <p:ajax event="rowSelect" update=":#{p:component('editCustomerPanel')}" oncomplete="PF('editCustomerDialog').show()" listener="#{customerAction.onRowSelect}"/>  
-      <p:column headerText="#{msg.id}" sortBy="#{customer.id}" rendered="#{s:hasPermission('id', 'viewId' )}"> 
+      <p:column headerText="#{msg.Customer} #{msg.id}" sortBy="#{customer.id}" rendered="#{s:hasPermission('id', 'viewId' )}"> 
         <h:link outcome="/admin/entities/onepack/customer/viewCustomer.xhtml" rendered="#{s:hasPermission(_customer, 'view')}" propagation="none"> 
           <h:outputText value="#{_customer.id}"/>  
           <f:param name="customerId" value="#{_customer.id}"/> 
@@ -27,6 +27,13 @@
       </p:column>  
       <p:column headerText="#{msg.customer_lastName}" sortBy="#{customer.lastName}" rendered="#{ ! excludeLastName == true and ( skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewLastName')) }"> 
         <h:outputText value="#{_customer.lastName}" escape="false"/> 
+      </p:column>  
+      <p:column rendered="#{s:hasPermission('_customer', 'edit') and !_customerCategory.archived}"> 
+        <h:link outcome="/admin/entities/onepack/customer/editCustomer.xhtml" rendered="#{s:hasPermission(_customer, 'edit')}"> 
+          <h:graphicImage value="/images/icons/edit.png" style="border: 0px" alt="edit"/>  
+          <f:param name="customerId" value="#{_customer.id}"/>  
+          <s:conversationId/> 
+        </h:link> 
       </p:column>  
       <p:column headerText="#{msg.dateCreated}" sortBy="#{customer.dateCreated}" rendered="#{s:hasPermission('dateCreated', 'viewDateCreated' )}"> 
         <h:outputText value="#{_customer.dateCreated}"> 

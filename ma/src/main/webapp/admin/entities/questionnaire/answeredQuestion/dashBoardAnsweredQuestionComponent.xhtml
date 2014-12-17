@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf">  
+  <h:panelGrid columns="1" styleClass="summarywrap"> 
+    <p:panel id="pnlAnswersProvideds" header="AnswersProvideds" toggleable="true" closable="true"> 
+      <h:panelGrid columns="2"> 
+        <p:pieChart value="#{answeredQuestionList.resultList}" var="dep" categoryField="#{dep.displayName}" dataField="#{dep.answersProvidedsCount}"/>  
+        <p:barChart value="#{answeredQuestionList.resultList}" var="dep" yfield="#{dep.displayName}"> 
+          <p:chartSeries label="Incidents" value="#{dep.answersProvidedsCount}"/> 
+        </p:barChart> 
+      </h:panelGrid> 
+    </p:panel> 
+  </h:panelGrid> 
+</ui:composition>

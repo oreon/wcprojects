@@ -14,9 +14,9 @@
     </ui:include> 
   </h:form>  
   <h:form id="customerOrderForm"> 
-    <p:dataTable var="_customerOrder" value="#{records}" id="customerOrderList" paginator="true" lazy="true" rows="10" selectionMode="single" selection="#{customerOrderAction.customerOrder}"> 
+    <p:dataTable var="_customerOrder" value="#{records}" id="customerOrderList" paginator="true" lazy="true" rows="20" selectionMode="single" selection="#{customerOrderAction.customerOrder}" tableStyle="width:auto"> 
       <p:ajax event="rowSelect" update=":#{p:component('editCustomerOrderPanel')}" oncomplete="PF('editCustomerOrderDialog').show()" listener="#{customerOrderAction.onRowSelect}"/>  
-      <p:column headerText="#{msg.id}" sortBy="#{customerOrder.id}" rendered="#{s:hasPermission('id', 'viewId' )}"> 
+      <p:column headerText="#{msg.CustomerOrder} #{msg.id}" sortBy="#{customerOrder.id}" rendered="#{s:hasPermission('id', 'viewId' )}"> 
         <h:link outcome="/admin/entities/onepack/customerOrder/viewCustomerOrder.xhtml" rendered="#{s:hasPermission(_customerOrder, 'view')}" propagation="none"> 
           <h:outputText value="#{_customerOrder.id}"/>  
           <f:param name="customerOrderId" value="#{_customerOrder.id}"/> 
@@ -27,37 +27,32 @@
       </p:column>  
       <p:rowExpansion> 
         <ui:include src="/admin/entities/onepack/orderItem/miniListOrderItemComponent.xhtml"> 
-          <ui:param name="records" value="#{_customerOrder.listOrderItems}"/>  
+          <ui:param name="records" value="#{_customerOrder.orderItems}"/>  
           <ui:param name="excludeCustomerOrder" value="true"/> 
         </ui:include> 
       </p:rowExpansion>  
       <p:column headerText="#{msg.customerOrder_notes}" sortBy="#{customerOrder.notes}" rendered="#{ ! excludeNotes == true and ( skipPermissionCheck == 'true' || s:hasPermission('customerOrder', 'viewNotes')) }"> 
-        <h:panelGroup> 
-          <h:outputText id="${panelId}notesAbbr" value="#{_customerOrder.notesAbbreviated}" escape="false"/> 
-        </h:panelGroup> 
+        <h:outputText value="#{_customerOrder.notes}" escape="false"/> 
       </p:column>  
       <p:column headerText="#{msg.customerOrder_customer}" sortBy="#{customerOrder.customer}" rendered="#{ ! excludeCustomer == true and ( skipPermissionCheck == 'true' || s:hasPermission('customerOrder', 'viewCustomer')) }"> 
         <h:panelGroup> 
           <h:link id="customercustomerOrder_customer" escape="false" value="#{_customerOrder.customer.displayName}" outcome="/admin/entities/onepack/customer/viewCustomer.xhtml" propagation="none"> 
             <f:param name="customerId" value="#{_customerOrder.customer.id}"/>  
             <f:param name="from" value="#{request.servletPath}"/> 
-          </h:link>  
-          <p:overlayPanel for="customercustomerOrder_customer" showEvent="mouseover" hideEffect="fade" dynamic="false"> 
-            <h:form> 
-              <ui:include src="/admin/entities/onepack/customer/viewCustomerComponent.xhtml"> 
-                <ui:param name="customer" value="#{_customerOrder.customer}"/>  
-                <ui:param name="numColumns" value="4"/>  
-                <ui:param name="panelId" value="customer"/>  
-                <ui:param name="exclude" value="true"/> 
-              </ui:include> 
-            </h:form> 
-          </p:overlayPanel> 
+          </h:link> 
         </h:panelGroup> 
       </p:column>  
       <p:column headerText="#{msg.customerOrder_shipDate}" sortBy="#{customerOrder.shipDate}" rendered="#{ ! excludeShipDate == true and ( skipPermissionCheck == 'true' || s:hasPermission('customerOrder', 'viewShipDate')) }"> 
         <h:outputText value="#{_customerOrder.shipDate}"> 
           <s:convertDateTime type="date" dateStyle="medium"/> 
         </h:outputText> 
+      </p:column>  
+      <p:column rendered="#{s:hasPermission('_customerOrder', 'edit') and !_customerOrderCategory.archived}"> 
+        <h:link outcome="/admin/entities/onepack/customerOrder/editCustomerOrder.xhtml" rendered="#{s:hasPermission(_customerOrder, 'edit')}"> 
+          <h:graphicImage value="/images/icons/edit.png" style="border: 0px" alt="edit"/>  
+          <f:param name="customerOrderId" value="#{_customerOrder.id}"/>  
+          <s:conversationId/> 
+        </h:link> 
       </p:column>  
       <p:column headerText="#{msg.dateCreated}" sortBy="#{customerOrder.dateCreated}" rendered="#{s:hasPermission('dateCreated', 'viewDateCreated' )}"> 
         <h:outputText value="#{_customerOrder.dateCreated}"> 

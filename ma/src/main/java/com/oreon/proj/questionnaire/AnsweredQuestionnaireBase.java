@@ -1,7 +1,6 @@
 package com.oreon.proj.questionnaire;
 
 import javax.persistence.*;
-
 import org.witchcraft.base.entity.FileAttachment;
 import org.witchcraft.base.entity.BaseEntity;
 import org.hibernate.annotations.Filter;
@@ -10,6 +9,7 @@ import org.hibernate.annotations.Filters;
 import javax.validation.constraints.*;
 
 import java.math.BigDecimal;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
@@ -91,8 +91,6 @@ public class AnsweredQuestionnaireBase extends BaseEntity {
 	public String createListAnsweredQuestionsAsString() {
 		return listAsString(answeredQuestions);
 	}
-
-	
 
 	@Transient
 	public String getDisplayName() {

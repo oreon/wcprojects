@@ -37,13 +37,13 @@
           </ui:include>  
           <h:form> 
             <p:commandButton value="Create New" action="/admin/entities/onepack/employee/editEmployee.xhtml"> 
-              <f:setPropertyActionListener target="#{employeeAction.instance.department}" value="#{departmentAction.instance}"/>  
               <f:setPropertyActionListener target="#{employeeAction.entityId}" value="0"/>  
+              <f:setPropertyActionListener target="#{employeeAction.instance.department}" value="#{departmentAction.instance}"/>  
               <f:setPropertyActionListener target="#{employeeAction.fromView}" value="#{view.viewId}"/>  
               <s:conversationId/> 
             </p:commandButton>  
             <p:commandButton value="Quick Create" update=":#{p:component('editEmployeePanel')}" oncomplete="PF('editEmployeeDialog').show()" actionListener="#{employeeAction.setEmployeeId(0)}"> 
-              <f:setPropertyActionListener target="#{employeeAction.departmentId}" value="#{departmentAction.instance.id}"/> 
+              <f:setPropertyActionListener target="#{employeeAction.instance.department}" value="#{departmentAction.instance}"/> 
             </p:commandButton> 
           </h:form> 
         </p:tab> 

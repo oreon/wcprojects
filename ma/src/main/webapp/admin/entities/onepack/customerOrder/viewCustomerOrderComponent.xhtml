@@ -2,70 +2,39 @@
 
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf">  
   <h:panelGroup id="${panelId == null ? 'viewCustomerOrderPanel' : panelId}"> 
-    <h:panelGrid columns="1"/>  
-    <c:if test="${numColumns == null }"> 
-      <c:set var="numColumns" value="2"/> 
-    </c:if>  
-    <h:panelGrid columns="${numColumns}" styleClass="viewInfo" columnClasses="leftCol, rightCol"> 
-      <f:facet name="header"> 
-        <h:outputText value="#{msg.CustomerOrder}"/> 
-      </f:facet>  
-      <h:outputText value="#{msg.customerOrder_notes}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customerOrder', 'viewNotes')}"/>  
-      <h:outputText value="#{customerOrder.notes}" escape="false"/>  
-      <h:outputText value="#{msg.customerOrder_shipDate}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customerOrder', 'viewShipDate')}"/>  
-      <h:outputText value="#{customerOrder.shipDate}"> 
-        <s:convertDateTime type="date" dateStyle="medium"/> 
-      </h:outputText>  
-      <h:outputText value="#{msg.customerOrder_customer}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customerOrder', 'viewCustomer')}"/>  
-      <h:panelGroup> 
-        <h:link id="customercustomerOrder_customer" escape="false" value="#{customerOrder.customer.displayName}" outcome="/admin/entities/onepack/customer/viewCustomer.xhtml" propagation="none"> 
-          <f:param name="customerId" value="#{customerOrder.customer.id}"/>  
-          <f:param name="from" value="#{request.servletPath}"/> 
-        </h:link>  
-        <p:overlayPanel for="customercustomerOrder_customer" showEvent="mouseover" hideEffect="fade" dynamic="false"> 
-          <h:form> 
-            <ui:include src="/admin/entities/onepack/customer/viewCustomerComponent.xhtml"> 
-              <ui:param name="customer" value="#{customerOrder.customer}"/>  
-              <ui:param name="numColumns" value="4"/>  
-              <ui:param name="panelId" value="customer"/>  
-              <ui:param name="exclude" value="true"/> 
-            </ui:include> 
-          </h:form> 
-        </p:overlayPanel> 
-      </h:panelGroup> 
-    </h:panelGrid>  
-    <br/>  
-    <p:panel rendered="#{ ! excludeOrderItems == true}"> 
-      <p:dataTable id="orderItems" var="_orderItem" rendered="#{ customerOrderAction.listOrderItems.size() &gt; 0  and skipPermissionCheck == 'true' || s:hasPermission('customerOrder', 'viewOrderItems') }" value="#{customerOrderAction.listOrderItems}" rowIndexVar="rowIndex"> 
-        <p:column> 
-          <f:facet name="header"> 
-            <h:outputText value="#{msg.orderItem_product}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('orderItem', 'viewProduct')}"/> 
-          </f:facet>  
-          <h:panelGroup> 
-            <h:link id="productorderItem_product" escape="false" value="#{_orderItem.product.displayName}" outcome="/admin/entities/onepack/product/viewProduct.xhtml" propagation="none"> 
-              <f:param name="productId" value="#{_orderItem.product.id}"/>  
-              <f:param name="from" value="#{request.servletPath}"/> 
-            </h:link>  
-            <p:overlayPanel for="productorderItem_product" showEvent="mouseover" hideEffect="fade" dynamic="false"> 
-              <h:form> 
-                <ui:include src="/admin/entities/onepack/product/viewProductComponent.xhtml"> 
-                  <ui:param name="product" value="#{_orderItem.product}"/>  
-                  <ui:param name="numColumns" value="4"/>  
-                  <ui:param name="panelId" value="product"/>  
-                  <ui:param name="exclude" value="true"/> 
-                </ui:include> 
-              </h:form> 
-            </p:overlayPanel> 
-          </h:panelGroup> 
-        </p:column>  
-        <p:column> 
-          <f:facet name="header"> 
-            <h:outputText value="#{msg.orderItem_qty}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('orderItem', 'viewQty')}"/> 
-          </f:facet>  
-          <h:outputText value="#{_orderItem.qty}" escape="false"/> 
-        </p:column> 
-      </p:dataTable> 
-    </p:panel>  
-    <br/> 
+    <h:panelGrid columns="1" styleClass="viewInfo" columnClasses="leftCol, rightCol"> 
+      <c:if test="${numColumns == null }"> 
+        <c:set var="numColumns" value="2"/> 
+      </c:if>  
+      <h:panelGrid columns="${numColumns}"> 
+        <f:facet name="header"> 
+          <h:outputText value="#{msg.CustomerOrder}"/> 
+        </f:facet>  
+        <h:outputText value="#{msg.customerOrder_notes}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customerOrder', 'viewNotes')}"/>  
+        <h:outputText value="#{customerOrder.notes}" escape="false"/>  
+        <h:outputText value="#{msg.customerOrder_shipDate}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customerOrder', 'viewShipDate')}"/>  
+        <h:outputText value="#{customerOrder.shipDate}"> 
+          <s:convertDateTime type="date" dateStyle="medium"/> 
+        </h:outputText>  
+        <h:outputText value="#{msg.customerOrder_customer}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customerOrder', 'viewCustomer')}"/>  
+        <h:panelGroup> 
+          <h:link id="customercustomerOrder_customer" escape="false" value="#{customerOrder.customer.displayName}" outcome="/admin/entities/onepack/customer/viewCustomer.xhtml" propagation="none"> 
+            <f:param name="customerId" value="#{customerOrder.customer.id}"/>  
+            <f:param name="from" value="#{request.servletPath}"/> 
+          </h:link> 
+        </h:panelGroup> 
+      </h:panelGrid>  
+      <br/>  
+      <p:panel rendered="#{ ! excludeOrderItems == true}"> 
+        <f:facet name="header"> 
+          <h:outputText value="#{msg.customerOrder_orderItems}"/> 
+        </f:facet>  
+        <ui:include src="/admin/entities/onepack/orderItem/miniListOrderItemComponent.xhtml"> 
+          <ui:param name="records" value="#{customerOrder.orderItems}"/>  
+          <ui:param name="excludeCustomerOrder" value="true"/> 
+        </ui:include> 
+      </p:panel>  
+      <br/> 
+    </h:panelGrid> 
   </h:panelGroup> 
 </ui:composition>
