@@ -62,6 +62,18 @@
               </p:selectOneMenu> 
             </s:decorate> 
           </p:column>  
+          <p:column>
+            <f:facet name="header">
+              <h:outputText value="#{msg.answeredQuestion_answer}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestion', 'editAnswer')}"/>
+            </f:facet>  
+            <s:decorate id="answerIdDecorate" rendered="#{ ! excludeAnswer == true}" template="/layout/editTableField.xhtml"> 
+              <ui:define name="label"></ui:define>  
+              <p:selectOneMenu id="answerId" label="#{msg.answeredQuestion_answer}" value="#{_answeredQuestion.answer}" required="false" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestion', 'editAnswer')}" disabled="false" converter="#{answerList.converter}"> 
+                <f:selectItem itemLabel="Select One" itemValue=""/>  
+                <f:selectItems value="#{answerList.fetchAll()}" var="itemIter" itemLabel="#{itemIter.displayName}" itemValue="#{itemIter}"/> 
+              </p:selectOneMenu> 
+            </s:decorate> 
+          </p:column>  
           <p:column> 
             <p:commandButton action="#{answeredQuestionnaireAction.addAnsweredQuestions}" update="answeredQuestions, :#{p:component('editAnsweredQuestionnaireComponentPanel')}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestion', 'editAnsweredQuestions')}" id="btnadd_answeredQuestions" icon="ui-icon-plus"> 
               <s:conversationId/> 

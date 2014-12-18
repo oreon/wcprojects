@@ -57,8 +57,6 @@ import org.witchcraft.base.entity.Range;
 import org.witchcraft.base.entity.SavedSearch;
 import org.witchcraft.exceptions.ContractViolationException;
 
-
-
 /**
  * @author User
  * 
@@ -72,9 +70,8 @@ public abstract class BaseQuery<E extends BaseEntity, PK extends Serializable>
 	private static final String SEARCH_DATA = "searchData";
 
 	private Class<E> entityClass = null;
-	
-	public static final int ABSOLUTE_MAX_RECORDS = 100000;
 
+	public static final int ABSOLUTE_MAX_RECORDS = 100000;
 
 	protected E instance;
 
@@ -85,10 +82,9 @@ public abstract class BaseQuery<E extends BaseEntity, PK extends Serializable>
 	protected StatusMessages statusMessages;
 
 	/*
-	@In(create = true)
-	AppUserAction appUserAction;
-	*/
-	
+	 * @In(create = true) AppUserAction appUserAction;
+	 */
+
 	private Range<java.util.Date> dateCreatedRange = new Range<Date>();
 
 	private String searchName;
@@ -250,18 +246,17 @@ public abstract class BaseQuery<E extends BaseEntity, PK extends Serializable>
 	public void setDropDownListOrder() {
 		setOrderDirection("asc");
 		try {
-			
+
 			BaseEntity entity = getInstance();
-			
-			if( entity.getClass().getField("name") != null )
+
+			if (entity.getClass().getField("name") != null)
 				setOrderColumn("name");
-			
-			if( entity.getClass().getField("lastName") != null )
+
+			if (entity.getClass().getField("lastName") != null)
 				setOrderColumn("lastName");
-			
-			
+
 		} catch (Throwable e) {
-			
+
 			// ignore
 		}
 	}
@@ -569,29 +564,24 @@ public abstract class BaseQuery<E extends BaseEntity, PK extends Serializable>
 	}
 
 	/*
-	public void saveSearch() {
-
-		if (searchName == null || StringUtils.isEmpty(searchName)) {
-			addErrorMessage("Search name is required");
-			return;
-		}
-
-		SavedSearch search = null;
-
-		// if(searchName!=null)
-		search = findSavedSearchByName(searchName);
-		if (search == null)
-			search = new SavedSearch();
-
-		search.setSearchName(searchName);
-		search.setEntityName(getEntityClass().getSimpleName());
-		search.setEncodedXml(encode());
-		/*
-		search.setCreatedByUser(appUserAction.findByUnqUserName(identity
-				.getCredentials().getUsername()));
-
-		entityManager.persist(search);
-	}*/
+	 * public void saveSearch() {
+	 * 
+	 * if (searchName == null || StringUtils.isEmpty(searchName)) {
+	 * addErrorMessage("Search name is required"); return; }
+	 * 
+	 * SavedSearch search = null;
+	 * 
+	 * // if(searchName!=null) search = findSavedSearchByName(searchName); if
+	 * (search == null) search = new SavedSearch();
+	 * 
+	 * search.setSearchName(searchName);
+	 * search.setEntityName(getEntityClass().getSimpleName());
+	 * search.setEncodedXml(encode()); /*
+	 * search.setCreatedByUser(appUserAction.findByUnqUserName(identity
+	 * .getCredentials().getUsername()));
+	 * 
+	 * entityManager.persist(search); }
+	 */
 
 	public void executeSearch() {
 		SavedSearch savedSearch = findSavedSearchByName(currentSavedSearch
@@ -758,10 +748,11 @@ public abstract class BaseQuery<E extends BaseEntity, PK extends Serializable>
 				E t = getEntityManager().find(getEntityClass(), id);
 
 				/*
-				 * Hibernate.initialize(t); if (t instanceof HibernateProxy) { t
-				 * = (T) ((HibernateProxy) t)
-				 * .getHibernateLazyInitializer().getImplementation(); }
-				 */
+				Hibernate.initialize(t);
+				if (t instanceof HibernateProxy) {
+					t = (E) ((HibernateProxy) t).getHibernateLazyInitializer()
+							.getImplementation();
+				}*/
 
 				return t;
 			}

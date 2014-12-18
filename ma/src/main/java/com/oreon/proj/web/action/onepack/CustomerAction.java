@@ -44,8 +44,12 @@ import org.witchcraft.base.entity.BaseEntity;
 
 //@Scope(ScopeType.CONVERSATION)
 @Name("customerAction")
-public class CustomerAction extends CustomerActionBase
-		implements
-			java.io.Serializable {
+public class CustomerAction extends CustomerActionBase implements
+		java.io.Serializable {
+
+	@Begin(pageflow = "investor", join=true)
+	public void begin() {
+
+	}
 
 }

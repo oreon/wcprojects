@@ -28,6 +28,14 @@
       <p:column headerText="#{msg.customer_lastName}" sortBy="#{customer.lastName}" rendered="#{ ! excludeLastName == true and ( skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewLastName')) }"> 
         <h:outputText value="#{_customer.lastName}" escape="false"/> 
       </p:column>  
+      <p:column headerText="#{msg.customer_city}" sortBy="#{customer.city}" rendered="#{ ! excludeCity == true and ( skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewCity')) }"> 
+        <h:outputText value="#{_customer.city}" escape="false"/> 
+      </p:column>  
+      <p:column headerText="#{msg.customer_dob}" sortBy="#{customer.dob}" rendered="#{ ! excludeDob == true and ( skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewDob')) }"> 
+        <h:outputText value="#{_customer.dob}"> 
+          <s:convertDateTime type="date" dateStyle="medium"/> 
+        </h:outputText> 
+      </p:column>  
       <p:column rendered="#{s:hasPermission('_customer', 'edit') and !_customerCategory.archived}"> 
         <h:link outcome="/admin/entities/onepack/customer/editCustomer.xhtml" rendered="#{s:hasPermission(_customer, 'edit')}"> 
           <h:graphicImage value="/images/icons/edit.png" style="border: 0px" alt="edit"/>  

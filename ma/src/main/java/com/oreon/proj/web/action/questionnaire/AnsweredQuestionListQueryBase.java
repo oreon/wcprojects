@@ -92,6 +92,8 @@ public abstract class AnsweredQuestionListQueryBase
 
 			"answeredQuestion.answeredQuestionnaire.id = #{answeredQuestionList.answeredQuestion.answeredQuestionnaire.id}",
 
+			"answeredQuestion.answer.id = #{answeredQuestionList.answeredQuestion.answer.id}",
+
 			"answeredQuestion.dateCreated <= #{answeredQuestionList.dateCreatedRange.end}",
 			"answeredQuestion.dateCreated >= #{answeredQuestionList.dateCreatedRange.begin}",};
 
@@ -159,6 +161,19 @@ public abstract class AnsweredQuestionListQueryBase
 		return answeredQuestion.getAnsweredQuestionnaire() == null
 				? null
 				: answeredQuestion.getAnsweredQuestionnaire().getId();
+	}
+
+	public void setAnswerId(Long id) {
+		if (answeredQuestion.getAnswer() == null) {
+			answeredQuestion
+					.setAnswer(new com.oreon.proj.questionnaire.Answer());
+		}
+		answeredQuestion.getAnswer().setId(id);
+	}
+
+	public Long getAnswerId() {
+		return answeredQuestion.getAnswer() == null ? null : answeredQuestion
+				.getAnswer().getId();
 	}
 
 }

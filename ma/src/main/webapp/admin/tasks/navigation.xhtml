@@ -2,7 +2,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:s="http://jboss.com/products/seam/taglib"
 	xmlns:a="http://richfaces.org/a4j"
 	xmlns:p="http://primefaces.prime.com.tr/ui"
 	xmlns:rich="http://richfaces.org/rich"
@@ -11,18 +11,18 @@
 	xmlns:wc="http://witchcraft.sourceforge.net/jsf"
  >
 		<a:form>
-		<p:panelMenu style="width:162px" mode="ajax"
+		<rich:panelMenu style="width:162px" mode="ajax"
 				iconExpandedGroup="disc" iconCollapsedGroup="disc"
 				iconExpandedTopGroup="chevronUp" iconGroupTopPosition="right"
 				iconCollapsedTopGroup="chevronDown" iconCollapsedTopPosition="right">
 		
-		    <p:panelMenuGroup label="ApproveExam"  expanded="true" >
-				<p:panelMenuItem>
-					<s:link propagation="none"  value="approveExam" action="approveExam" />
-				</p:panelMenuItem>
-			</p:panelMenuGroup>
+		    <rich:panelMenuGroup label="Investor"  expanded="true" >
+				<rich:panelMenuItem>
+					<s:link propagation="none"  value="investor" action="investor" />
+				</rich:panelMenuItem>
+			</rich:panelMenuGroup>
 		
-		</p:panelMenu>
+		</rich:panelMenu>
 		</a:form>
 	</html>
 

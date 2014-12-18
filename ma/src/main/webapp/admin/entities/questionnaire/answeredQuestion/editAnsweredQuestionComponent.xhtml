@@ -27,6 +27,15 @@
             <f:selectItem itemLabel="Select One" itemValue=""/>  
             <f:selectItems value="#{answeredQuestionnaireList.fetchAll()}" var="itemIter" itemLabel="#{itemIter.displayName}" itemValue="#{itemIter}"/> 
           </p:selectOneMenu> 
+        </s:decorate>  
+        <s:decorate id="answerIdDecorate" rendered="#{ ! excludeAnswer == true}" template="/layout/edit.xhtml"> 
+          <ui:define name="label"> 
+            <h:outputText value="#{msg.answeredQuestion_answer}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestion', 'editAnswer')}"/>
+          </ui:define>  
+          <p:selectOneMenu id="answerId" label="#{msg.answeredQuestion_answer}" value="#{answeredQuestionAction.answeredQuestion.answer}" required="false" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestion', 'editAnswer')}" disabled="false" converter="#{answerList.converter}"> 
+            <f:selectItem itemLabel="Select One" itemValue=""/>  
+            <f:selectItems value="#{answerList.fetchAll()}" var="itemIter" itemLabel="#{itemIter.displayName}" itemValue="#{itemIter}"/> 
+          </p:selectOneMenu> 
         </s:decorate> 
       </h:panelGrid>  
       <br/>  

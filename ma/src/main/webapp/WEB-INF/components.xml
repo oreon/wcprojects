@@ -107,6 +107,8 @@
 		</bpm:process-definitions> </bpm:jbpm> -->
 
 
+	<bpm:jbpm />
+
 
 	<resteasy:application  destroy-session-after-request="true">
 		<resteasy:media-type-mappings>

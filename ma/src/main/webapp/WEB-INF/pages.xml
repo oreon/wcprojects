@@ -425,6 +425,18 @@
 			
 		
 	
+		
+			
+				<param name="city" value="#{customerList.customer.city}"  validateModel="false" />
+			
+		
+	
+		
+			
+				<param name="dob" value="#{customerList.customer.dob}"  validateModel="false" />
+			
+		
+	
 	</page>
 	
 	
@@ -1025,6 +1037,14 @@
 			
 				
 				<param name="answeredQuestionnaireId" value="#{answeredQuestionList.answeredQuestionnaireId}"  validateModel="false" />
+				
+			
+		
+	
+		
+			
+				
+				<param name="answerId" value="#{answeredQuestionList.answerId}"  validateModel="false" />
 				
 			
 		

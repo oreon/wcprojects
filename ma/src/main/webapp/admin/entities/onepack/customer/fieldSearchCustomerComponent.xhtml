@@ -19,6 +19,20 @@
       <h:outputText value="#{msg.customer_lastName}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editLastName')}"/>  
       <br/>  
       <h:inputText id="lastName" value="#{customerList.customer.lastName}"/> 
+    </h:panelGroup>  
+    <h:panelGroup> 
+      <h:outputText value="#{msg.customer_city}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editCity')}"/>  
+      <br/>  
+      <h:inputText id="city" value="#{customerList.customer.city}"/> 
+    </h:panelGroup>  
+    <h:panelGroup> 
+      <h:outputText value="#{msg.customer_dob}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editDob')}"/>  
+      <br/>  
+      <h:outputText value="From"/>  
+      <br/>  
+      <p:calendar value="#{customerList.dobRange.begin}"/> To
+      <br/>  
+      <p:calendar value="#{customerList.dobRange.end}"/> 
     </h:panelGroup> 
   </h:panelGrid>  
   <h:panelGrid columns="2"> 

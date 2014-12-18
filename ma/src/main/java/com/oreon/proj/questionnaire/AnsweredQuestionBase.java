@@ -29,6 +29,14 @@ public class AnsweredQuestionBase extends BaseEntity {
 	@OrderBy("id DESC")
 	private List<AnswersProvided> answersProvideds;
 
+	@ManyToOne(optional = true, fetch = FetchType.LAZY)
+	@JoinColumn(name = "answer_id", nullable = true, updatable = true, insertable = true)
+	private Answer answer;
+
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OrderBy("id DESC")
+	private List<Answer> answers;
+
 	public void setQuestion(Question question) {
 		this.question = question;
 	}
@@ -68,6 +76,36 @@ public class AnsweredQuestionBase extends BaseEntity {
 	@Transient
 	public String createListAnswersProvidedsAsString() {
 		return listAsString(answersProvideds);
+	}
+
+	public void setAnswer(Answer answer) {
+		this.answer = answer;
+	}
+
+	public Answer getAnswer() {
+		return answer;
+	}
+
+	public void setAnswers(List<Answer> answers) {
+		this.answers = answers;
+	}
+
+	public List<Answer> getAnswers() {
+		return answers;
+	}
+
+	public void addAnswer(Answer answer) {
+
+		if (answers == null) {
+			answers = new ArrayList<com.oreon.proj.questionnaire.Answer>();
+		}
+
+		this.answers.add(answer);
+	}
+
+	@Transient
+	public String createListAnswersAsString() {
+		return listAsString(answers);
 	}
 
 	@Transient
