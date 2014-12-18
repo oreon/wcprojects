@@ -47,6 +47,14 @@
           </h:link> 
         </h:panelGroup> 
       </p:column>  
+      <p:column headerText="#{msg.answeredQuestion_answer}" sortBy="#{answeredQuestion.answer}" rendered="#{ ! excludeAnswer == true and ( skipPermissionCheck == 'true' || s:hasPermission('answeredQuestion', 'viewAnswer')) }"> 
+        <h:panelGroup> 
+          <h:link id="answeransweredQuestion_answer" escape="false" value="#{_answeredQuestion.answer.displayName}" outcome="/admin/entities/questionnaire/answer/viewAnswer.xhtml" propagation="none"> 
+            <f:param name="answerId" value="#{_answeredQuestion.answer.id}"/>  
+            <f:param name="from" value="#{request.servletPath}"/> 
+          </h:link> 
+        </h:panelGroup> 
+      </p:column>  
       <p:column rendered="#{s:hasPermission('_answeredQuestion', 'edit') and !_answeredQuestionCategory.archived}"> 
         <h:link outcome="/admin/entities/questionnaire/answeredQuestion/editAnsweredQuestion.xhtml" rendered="#{s:hasPermission(_answeredQuestion, 'edit')}"> 
           <h:graphicImage value="/images/icons/edit.png" style="border: 0px" alt="edit"/>  

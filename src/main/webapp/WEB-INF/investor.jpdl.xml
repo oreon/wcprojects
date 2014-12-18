@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pageflow-definition name="investor">  
+  <!--PROTECTED REGION ID(USER_EDITABLE_RGN_investor22) ENABLED START-->  
+  <!--PROTECTED REGION END-->  
+  <page name="newClient" view-id="/investor/newClient.seam" redirect="true" no-conversation-view-id="/error/noConversation.seam"> 
+    <transition to="profile" name="proceedToProfile"></transition> 
+  </page>  
+  <start-state name=""> 
+    <transition to="newClient" name="newclient"></transition> 
+  </start-state>  
+  <page name="profile" view-id="/investor/profile.seam" redirect="true" no-conversation-view-id="/error/noConversation.seam"> 
+    <transition to="questionnaire" name="proceedToQuestionnaire"></transition> 
+  </page>  
+  <page name="questionnaire" view-id="/investor/questionnaire.seam" redirect="true" no-conversation-view-id="/error/noConversation.seam"> 
+    <transition to="investorProfile" name="proceedToInvestorProfile"></transition> 
+  </page>  
+  <page name="investorProfile" view-id="/investor/investorProfile.seam" redirect="true" no-conversation-view-id="/error/noConversation.seam"> 
+    <transition to="investingSolution" name="proceedToInvestingSolution"></transition> 
+  </page>  
+  <page name="investingSolution" view-id="/investor/investingSolution.seam" redirect="true" no-conversation-view-id="/error/noConversation.seam"> 
+    <transition to="final" name="proceedToFinal"></transition> 
+  </page>  
+  <page name="final" view-id="/investor/final.seam" redirect="true" no-conversation-view-id="/error/noConversation.seam"> 
+    <transition to="endState1" name="proceedToEndState1"></transition> 
+  </page>  
+  <end-state name="endState1"> 
+    <redirect/>  
+    <end-conversation/> 
+  </end-state> 
+</pageflow-definition>

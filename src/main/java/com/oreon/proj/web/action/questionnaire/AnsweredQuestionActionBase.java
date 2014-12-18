@@ -121,6 +121,12 @@ public abstract class AnsweredQuestionActionBase
 						 getInstance().setAnsweredQuestionnaire(answeredQuestionnaire);
 					}
 				 
+				 
+					com.oreon.proj.questionnaire.Answer answer = answerAction.getInstance();
+					if (answer != null  ) {
+						 getInstance().setAnswer(answer);
+					}
+				 
 			
 		}
 		 */
@@ -153,6 +159,11 @@ public abstract class AnsweredQuestionActionBase
 		if (instance.getAnsweredQuestionnaire() != null) {
 			criteria = criteria.add(Restrictions.eq("answeredQuestionnaire.id",
 					instance.getAnsweredQuestionnaire().getId()));
+		}
+
+		if (instance.getAnswer() != null) {
+			criteria = criteria.add(Restrictions.eq("answer.id", instance
+					.getAnswer().getId()));
 		}
 
 	}

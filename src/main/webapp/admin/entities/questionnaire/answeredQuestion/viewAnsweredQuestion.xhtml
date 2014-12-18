@@ -36,6 +36,13 @@
                 <ui:param name="answeredQuestionnaire" value="#{answeredQuestionAction.instance.answeredQuestionnaire}"/> 
               </ui:include> 
             </h:form> 
+          </p:tab>  
+          <p:tab title="Answer" rendered="#{answeredQuestionAction.instance.answer != null}"> 
+            <h:form> 
+              <ui:include src="/admin/entities/questionnaire/answer/viewAnswerComponent.xhtml"> 
+                <ui:param name="answer" value="#{answeredQuestionAction.instance.answer}"/> 
+              </ui:include> 
+            </h:form> 
           </p:tab> 
         </p:tabView>  
         <div class="buttonBox"></div> 

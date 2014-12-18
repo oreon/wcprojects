@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf">  
-  <p:commandButton type="button" onclick="jQuery('.ui-row-toggler').click()" value="Expand/Collapse"/>  
   <p:dataTable var="_section" value="#{records}" tableStyle="width:auto"> 
     <p:column headerText="#{msg.Section} #{msg.id}" sortBy="#{section.id}" rendered="#{s:hasPermission('id', 'viewId' )}"> 
       <h:link outcome="/admin/entities/questionnaire/section/viewSection.xhtml" rendered="#{s:hasPermission(_section, 'view')}" propagation="none"> 

@@ -81,6 +81,15 @@ public abstract class CustomerListQueryBase extends BaseQuery<Customer, Long> {
 		return RESTRICTIONS;
 	}
 
+	private Range<Date> dobRange = new Range<Date>();
+
+	public Range<Date> getDobRange() {
+		return dobRange;
+	}
+	public void setDob(Range<Date> dobRange) {
+		this.dobRange = dobRange;
+	}
+
 	private static final String[] RESTRICTIONS = {
 			"customer.id = #{customerList.customer.id}",
 
@@ -89,6 +98,11 @@ public abstract class CustomerListQueryBase extends BaseQuery<Customer, Long> {
 			"lower(customer.firstName) like concat(lower(#{customerList.customer.firstName}),'%')",
 
 			"lower(customer.lastName) like concat(lower(#{customerList.customer.lastName}),'%')",
+
+			"lower(customer.city) like concat(lower(#{customerList.customer.city}),'%')",
+
+			"customer.dob >= #{customerList.dobRange.begin}",
+			"customer.dob <= #{customerList.dobRange.end}",
 
 			"customer.dateCreated <= #{customerList.dateCreatedRange.end}",
 			"customer.dateCreated >= #{customerList.dateCreatedRange.begin}",};

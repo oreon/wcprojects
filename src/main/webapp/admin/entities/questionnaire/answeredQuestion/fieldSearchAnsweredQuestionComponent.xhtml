@@ -25,6 +25,15 @@
         <f:selectItem itemLabel="Any..." itemValue=""/>  
         <f:selectItems value="#{answeredQuestionnaireList.fetchAll()}" var="itemIter" itemLabel="#{itemIter.displayName}" itemValue="#{itemIter}"/> 
       </p:selectOneMenu> 
+    </h:panelGroup>  
+    <h:panelGroup> 
+      <h:outputText value="#{msg.answeredQuestion_answer}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestion', 'editAnswer')}"/>  
+      <br/>  
+      <p:selectOneMenu id="answerId" converter="#{answerList.converter}" value="#{ answeredQuestionList.answeredQuestion.answer}"> 
+        <f:selectItem itemLabel="Any..." itemValue=""/>  
+        <f:selectItem itemLabel="--None--" itemValue=""/>  
+        <f:selectItems value="#{answerList.fetchAll()}" var="itemIter" itemLabel="#{itemIter.displayName}" itemValue="#{itemIter}"/> 
+      </p:selectOneMenu> 
     </h:panelGroup> 
   </h:panelGrid>  
   <h:panelGrid columns="2"> 

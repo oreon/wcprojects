@@ -21,6 +21,7 @@ public class AnswerBase extends BaseEntity {
 	@JoinColumn(name = "question_id", nullable = false, updatable = true, insertable = true)
 	private Question question;
 
+	@Size(min = 10)
 	@Lob
 	@Column(name = "text", unique = false)
 	private String text;

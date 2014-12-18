@@ -21,6 +21,18 @@
             <h:outputText value="#{msg.customer_lastName}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editLastName')}"/>
           </ui:define>  
           <h:inputText escape="false" id="lastName#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editLastName')}" label="#{msg.customer_lastName}" required="false" disabled="false" value="#{customerAction.customer.lastName}"></h:inputText> 
+        </s:decorate>  
+        <s:decorate id="cityDecorate" rendered="#{ ! excludeCity == true}" template="/layout/edit.xhtml"> 
+          <ui:define name="label"> 
+            <h:outputText value="#{msg.customer_city}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editCity')}"/>
+          </ui:define>  
+          <h:inputText escape="false" id="city#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editCity')}" label="#{msg.customer_city}" required="false" disabled="false" value="#{customerAction.customer.city}"></h:inputText> 
+        </s:decorate>  
+        <s:decorate id="dobDecorate" rendered="#{ ! excludeDob == true}" template="/layout/edit.xhtml"> 
+          <ui:define name="label"> 
+            <h:outputText value="#{msg.customer_dob}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editDob')}"/>
+          </ui:define>  
+          <p:calendar escape="false" navigator="true" id="dob#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editDob')}" label="#{msg.customer_dob}" required="false" disabled="false" value="#{customerAction.customer.dob}"></p:calendar> 
         </s:decorate> 
       </h:panelGrid>  
       <br/>  

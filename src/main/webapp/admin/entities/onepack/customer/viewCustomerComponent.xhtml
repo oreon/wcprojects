@@ -13,7 +13,13 @@
         <h:outputText value="#{msg.customer_firstName}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewFirstName')}"/>  
         <h:outputText value="#{customer.firstName}" escape="false"/>  
         <h:outputText value="#{msg.customer_lastName}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewLastName')}"/>  
-        <h:outputText value="#{customer.lastName}" escape="false"/> 
+        <h:outputText value="#{customer.lastName}" escape="false"/>  
+        <h:outputText value="#{msg.customer_city}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewCity')}"/>  
+        <h:outputText value="#{customer.city}" escape="false"/>  
+        <h:outputText value="#{msg.customer_dob}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewDob')}"/>  
+        <h:outputText value="#{customer.dob}"> 
+          <s:convertDateTime type="date" dateStyle="medium"/> 
+        </h:outputText> 
       </h:panelGrid>  
       <br/>  
       <br/> 

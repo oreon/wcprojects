@@ -14,11 +14,8 @@
 	<ui:define name="content">
 		<h:form>
 		
-		
-		
-	
 		<div id="printable" >
-			<ui:include src="/admin/entities/questionnaire/answeredQuestionnaire/editAnsweredQuestionnaireComponent.xhtml" >
+			<ui:include src="/admin/entities/questionnaire/answeredQuestionnaire/editAnsweredQuestionnaireComponentCustom.xhtml" >
 				<ui:param name="answeredQuestionnaire" value="#{answeredQuestionnaireAction.instance}"/>
 			</ui:include>
 		</div>
