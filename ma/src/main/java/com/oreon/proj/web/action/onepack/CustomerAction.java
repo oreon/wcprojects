@@ -46,7 +46,24 @@ public class CustomerAction extends CustomerActionBase implements
 			}
 			
 			tradd(list.subList(1, list.size()), child);
+			
+			updateTotals(parent);
 		}
+	}
+
+	private static void updateTotals(TreeNode current) {
+		List<TreeNode> children = current.getChildren();
+		AnalyticsData currentData = (AnalyticsData) current.getData();
+		
+		int total = 0;
+		
+		for (TreeNode treeNode : children) {
+			
+			AnalyticsData childData = ((AnalyticsData)treeNode.getData()); 
+			total += childData.getSize(); 
+		}
+		
+		currentData.setSize(total);
 	}
 
 	private static TreeNode findElement(List<TreeNode> list, AnalyticsData dataToFind) {
