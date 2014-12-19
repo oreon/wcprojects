@@ -42,7 +42,7 @@ public class CustomerAction extends CustomerActionBase implements
 			
 			if (child == null) {
 				child = new DefaultTreeNode(adata, parent);
-				System.out.println(" adding " +  adata.getName() + " " + parent);
+				//System.out.println(" adding " +  adata.getName() + " " + parent);
 			}
 			
 			tradd(list.subList(1, list.size()), child);
