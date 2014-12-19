@@ -1,55 +1,79 @@
 package com.oreon.proj.web.action.onepack;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import javax.faces.event.ValueChangeEvent;
-import javax.faces.model.SelectItem;
-import javax.persistence.EntityManager;
-
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
-
-import org.apache.commons.lang.StringUtils;
-
-import org.jboss.seam.ScopeType;
-import org.jboss.seam.annotations.Scope;
-
 import org.jboss.seam.annotations.Begin;
-import org.jboss.seam.annotations.End;
-import org.jboss.seam.annotations.Factory;
-import org.jboss.seam.annotations.In;
-import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
-import org.jboss.seam.annotations.Out;
-import org.jboss.seam.Component;
-import org.jboss.seam.security.Identity;
-
-import org.jboss.seam.annotations.datamodel.DataModel;
-import org.jboss.seam.annotations.datamodel.DataModelSelection;
-import org.jboss.seam.faces.FacesMessages;
-import org.jboss.seam.log.Log;
-import org.jboss.seam.annotations.Observer;
-import org.jboss.seam.annotations.security.Restrict;
-import org.jboss.seam.annotations.web.RequestParameter;
-
-import org.witchcraft.base.entity.FileAttachment;
-
-import org.apache.commons.io.FileUtils;
-
-import org.primefaces.model.DualListModel;
-
-import org.witchcraft.seam.action.BaseAction;
-import org.witchcraft.base.entity.BaseEntity;
+import org.primefaces.model.DefaultTreeNode;
+import org.primefaces.model.TreeNode;
 
 //@Scope(ScopeType.CONVERSATION)
 @Name("customerAction")
 public class CustomerAction extends CustomerActionBase implements
 		java.io.Serializable {
 
-	@Begin(pageflow = "investor", join=true)
+	@Begin(pageflow = "investor", join = true)
 	public void begin() {
 
+	}
+
+	String[][] arr = { { "ON", "Toronto", "F", "1" }, 
+			{ "ON", "Toronto", "M", "1" }, { "ON", "Brampton", "M", "1" }, { "ON", "Toronto", "F", "7" }, { "ON", "Brampton", "F", "1" },
+		  { "ON", "scarborough","F", "1", },
+		  { "AB", "Calgary", "F", "1", },
+	};
+	
+	
+	private static void tradd(List<String> list, TreeNode parent) {
+		if (list.size() >= 2) {
+			String data = list.size() == 2 ? list.get(0) + " " + list.get(1)
+					: list.get(0);
+
+			TreeNode child = findElement(parent.getChildren(), data);
+			
+			if (child == null) {
+				child = new DefaultTreeNode(data, parent);
+				System.out.println(" adding " + list.get(0) + " " + parent);
+			}
+			
+
+			tradd(list.subList(1, list.size()), child);
+		}
+	}
+
+	private static TreeNode findElement(List<TreeNode> list, String dataToFind) {
+		for (TreeNode treeNode : list) {
+			if (treeNode.getData().equals(dataToFind))
+				return treeNode;
+		}
+		return null;
+	}
+
+	public TreeNode getTree() {
+		
+		String[][] arr2 = { { "ON", "Scarborough", "M", "11" }, 
+				{ "ON", "Toronto", "M", "1" }, { "ON", "Brampton", "M", "1" }, { "ON", "Toronto", "F", "7" }, { "ON", "Brampton", "F", "1" },
+			  { "ON", "Scarborough","F", "1", },
+			  { "AB", "Calgary", "F", "1", },
+		};
+		
+		
+		TreeNode root = new DefaultTreeNode("", null);
+
+		List<List<String>> tuples = new ArrayList<List<String>>();
+
+		for (String[] strings : arr2) {
+			tuples.add(Arrays.asList(strings));
+		}
+
+
+		for (List<String> list : tuples) {
+			tradd(list, root);
+		}
+
+		return root;
 	}
 
 }
