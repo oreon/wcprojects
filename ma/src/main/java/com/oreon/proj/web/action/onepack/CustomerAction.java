@@ -8,6 +8,7 @@ import org.jboss.seam.annotations.Begin;
 import org.jboss.seam.annotations.Name;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
+import org.witchcraft.base.entity.AnalyticsData;
 
 //@Scope(ScopeType.CONVERSATION)
 @Name("customerAction")
@@ -28,25 +29,34 @@ public class CustomerAction extends CustomerActionBase implements
 	
 	private static void tradd(List<String> list, TreeNode parent) {
 		if (list.size() >= 2) {
-			String data = list.size() == 2 ? list.get(0) + " " + list.get(1)
-					: list.get(0);
-
-			TreeNode child = findElement(parent.getChildren(), data);
 			
-			if (child == null) {
-				child = new DefaultTreeNode(data, parent);
-				System.out.println(" adding " + list.get(0) + " " + parent);
+			AnalyticsData adata = null;
+			
+			if(list.size() == 2 ){
+				 adata = new AnalyticsData(list.get(0) , Integer.parseInt(list.get(1)) );
+			}else{
+				 adata = new AnalyticsData(list.get(0) , 0  );
 			}
 			
-
+			TreeNode child = findElement(parent.getChildren(), adata);
+			
+			if (child == null) {
+				child = new DefaultTreeNode(adata, parent);
+				System.out.println(" adding " +  adata.getName() + " " + parent);
+			}
+			
 			tradd(list.subList(1, list.size()), child);
 		}
 	}
 
-	private static TreeNode findElement(List<TreeNode> list, String dataToFind) {
+	private static TreeNode findElement(List<TreeNode> list, AnalyticsData dataToFind) {
 		for (TreeNode treeNode : list) {
-			if (treeNode.getData().equals(dataToFind))
+			AnalyticsData current = (AnalyticsData)treeNode.getData(); 
+			
+			if ( (current).equals(dataToFind)){
+				
 				return treeNode;
+			}
 		}
 		return null;
 	}
@@ -54,13 +64,14 @@ public class CustomerAction extends CustomerActionBase implements
 	public TreeNode getTree() {
 		
 		String[][] arr2 = { { "ON", "Scarborough", "M", "11" }, 
-				{ "ON", "Toronto", "M", "1" }, { "ON", "Brampton", "M", "1" }, { "ON", "Toronto", "F", "7" }, { "ON", "Brampton", "F", "1" },
+				{ "ON", "Toronto", "M", "1" }, { "ON", "Brampton", "M", "1" }, { "ON", "Toronto", "F", "7" },
+				{ "ON", "Brampton", "F", "1" },
 			  { "ON", "Scarborough","F", "1", },
 			  { "AB", "Calgary", "F", "1", },
 		};
 		
 		
-		TreeNode root = new DefaultTreeNode("", null);
+		TreeNode root = new DefaultTreeNode(new AnalyticsData("root", 0), null);
 
 		List<List<String>> tuples = new ArrayList<List<String>>();
 
