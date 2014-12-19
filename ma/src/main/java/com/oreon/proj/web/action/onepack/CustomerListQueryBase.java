@@ -95,14 +95,20 @@ public abstract class CustomerListQueryBase extends BaseQuery<Customer, Long> {
 
 			"customer.archived = #{customerList.customer.archived}",
 
-			"lower(customer.firstName) like concat(lower(#{customerList.customer.firstName}),'%')",
-
-			"lower(customer.lastName) like concat(lower(#{customerList.customer.lastName}),'%')",
-
-			"lower(customer.city) like concat(lower(#{customerList.customer.city}),'%')",
+			"customer.gender = #{customerList.customer.gender}",
 
 			"customer.dob >= #{customerList.dobRange.begin}",
 			"customer.dob <= #{customerList.dobRange.end}",
+
+			"lower(customer.address.street) like concat(lower(#{customerList.customer.address.street}),'%')",
+
+			"lower(customer.address.city) like concat(lower(#{customerList.customer.address.city}),'%')",
+
+			"lower(customer.address.province) like concat(lower(#{customerList.customer.address.province}),'%')",
+
+			"lower(customer.firstName) like concat(lower(#{customerList.customer.firstName}),'%')",
+
+			"lower(customer.lastName) like concat(lower(#{customerList.customer.lastName}),'%')",
 
 			"customer.dateCreated <= #{customerList.dateCreatedRange.end}",
 			"customer.dateCreated >= #{customerList.dateCreatedRange.begin}",};

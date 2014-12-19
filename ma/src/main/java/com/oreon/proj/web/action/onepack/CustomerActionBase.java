@@ -47,7 +47,9 @@ import org.witchcraft.seam.action.BaseAction;
 import org.witchcraft.base.entity.BaseEntity;
 
 //
-public abstract class CustomerActionBase extends BaseAction<Customer>
+public abstract class CustomerActionBase
+		extends
+			com.oreon.proj.web.action.onepack.AbstractPersonAction<Customer>
 		implements
 			java.io.Serializable {
 

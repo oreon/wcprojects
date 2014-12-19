@@ -33,15 +33,6 @@
         </h:panelGroup> 
       </h:panelGrid>  
       <br/>  
-      <p:panel rendered="#{ ! excludeAnswersProvideds == true}"> 
-        <f:facet name="header"> 
-          <h:outputText value="#{msg.answeredQuestion_answersProvideds}"/> 
-        </f:facet>  
-        <ui:include src="/admin/entities/questionnaire/answersProvided/miniListAnswersProvidedComponent.xhtml"> 
-          <ui:param name="records" value="#{answeredQuestion.answersProvideds}"/>  
-          <ui:param name="excludeAnsweredQuestion" value="true"/> 
-        </ui:include> 
-      </p:panel>  
       <br/> 
     </h:panelGrid> 
   </h:panelGroup> 

@@ -81,10 +81,30 @@ public abstract class EmployeeListQueryBase extends BaseQuery<Employee, Long> {
 		return RESTRICTIONS;
 	}
 
+	private Range<Date> dobRange = new Range<Date>();
+
+	public Range<Date> getDobRange() {
+		return dobRange;
+	}
+	public void setDob(Range<Date> dobRange) {
+		this.dobRange = dobRange;
+	}
+
 	private static final String[] RESTRICTIONS = {
 			"employee.id = #{employeeList.employee.id}",
 
 			"employee.archived = #{employeeList.employee.archived}",
+
+			"employee.gender = #{employeeList.employee.gender}",
+
+			"employee.dob >= #{employeeList.dobRange.begin}",
+			"employee.dob <= #{employeeList.dobRange.end}",
+
+			"lower(employee.address.street) like concat(lower(#{employeeList.employee.address.street}),'%')",
+
+			"lower(employee.address.city) like concat(lower(#{employeeList.employee.address.city}),'%')",
+
+			"lower(employee.address.province) like concat(lower(#{employeeList.employee.address.province}),'%')",
 
 			"employee.department.id = #{employeeList.employee.department.id}",
 

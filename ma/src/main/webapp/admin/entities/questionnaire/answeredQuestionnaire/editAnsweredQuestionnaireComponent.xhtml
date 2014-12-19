@@ -16,12 +16,8 @@
           </ui:define>  
           <p:editor useSeamText="true" width="400" height="130" escape="false" id="remarks#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestionnaire', 'editRemarks')}" label="#{msg.answeredQuestionnaire_remarks}" required="false" disabled="false" value="#{answeredQuestionnaireAction.answeredQuestionnaire.remarks}"></p:editor> 
         </s:decorate>  
-        <s:decorate id="defaultScoreDecorate" rendered="#{ ! excludeDefaultScore == true}" template="/layout/edit.xhtml"> 
-          <ui:define name="label"> 
-            <h:outputText value="#{msg.answeredQuestionnaire_defaultScore}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestionnaire', 'editDefaultScore')}"/>
-          </ui:define>  
-          <p:spinner size="2" min="0" escape="false" id="defaultScore#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestionnaire', 'editDefaultScore')}" label="#{msg.answeredQuestionnaire_defaultScore}" required="false" disabled="false" value="#{answeredQuestionnaireAction.answeredQuestionnaire.defaultScore}"></p:spinner> 
-        </s:decorate>  
+        <h:outputText value="#{msg.answeredQuestionnaire_defaultScore}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestionnaire', 'editDefaultScore')}"/>  
+        <h:outputText value="#{answeredQuestionnaire.defaultScore}" escape="false"/>  
         <s:decorate id="questionnaireIdDecorate" rendered="#{ ! excludeQuestionnaire == true}" template="/layout/edit.xhtml"> 
           <ui:define name="label"> 
             <h:outputText value="#{msg.answeredQuestionnaire_questionnaire}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestionnaire', 'editQuestionnaire')}"/>

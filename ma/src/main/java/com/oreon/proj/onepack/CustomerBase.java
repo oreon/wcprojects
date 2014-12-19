@@ -15,19 +15,13 @@ import java.util.List;
 import java.util.Date;
 
 @MappedSuperclass
-public class CustomerBase extends BaseEntity {
+public class CustomerBase extends com.oreon.proj.onepack.Person {
 
 	@Column(name = "firstName", unique = false)
 	private String firstName;
 
 	@Column(name = "lastName", unique = false)
 	private String lastName;
-
-	@Column(name = "city", unique = false)
-	private String city;
-
-	@Column(name = "dob", unique = false)
-	private Date dob;
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -43,22 +37,6 @@ public class CustomerBase extends BaseEntity {
 
 	public String getLastName() {
 		return lastName;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setDob(Date dob) {
-		this.dob = dob;
-	}
-
-	public Date getDob() {
-		return dob;
 	}
 
 	@Transient

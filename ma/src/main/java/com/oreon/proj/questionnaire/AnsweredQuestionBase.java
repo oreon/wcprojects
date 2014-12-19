@@ -25,10 +25,6 @@ public class AnsweredQuestionBase extends BaseEntity {
 	@JoinColumn(name = "answeredQuestionnaire_id", nullable = false, updatable = true, insertable = true)
 	private AnsweredQuestionnaire answeredQuestionnaire;
 
-	@OneToMany(mappedBy = "answeredQuestion", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-	@OrderBy("id DESC")
-	private List<AnswersProvided> answersProvideds;
-
 	@ManyToOne(optional = true, fetch = FetchType.LAZY)
 	@JoinColumn(name = "answer_id", nullable = true, updatable = true, insertable = true)
 	private Answer answer;
@@ -52,30 +48,6 @@ public class AnsweredQuestionBase extends BaseEntity {
 
 	public AnsweredQuestionnaire getAnsweredQuestionnaire() {
 		return answeredQuestionnaire;
-	}
-
-	public void setAnswersProvideds(List<AnswersProvided> answersProvideds) {
-		this.answersProvideds = answersProvideds;
-	}
-
-	public List<AnswersProvided> getAnswersProvideds() {
-		return answersProvideds;
-	}
-
-	public void addAnswersProvided(AnswersProvided answersProvided) {
-
-		answersProvided.setAnsweredQuestion((AnsweredQuestion) this);
-
-		if (answersProvideds == null) {
-			answersProvideds = new ArrayList<com.oreon.proj.questionnaire.AnswersProvided>();
-		}
-
-		this.answersProvideds.add(answersProvided);
-	}
-
-	@Transient
-	public String createListAnswersProvidedsAsString() {
-		return listAsString(answersProvideds);
 	}
 
 	public void setAnswer(Answer answer) {

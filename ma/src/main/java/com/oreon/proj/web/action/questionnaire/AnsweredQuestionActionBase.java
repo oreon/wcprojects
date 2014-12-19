@@ -46,8 +46,6 @@ import org.primefaces.model.DualListModel;
 import org.witchcraft.seam.action.BaseAction;
 import org.witchcraft.base.entity.BaseEntity;
 
-import com.oreon.proj.questionnaire.AnswersProvided;
-
 //
 public abstract class AnsweredQuestionActionBase
 		extends
@@ -166,28 +164,6 @@ public abstract class AnsweredQuestionActionBase
 					.getAnswer().getId()));
 		}
 
-	}
-
-	public List<com.oreon.proj.questionnaire.AnswersProvided> getListAnswersProvideds() {
-		return getInstance().getAnswersProvideds();
-	}
-
-	//public void prePopulateListAnswersProvideds() {}
-
-	public void setListAnswersProvideds(
-			List<com.oreon.proj.questionnaire.AnswersProvided> listAnswersProvideds) {
-		//this.listAnswersProvideds = listAnswersProvideds;
-	}
-
-	@Begin(join = true, flushMode = org.jboss.seam.annotations.FlushModeType.MANUAL)
-	public void deleteAnswersProvideds(int index) {
-		getListAnswersProvideds().remove(index);
-	}
-
-	@Begin(join = true, flushMode = org.jboss.seam.annotations.FlushModeType.MANUAL)
-	public void addAnswersProvideds() {
-		getInstance().addAnswersProvided(
-				new com.oreon.proj.questionnaire.AnswersProvided());
 	}
 
 	public String viewAnsweredQuestion() {

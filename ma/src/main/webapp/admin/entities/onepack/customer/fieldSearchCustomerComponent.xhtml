@@ -11,6 +11,40 @@
       <h:inputText id="CustomerSearchId" value="#{customerList.customer.id}" size="5"/> 
     </h:panelGroup>  
     <h:panelGroup> 
+      <h:outputText value="#{msg.person_gender}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editGender')}"/>  
+      <br/>  
+      <h:selectOneMenu id="gender" value="#{customerList.customer.gender}" required="false"> 
+        <f:selectItem itemLabel="Any" itemValue=""/>  
+        <f:selectItem itemLabel="None" itemValue=""/>  
+        <f:selectItem itemValue="MALE" itemLabel="Male"/>  
+        <f:selectItem itemValue="FEMALE" itemLabel="Female"/> 
+      </h:selectOneMenu> 
+    </h:panelGroup>  
+    <h:panelGroup> 
+      <h:outputText value="#{msg.person_dob}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editDob')}"/>  
+      <br/>  
+      <h:outputText value="From"/>  
+      <br/>  
+      <p:calendar value="#{customerList.dobRange.begin}"/> To
+      <br/>  
+      <p:calendar value="#{customerList.dobRange.end}"/> 
+    </h:panelGroup>  
+    <h:panelGroup> 
+      <h:outputText value="#{msg.address_street}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editStreet')}"/>  
+      <br/>  
+      <h:inputText id="address_street" value="#{customerList.customer.address.street}"/> 
+    </h:panelGroup>  
+    <h:panelGroup> 
+      <h:outputText value="#{msg.address_city}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editCity')}"/>  
+      <br/>  
+      <h:inputText id="address_city" value="#{customerList.customer.address.city}"/> 
+    </h:panelGroup>  
+    <h:panelGroup> 
+      <h:outputText value="#{msg.address_province}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editProvince')}"/>  
+      <br/>  
+      <h:inputText id="address_province" value="#{customerList.customer.address.province}"/> 
+    </h:panelGroup>  
+    <h:panelGroup> 
       <h:outputText value="#{msg.customer_firstName}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editFirstName')}"/>  
       <br/>  
       <h:inputText id="firstName" value="#{customerList.customer.firstName}"/> 
@@ -19,20 +53,6 @@
       <h:outputText value="#{msg.customer_lastName}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editLastName')}"/>  
       <br/>  
       <h:inputText id="lastName" value="#{customerList.customer.lastName}"/> 
-    </h:panelGroup>  
-    <h:panelGroup> 
-      <h:outputText value="#{msg.customer_city}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editCity')}"/>  
-      <br/>  
-      <h:inputText id="city" value="#{customerList.customer.city}"/> 
-    </h:panelGroup>  
-    <h:panelGroup> 
-      <h:outputText value="#{msg.customer_dob}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editDob')}"/>  
-      <br/>  
-      <h:outputText value="From"/>  
-      <br/>  
-      <p:calendar value="#{customerList.dobRange.begin}"/> To
-      <br/>  
-      <p:calendar value="#{customerList.dobRange.end}"/> 
     </h:panelGroup> 
   </h:panelGrid>  
   <h:panelGrid columns="2"> 

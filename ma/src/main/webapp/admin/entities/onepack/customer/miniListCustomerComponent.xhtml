@@ -8,19 +8,28 @@
         <f:param name="customerId" value="#{_customer.id}"/> 
       </h:link> 
     </p:column>  
+    <p:column headerText="#{msg.person_gender}" sortBy="#{customer.gender}" rendered="#{ ! excludeGender == true and ( skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewGender')) }"> 
+      <h:outputText value="#{_customer.gender}" escape="false"/> 
+    </p:column>  
+    <p:column headerText="#{msg.person_dob}" sortBy="#{customer.dob}" rendered="#{ ! excludeDob == true and ( skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewDob')) }"> 
+      <h:outputText value="#{_customer.dob}"> 
+        <s:convertDateTime type="date" dateStyle="medium"/> 
+      </h:outputText> 
+    </p:column>  
+    <p:column headerText="#{msg.address_street}" sortBy="#{customer.address.street}" rendered="#{ ! excludeStreet == true and ( skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewStreet')) }"> 
+      <h:outputText value="#{_customer.address.street}" escape="false"/> 
+    </p:column>  
+    <p:column headerText="#{msg.address_city}" sortBy="#{customer.address.city}" rendered="#{ ! excludeCity == true and ( skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewCity')) }"> 
+      <h:outputText value="#{_customer.address.city}" escape="false"/> 
+    </p:column>  
+    <p:column headerText="#{msg.address_province}" sortBy="#{customer.address.province}" rendered="#{ ! excludeProvince == true and ( skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewProvince')) }"> 
+      <h:outputText value="#{_customer.address.province}" escape="false"/> 
+    </p:column>  
     <p:column headerText="#{msg.customer_firstName}" sortBy="#{customer.firstName}" rendered="#{ ! excludeFirstName == true and ( skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewFirstName')) }"> 
       <h:outputText value="#{_customer.firstName}" escape="false"/> 
     </p:column>  
     <p:column headerText="#{msg.customer_lastName}" sortBy="#{customer.lastName}" rendered="#{ ! excludeLastName == true and ( skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewLastName')) }"> 
       <h:outputText value="#{_customer.lastName}" escape="false"/> 
-    </p:column>  
-    <p:column headerText="#{msg.customer_city}" sortBy="#{customer.city}" rendered="#{ ! excludeCity == true and ( skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewCity')) }"> 
-      <h:outputText value="#{_customer.city}" escape="false"/> 
-    </p:column>  
-    <p:column headerText="#{msg.customer_dob}" sortBy="#{customer.dob}" rendered="#{ ! excludeDob == true and ( skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewDob')) }"> 
-      <h:outputText value="#{_customer.dob}"> 
-        <s:convertDateTime type="date" dateStyle="medium"/> 
-      </h:outputText> 
     </p:column>  
     <p:column rendered="#{s:hasPermission('_customer', 'edit') and !_customerCategory.archived}"> 
       <h:link outcome="/admin/entities/onepack/customer/editCustomer.xhtml" rendered="#{s:hasPermission(_customer, 'edit')}"> 
