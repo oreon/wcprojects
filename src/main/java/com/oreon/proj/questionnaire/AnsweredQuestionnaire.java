@@ -28,14 +28,13 @@ public class AnsweredQuestionnaire extends AnsweredQuestionnaireBase
 		implements
 			java.io.Serializable {
 	private static final long serialVersionUID = -1880888387L;
+
+	
+	@Formula(value="(select SUM(a.score) FROM answer a,  answeredquestion_answer aa , answeredquestion aq WHERE aa.answers_id = a.id AND aa.answeredquestion_id =  aq.id  AND  aq.answeredQuestionnaire_id = id )" )
+	private Integer defaultScore;
 	
 	
-	@Override
-	@Formula(value="(select sum(a.score) from answer a, answersprovided p , answeredquestion q where p.answer_id = a.id and p.answeredQuestion_id = q.id and q.answeredQuestionnaire_id= id")
 	public Integer getDefaultScore() {
-		// TODO Auto-generated method stub
-		return super.getDefaultScore();
-		
-		
+		return defaultScore;
 	}
 }

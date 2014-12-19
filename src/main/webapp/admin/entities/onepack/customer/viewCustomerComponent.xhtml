@@ -10,16 +10,30 @@
         <f:facet name="header"> 
           <h:outputText value="#{msg.Customer}"/> 
         </f:facet>  
+        <h:outputText value="#{msg.person_gender}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewGender')}"/>  
+        <h:outputText value="#{customer.gender}" escape="false"/>  
+        <h:outputText value="#{msg.person_dob}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewDob')}"/>  
+        <h:outputText value="#{customer.dob}"> 
+          <s:convertDateTime type="date" dateStyle="medium"/> 
+        </h:outputText>  
         <h:outputText value="#{msg.customer_firstName}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewFirstName')}"/>  
         <h:outputText value="#{customer.firstName}" escape="false"/>  
         <h:outputText value="#{msg.customer_lastName}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewLastName')}"/>  
-        <h:outputText value="#{customer.lastName}" escape="false"/>  
-        <h:outputText value="#{msg.customer_city}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewCity')}"/>  
-        <h:outputText value="#{customer.city}" escape="false"/>  
-        <h:outputText value="#{msg.customer_dob}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewDob')}"/>  
-        <h:outputText value="#{customer.dob}"> 
-          <s:convertDateTime type="date" dateStyle="medium"/> 
-        </h:outputText> 
+        <h:outputText value="#{customer.lastName}" escape="false"/> 
+      </h:panelGrid>  
+      <c:if test="${numColumns == null }"> 
+        <c:set var="numColumns" value="2"/> 
+      </c:if>  
+      <h:panelGrid columns="${numColumns}"> 
+        <f:facet name="header"> 
+          <h:outputText value="#{msg.Address}"/> 
+        </f:facet>  
+        <h:outputText value="#{msg.address_street}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewStreet')}"/>  
+        <h:outputText value="#{customer.address.street}" escape="false"/>  
+        <h:outputText value="#{msg.address_city}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewCity')}"/>  
+        <h:outputText value="#{customer.address.city}" escape="false"/>  
+        <h:outputText value="#{msg.address_province}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'viewProvince')}"/>  
+        <h:outputText value="#{customer.address.province}" escape="false"/> 
       </h:panelGrid>  
       <br/>  
       <br/> 

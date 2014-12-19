@@ -10,6 +10,12 @@
         <f:facet name="header"> 
           <h:outputText value="#{msg.Employee}"/> 
         </f:facet>  
+        <h:outputText value="#{msg.person_gender}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'viewGender')}"/>  
+        <h:outputText value="#{employee.gender}" escape="false"/>  
+        <h:outputText value="#{msg.person_dob}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'viewDob')}"/>  
+        <h:outputText value="#{employee.dob}"> 
+          <s:convertDateTime type="date" dateStyle="medium"/> 
+        </h:outputText>  
         <h:outputText value="#{msg.employee_firstName}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'viewFirstName')}"/>  
         <h:outputText value="#{employee.firstName}" escape="false"/>  
         <h:outputText value="#{msg.employee_lastName}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'viewLastName')}"/>  
@@ -21,6 +27,20 @@
             <f:param name="from" value="#{request.servletPath}"/> 
           </h:link> 
         </h:panelGroup> 
+      </h:panelGrid>  
+      <c:if test="${numColumns == null }"> 
+        <c:set var="numColumns" value="2"/> 
+      </c:if>  
+      <h:panelGrid columns="${numColumns}"> 
+        <f:facet name="header"> 
+          <h:outputText value="#{msg.Address}"/> 
+        </f:facet>  
+        <h:outputText value="#{msg.address_street}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'viewStreet')}"/>  
+        <h:outputText value="#{employee.address.street}" escape="false"/>  
+        <h:outputText value="#{msg.address_city}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'viewCity')}"/>  
+        <h:outputText value="#{employee.address.city}" escape="false"/>  
+        <h:outputText value="#{msg.address_province}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'viewProvince')}"/>  
+        <h:outputText value="#{employee.address.province}" escape="false"/> 
       </h:panelGrid>  
       <br/>  
       <br/> 

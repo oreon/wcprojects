@@ -19,13 +19,6 @@ public class CustomerAction extends CustomerActionBase implements
 	public void begin() {
 
 	}
-
-	String[][] arr = { { "ON", "Toronto", "F", "1" }, 
-			{ "ON", "Toronto", "M", "1" }, { "ON", "Brampton", "M", "1" }, { "ON", "Toronto", "F", "7" }, { "ON", "Brampton", "F", "1" },
-		  { "ON", "scarborough","F", "1", },
-		  { "AB", "Calgary", "F", "1", },
-	};
-	
 	
 	private static void tradd(List<String> list, TreeNode parent) {
 		if (list.size() >= 2) {

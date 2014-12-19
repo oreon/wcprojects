@@ -39,38 +39,6 @@
         </s:decorate> 
       </h:panelGrid>  
       <br/>  
-      <p:panel rendered="#{ ! excludeAnswersProvideds == true}"> 
-        <f:facet name="header"> 
-          <h:outputText value="#{msg.answeredQuestion_answersProvideds}"/> 
-        </f:facet>  
-        <p:commandButton action="#{answeredQuestionAction.addAnswersProvideds}" update="answersProvideds, :#{p:component('editAnsweredQuestionComponentPanel')}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestion', 'editAnswersProvideds')}" id="btnadd_answersProvideds" icon="ui-icon-plus"> 
-          <s:conversationId/> 
-        </p:commandButton>  
-        <p:dataTable id="answersProvideds" var="_answersProvided" tableStyle="width:auto" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestion', 'editAnswersProvideds')}" value="#{answeredQuestionAction.listAnswersProvideds}" rowIndexVar="rowIndex"> 
-          <p:column>
-            <f:facet name="header">
-              <h:outputText value="#{msg.answersProvided_answer}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answersProvided', 'editAnswer')}"/>
-            </f:facet>  
-            <s:decorate id="answerIdDecorate" rendered="#{ ! excludeAnswer == true}" template="/layout/editTableField.xhtml"> 
-              <ui:define name="label"></ui:define>  
-              <p:selectOneMenu id="answerId" label="#{msg.answersProvided_answer}" value="#{_answersProvided.answer}" required="true" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answersProvided', 'editAnswer')}" disabled="false" converter="#{answerList.converter}"> 
-                <f:selectItem itemLabel="Select One" itemValue=""/>  
-                <f:selectItems value="#{answerList.fetchAll()}" var="itemIter" itemLabel="#{itemIter.displayName}" itemValue="#{itemIter}"/> 
-              </p:selectOneMenu> 
-            </s:decorate> 
-          </p:column>  
-          <p:column> 
-            <p:commandButton action="#{answeredQuestionAction.addAnswersProvideds}" update="answersProvideds, :#{p:component('editAnsweredQuestionComponentPanel')}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answersProvided', 'editAnswersProvideds')}" id="btnadd_answersProvideds" icon="ui-icon-plus"> 
-              <s:conversationId/> 
-            </p:commandButton> 
-          </p:column>  
-          <p:column> 
-            <p:commandButton immediate="true" action="#{answeredQuestionAction.deleteAnswersProvideds(rowIndex)}" update="answersProvideds" process="@this" id="btndelete_answersProvideds" icon="ui-icon-close"> 
-              <s:conversationId/> 
-            </p:commandButton> 
-          </p:column> 
-        </p:dataTable> 
-      </p:panel>  
       <br/> 
     </h:panelGrid> 
   </h:panelGroup> 

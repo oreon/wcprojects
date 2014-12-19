@@ -30,16 +30,6 @@
       <h:outputText value="#{msg.answeredQuestionnaire_remarks}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestionnaire', 'editRemarks')}"/>  
       <br/>  
       <h:inputText id="remarks" value="#{answeredQuestionnaireList.answeredQuestionnaire.remarks}"/> 
-    </h:panelGroup>  
-    <h:panelGroup> 
-      <h:outputText value="#{msg.answeredQuestionnaire_defaultScore}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestionnaire', 'editDefaultScore')}"/>  
-      <br/>  
-      <h:inputText id="defaultScore_begin" value="#{answeredQuestionnaireList.defaultScoreRange.begin}"> 
-        <f:converter converterId="javax.faces.Integer"/> 
-      </h:inputText>  
-      <h:inputText id="defaultScore_end" value="#{answeredQuestionnaireList.defaultScoreRange.end}"> 
-        <f:converter converterId="javax.faces.Integer"/> 
-      </h:inputText> 
     </h:panelGroup> 
   </h:panelGrid>  
   <h:panelGrid columns="2"> 

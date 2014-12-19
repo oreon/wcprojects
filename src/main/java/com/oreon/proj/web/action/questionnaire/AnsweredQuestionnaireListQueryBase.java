@@ -83,15 +83,6 @@ public abstract class AnsweredQuestionnaireListQueryBase
 		return RESTRICTIONS;
 	}
 
-	private Range<Integer> defaultScoreRange = new Range<Integer>();
-
-	public Range<Integer> getDefaultScoreRange() {
-		return defaultScoreRange;
-	}
-	public void setDefaultScore(Range<Integer> defaultScoreRange) {
-		this.defaultScoreRange = defaultScoreRange;
-	}
-
 	private static final String[] RESTRICTIONS = {
 			"answeredQuestionnaire.id = #{answeredQuestionnaireList.answeredQuestionnaire.id}",
 
@@ -102,9 +93,6 @@ public abstract class AnsweredQuestionnaireListQueryBase
 			"answeredQuestionnaire.customer.id = #{answeredQuestionnaireList.answeredQuestionnaire.customer.id}",
 
 			"lower(answeredQuestionnaire.remarks) like concat(lower(#{answeredQuestionnaireList.answeredQuestionnaire.remarks}),'%')",
-
-			"answeredQuestionnaire.defaultScore >= #{answeredQuestionnaireList.defaultScoreRange.begin}",
-			"answeredQuestionnaire.defaultScore <= #{answeredQuestionnaireList.defaultScoreRange.end}",
 
 			"answeredQuestionnaire.dateCreated <= #{answeredQuestionnaireList.dateCreatedRange.end}",
 			"answeredQuestionnaire.dateCreated >= #{answeredQuestionnaireList.dateCreatedRange.begin}",};

@@ -11,6 +11,40 @@
       <h:inputText id="EmployeeSearchId" value="#{employeeList.employee.id}" size="5"/> 
     </h:panelGroup>  
     <h:panelGroup> 
+      <h:outputText value="#{msg.person_gender}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'editGender')}"/>  
+      <br/>  
+      <h:selectOneMenu id="gender" value="#{employeeList.employee.gender}" required="false"> 
+        <f:selectItem itemLabel="Any" itemValue=""/>  
+        <f:selectItem itemLabel="None" itemValue=""/>  
+        <f:selectItem itemValue="MALE" itemLabel="Male"/>  
+        <f:selectItem itemValue="FEMALE" itemLabel="Female"/> 
+      </h:selectOneMenu> 
+    </h:panelGroup>  
+    <h:panelGroup> 
+      <h:outputText value="#{msg.person_dob}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'editDob')}"/>  
+      <br/>  
+      <h:outputText value="From"/>  
+      <br/>  
+      <p:calendar value="#{employeeList.dobRange.begin}"/> To
+      <br/>  
+      <p:calendar value="#{employeeList.dobRange.end}"/> 
+    </h:panelGroup>  
+    <h:panelGroup> 
+      <h:outputText value="#{msg.address_street}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'editStreet')}"/>  
+      <br/>  
+      <h:inputText id="address_street" value="#{employeeList.employee.address.street}"/> 
+    </h:panelGroup>  
+    <h:panelGroup> 
+      <h:outputText value="#{msg.address_city}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'editCity')}"/>  
+      <br/>  
+      <h:inputText id="address_city" value="#{employeeList.employee.address.city}"/> 
+    </h:panelGroup>  
+    <h:panelGroup> 
+      <h:outputText value="#{msg.address_province}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'editProvince')}"/>  
+      <br/>  
+      <h:inputText id="address_province" value="#{employeeList.employee.address.province}"/> 
+    </h:panelGroup>  
+    <h:panelGroup> 
       <h:outputText value="#{msg.employee_department}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'editDepartment')}"/>  
       <br/>  
       <p:selectOneMenu id="departmentId" converter="#{departmentList.converter}" value="#{ employeeList.employee.department}"> 

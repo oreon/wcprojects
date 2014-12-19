@@ -10,6 +10,22 @@
         <f:facet name="header"> 
           <h:outputText value="#{msg.Employee}"/> 
         </f:facet>  
+        <s:decorate id="genderDecorate" rendered="#{ ! excludeGender == true}" template="/layout/edit.xhtml"> 
+          <ui:define name="label"> 
+            <h:outputText value="#{msg.person_gender}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'editGender')}"/>
+          </ui:define>  
+          <h:selectOneMenu id="gender" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'editGender')}" value="#{employeeAction.employee.gender}" required="false" label="#{msg.person_gender}"> 
+            <f:selectItem itemLabel="Please Select..." itemValue=""/>  
+            <f:selectItem itemValue="MALE" itemLabel="#{msg.MALE}"/>  
+            <f:selectItem itemValue="FEMALE" itemLabel="#{msg.FEMALE}"/> 
+          </h:selectOneMenu> 
+        </s:decorate>  
+        <s:decorate id="dobDecorate" rendered="#{ ! excludeDob == true}" template="/layout/edit.xhtml"> 
+          <ui:define name="label"> 
+            <h:outputText value="#{msg.person_dob}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'editDob')}"/>
+          </ui:define>  
+          <p:calendar escape="false" navigator="true" id="dob#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'editDob')}" label="#{msg.person_dob}" required="false" disabled="false" value="#{employeeAction.employee.dob}"></p:calendar> 
+        </s:decorate>  
         <s:decorate id="firstNameDecorate" rendered="#{ ! excludeFirstName == true}" template="/layout/edit.xhtml"> 
           <ui:define name="label"> 
             <h:outputText value="#{msg.employee_firstName}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'editFirstName')}"/>
@@ -30,6 +46,32 @@
             <f:selectItem itemLabel="Select One" itemValue=""/>  
             <f:selectItems value="#{departmentList.fetchAll()}" var="itemIter" itemLabel="#{itemIter.displayName}" itemValue="#{itemIter}"/> 
           </p:selectOneMenu> 
+        </s:decorate> 
+      </h:panelGrid>  
+      <c:if test="${numColumns == null }"> 
+        <c:set var="numColumns" value="2"/> 
+      </c:if>  
+      <h:panelGrid columns="${numColumns}"> 
+        <f:facet name="header"> 
+          <h:outputText value="#{msg.Address}"/> 
+        </f:facet>  
+        <s:decorate id="address_streetDecorate" rendered="#{ ! excludeStreet == true}" template="/layout/edit.xhtml"> 
+          <ui:define name="label"> 
+            <h:outputText value="#{msg.address_street}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'editStreet')}"/>
+          </ui:define>  
+          <h:inputText escape="false" id="address_street#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'editStreet')}" label="#{msg.address_street}" required="false" disabled="false" value="#{employeeAction.employee.address.street}"></h:inputText> 
+        </s:decorate>  
+        <s:decorate id="address_cityDecorate" rendered="#{ ! excludeCity == true}" template="/layout/edit.xhtml"> 
+          <ui:define name="label"> 
+            <h:outputText value="#{msg.address_city}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'editCity')}"/>
+          </ui:define>  
+          <h:inputText escape="false" id="address_city#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'editCity')}" label="#{msg.address_city}" required="false" disabled="false" value="#{employeeAction.employee.address.city}"></h:inputText> 
+        </s:decorate>  
+        <s:decorate id="address_provinceDecorate" rendered="#{ ! excludeProvince == true}" template="/layout/edit.xhtml"> 
+          <ui:define name="label"> 
+            <h:outputText value="#{msg.address_province}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'editProvince')}"/>
+          </ui:define>  
+          <h:inputText escape="false" id="address_province#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('employee', 'editProvince')}" label="#{msg.address_province}" required="false" disabled="false" value="#{employeeAction.employee.address.province}"></h:inputText> 
         </s:decorate> 
       </h:panelGrid>  
       <br/>  

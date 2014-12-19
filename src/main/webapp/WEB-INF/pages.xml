@@ -195,18 +195,6 @@
                 <redirect view-id="/admin/entities/questionnaire/answeredQuestionnaire/editAnsweredQuestionnaire.xhtml" />
             </rule>
         
-            <rule if-outcome="answersProvided">
-                <redirect view-id="/admin/entities/questionnaire/answersProvided/listAnswersProvided.xhtml" />
-            </rule>
-            
-            <rule if-outcome="viewAnswersProvided">
-                <redirect view-id="/admin/entities/questionnaire/answersProvided/viewAnswersProvided.xhtml" />
-            </rule>
-            
-            <rule if-outcome="editAnswersProvided">
-                <redirect view-id="/admin/entities/questionnaire/answersProvided/editAnswersProvided.xhtml" />
-            </rule>
-        
         </navigation>
     </page>
 
@@ -266,6 +254,37 @@
 
 		<param name="from" />
 		<param name="id" value="#{employeeList.employee.id}" />
+		
+			
+				<param name="gender" value="#{employeeList.employee.gender}"  validateModel="false" />
+			
+		
+	
+		
+			
+				<param name="dob" value="#{employeeList.employee.dob}"  validateModel="false" />
+			
+		
+	
+		
+			
+				<param name="address_street" value="#{employeeList.employee.address.street}"  validateModel="false" />
+			
+		
+	
+		
+			
+				<param name="address_city" value="#{employeeList.employee.address.city}"  validateModel="false" />
+			
+		
+	
+		
+			
+				<param name="address_province" value="#{employeeList.employee.address.province}"  validateModel="false" />
+			
+		
+	
+	
 	
 		
 			
@@ -412,6 +431,37 @@
 
 		<param name="from" />
 		<param name="id" value="#{customerList.customer.id}" />
+		
+			
+				<param name="gender" value="#{customerList.customer.gender}"  validateModel="false" />
+			
+		
+	
+		
+			
+				<param name="dob" value="#{customerList.customer.dob}"  validateModel="false" />
+			
+		
+	
+		
+			
+				<param name="address_street" value="#{customerList.customer.address.street}"  validateModel="false" />
+			
+		
+	
+		
+			
+				<param name="address_city" value="#{customerList.customer.address.city}"  validateModel="false" />
+			
+		
+	
+		
+			
+				<param name="address_province" value="#{customerList.customer.address.province}"  validateModel="false" />
+			
+		
+	
+	
 	
 		
 			
@@ -422,18 +472,6 @@
 		
 			
 				<param name="lastName" value="#{customerList.customer.lastName}"  validateModel="false" />
-			
-		
-	
-		
-			
-				<param name="city" value="#{customerList.customer.city}"  validateModel="false" />
-			
-		
-	
-		
-			
-				<param name="dob" value="#{customerList.customer.dob}"  validateModel="false" />
 			
 		
 	
@@ -1128,88 +1166,6 @@
 		
 			
 				<param name="remarks" value="#{answeredQuestionnaireList.answeredQuestionnaire.remarks}"  validateModel="false" />
-			
-		
-	
-		
-			
-				<param name="defaultScore" value="#{answeredQuestionnaireList.answeredQuestionnaire.defaultScore}"  validateModel="false" />
-			
-		
-	
-	</page>
-	
-	
-	
-    
-    <page view-id="/admin/entities/questionnaire/answersProvided/editAnswersProvided.xhtml"  >
-    	<!-- <description>Edit AnswersProvided: #{answersProvided.displayName}</description> -->
-    	<restrict>#{s:hasPermission('answersProvided', 'edit')}</restrict>
-    	<begin-conversation join="true"/>
-    	<navigation> 
-			 <rule if-outcome="save">
- 				<redirect view-id="/admin/entities/questionnaire/answersProvided/viewAnswersProvided.xhtml" />
-            </rule>	
-             <rule if-outcome="cancel">
- 				<redirect view-id="/admin/entities/questionnaire/answersProvided/listAnswersProvided.xhtml" />
-            </rule>			
-		</navigation>
-		<param name="answersProvidedId" value="#{answersProvidedAction.answersProvidedId}" />
-		
-	</page>
-	
-	 <page view-id="/admin/entities/questionnaire/answersProvided/viewAnswersProvided.xhtml"  action="#{redirect.captureCurrentView()}">
-	 	<!-- <description>View AnswersProvided: #{answersProvided.displayName}</description> -->
-	 	<restrict>#{s:hasPermission('answersProvided', 'view')}</restrict>
-	 	<navigation> 
-			 <rule if-outcome="edit">
-			 	
- 				<redirect view-id="/admin/entities/questionnaire/answersProvided/editAnswersProvided.xhtml" />
-            </rule>	
-             <rule if-outcome="cancel">
-             	
- 				<redirect view-id="/admin/entities/questionnaire/answersProvided/listAnswersProvided.xhtml" />
-            </rule>			
-		</navigation>
-		<param name="answersProvidedId" value="#{answersProvidedAction.answersProvidedId}" />
-	</page>
-	
-	<page view-id="/admin/entities/questionnaire/answersProvided/listAnswersProvided.xhtml" action="#{redirect.captureCurrentView()}" >
-		<restrict>#{s:hasPermission('answersProvided', 'view')}</restrict>
-		<navigation>
-			<rule if-outcome="viewAnswersProvided">
-				
-				<redirect view-id="/admin/entities/questionnaire/answersProvided/viewAnswersProvided.xhtml" />
-			</rule> 
-			 <rule if-outcome="edit">
-			 	
- 				<redirect view-id="/admin/entities/questionnaire/answersProvided/editAnswersProvided.xhtml" />
-            </rule>			
-            <rule if-outcome="textSearch"> 
-        		<redirect view-id="/admin/entities/questionnaire/answersProvided/textSearchResultsAnswersProvided.xhtml"/> 
-      		</rule>
-		</navigation>
-		
-		<param name="firstResult" value="#{answersProvidedList.firstResult}" />
-		<param name="sort" value="#{answersProvidedList.orderColumn}" />
-		<param name="dir" value="#{answersProvidedList.orderDirection}" />
-
-		<param name="from" />
-		<param name="id" value="#{answersProvidedList.answersProvided.id}" />
-	
-		
-			
-				
-				<param name="answeredQuestionId" value="#{answersProvidedList.answeredQuestionId}"  validateModel="false" />
-				
-			
-		
-	
-		
-			
-				
-				<param name="answerId" value="#{answersProvidedList.answerId}"  validateModel="false" />
-				
 			
 		
 	
