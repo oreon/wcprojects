@@ -104,11 +104,11 @@
 	<web:multipart-filter disabled="true" />
 
 	<!-- <bpm:jbpm> <bpm:process-definitions> <value>processes/processdefinition.xml</value> 
-		</bpm:process-definitions> </bpm:jbpm> -->
+		</bpm:process-definitions> </bpm:jbpm> 
 
 
 	<bpm:jbpm />
-
+-->
 
 	<resteasy:application  destroy-session-after-request="true">
 		<resteasy:media-type-mappings>

@@ -25,6 +25,7 @@ public class AnsweredQuestionnaireBase extends BaseEntity {
 	@JoinColumn(name = "customer_id", nullable = false, updatable = true, insertable = true)
 	private com.oreon.proj.onepack.Customer customer;
 
+	@NotNull
 	@Lob
 	@Column(name = "remarks", unique = false)
 	private String remarks;

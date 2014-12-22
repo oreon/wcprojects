@@ -14,7 +14,7 @@
           <ui:define name="label"> 
             <h:outputText value="#{msg.person_gender}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editGender')}"/>
           </ui:define>  
-          <h:selectOneMenu id="gender" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editGender')}" value="#{customerAction.customer.gender}" required="false" label="#{msg.person_gender}"> 
+          <h:selectOneMenu id="gender" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editGender')}" value="#{customerAction.customer.gender}" required="true" label="#{msg.person_gender}"> 
             <f:selectItem itemLabel="Please Select..." itemValue=""/>  
             <f:selectItem itemValue="MALE" itemLabel="#{msg.MALE}"/>  
             <f:selectItem itemValue="FEMALE" itemLabel="#{msg.FEMALE}"/> 
@@ -24,19 +24,19 @@
           <ui:define name="label"> 
             <h:outputText value="#{msg.person_dob}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editDob')}"/>
           </ui:define>  
-          <p:calendar escape="false" navigator="true" id="dob#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editDob')}" label="#{msg.person_dob}" required="false" disabled="false" value="#{customerAction.customer.dob}"></p:calendar> 
+          <p:calendar escape="false" navigator="true" id="dob#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editDob')}" label="#{msg.person_dob}" required="true" disabled="false" value="#{customerAction.customer.dob}"></p:calendar> 
         </s:decorate>  
         <s:decorate id="firstNameDecorate" rendered="#{ ! excludeFirstName == true}" template="/layout/edit.xhtml"> 
           <ui:define name="label"> 
             <h:outputText value="#{msg.customer_firstName}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editFirstName')}"/>
           </ui:define>  
-          <h:inputText escape="false" id="firstName#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editFirstName')}" label="#{msg.customer_firstName}" required="false" disabled="false" value="#{customerAction.customer.firstName}"></h:inputText> 
+          <h:inputText escape="false" id="firstName#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editFirstName')}" label="#{msg.customer_firstName}" required="true" disabled="false" value="#{customerAction.customer.firstName}"></h:inputText> 
         </s:decorate>  
         <s:decorate id="lastNameDecorate" rendered="#{ ! excludeLastName == true}" template="/layout/edit.xhtml"> 
           <ui:define name="label"> 
             <h:outputText value="#{msg.customer_lastName}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editLastName')}"/>
           </ui:define>  
-          <h:inputText escape="false" id="lastName#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editLastName')}" label="#{msg.customer_lastName}" required="false" disabled="false" value="#{customerAction.customer.lastName}"></h:inputText> 
+          <h:inputText escape="false" id="lastName#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editLastName')}" label="#{msg.customer_lastName}" required="true" disabled="false" value="#{customerAction.customer.lastName}"></h:inputText> 
         </s:decorate> 
       </h:panelGrid>  
       <c:if test="${numColumns == null }"> 
@@ -50,19 +50,19 @@
           <ui:define name="label"> 
             <h:outputText value="#{msg.address_street}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editStreet')}"/>
           </ui:define>  
-          <h:inputText escape="false" id="address_street#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editStreet')}" label="#{msg.address_street}" required="false" disabled="false" value="#{customerAction.customer.address.street}"></h:inputText> 
+          <h:inputText escape="false" id="address_street#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editStreet')}" label="#{msg.address_street}" required="true" disabled="false" value="#{customerAction.customer.address.street}"></h:inputText> 
         </s:decorate>  
         <s:decorate id="address_cityDecorate" rendered="#{ ! excludeCity == true}" template="/layout/edit.xhtml"> 
           <ui:define name="label"> 
             <h:outputText value="#{msg.address_city}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editCity')}"/>
           </ui:define>  
-          <h:inputText escape="false" id="address_city#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editCity')}" label="#{msg.address_city}" required="false" disabled="false" value="#{customerAction.customer.address.city}"></h:inputText> 
+          <h:inputText escape="false" id="address_city#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editCity')}" label="#{msg.address_city}" required="true" disabled="false" value="#{customerAction.customer.address.city}"></h:inputText> 
         </s:decorate>  
         <s:decorate id="address_provinceDecorate" rendered="#{ ! excludeProvince == true}" template="/layout/edit.xhtml"> 
           <ui:define name="label"> 
             <h:outputText value="#{msg.address_province}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editProvince')}"/>
           </ui:define>  
-          <h:inputText escape="false" id="address_province#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editProvince')}" label="#{msg.address_province}" required="false" disabled="false" value="#{customerAction.customer.address.province}"></h:inputText> 
+          <h:inputText escape="false" id="address_province#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customer', 'editProvince')}" label="#{msg.address_province}" required="true" disabled="false" value="#{customerAction.customer.address.province}"></h:inputText> 
         </s:decorate> 
       </h:panelGrid>  
       <br/>  

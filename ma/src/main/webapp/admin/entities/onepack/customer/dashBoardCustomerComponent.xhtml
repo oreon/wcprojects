@@ -12,37 +12,37 @@
 	<h:panelGrid columns="1" styleClass="summarywrap">
 		<h:form>
 
-			<ui:repeat var="fld" value="#{customerList.groupByFields}">
+			<ui:repeat var="fld" value="#{customerList.listGroupByFields}">
 
 				<s:decorate template="/layout/edit.xhtml">
 					<ui:define name="label">
-						<h:outputText value="fld" />
+						<h:outputText value="" />
 					</ui:define>
-					<p:selectOneMenu id="#{fld}Id"
+					<p:selectOneMenu 
 						value="#{customerList.selecteGroupField}">
 						<f:selectItem itemLabel="Select One" itemValue="" />
-						<f:selectItems value="#{customerList.groupByFields}"
+						<f:selectItems value="#{customerList.listGroupByFields}"
 							var="itemIter" itemLabel="#{itemIter}" itemValue="#{itemIter}" />
 					</p:selectOneMenu>
 				</s:decorate>
 
 			</ui:repeat>
 
+			<p:commandButton value="Get" update="groupsTree"  process="@form" />
 
-
-			<p:treeTable value="#{customerAction.tree}" var="document">
-				<f:facet name="header">
+				<p:treeTable value="#{customerList.tree}" var="document"
+					id="groupsTree">
+					<f:facet name="header">
 	            Document Viewer
 	   	     </f:facet>
-				<p:column>
+					<p:column>
 	   					#{document.name}
 	   			</p:column>
-				<p:column>
+					<p:column>
 	   					#{document.size}
 	   			</p:column>
 
-			</p:treeTable>
-
+				</p:treeTable>
 		</h:form>
 
 	</h:panelGrid>
