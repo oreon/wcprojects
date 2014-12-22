@@ -74,6 +74,9 @@ public abstract class WCBaseAction<T extends BaseEntity> extends EntityHome<T> {
 
 	@In
 	Redirect redirect;
+	
+	@In 
+	Conversation conversation;
 
 	@In(create = true)
 	// @PersistenceContext(type = PersistenceContextType.EXTENDED)
@@ -102,6 +105,18 @@ public abstract class WCBaseAction<T extends BaseEntity> extends EntityHome<T> {
 
 	@RequestParameter
 	protected Long currentEntityId;
+	
+	
+	@RequestParameter
+	protected String from;
+
+	public String getFrom() {
+		return from;
+	}
+
+	public void setFrom(String from) {
+		this.from = from;
+	}
 
 	private List<AuditLog> auditLog;
 
@@ -207,6 +222,12 @@ public abstract class WCBaseAction<T extends BaseEntity> extends EntityHome<T> {
 		setInstance(t);
 		loadAssociations();
 	}
+	
+	
+	public Long getEntityId(){
+		return getInstance().getId();
+	}
+	
 
 	public void setEntityId(Long entityId) {
 		
@@ -584,12 +605,30 @@ public abstract class WCBaseAction<T extends BaseEntity> extends EntityHome<T> {
 		}
 	}
 
-	@End
+	//@End
 	public String cancel() {
+		
+		System.out.println("current conversation " + conversation.getId());
+		/*
 		Conversation.instance().end();
 		clearInstance();
 		clearLists();
+		*/
+		if(from != null){
+			redirect.setViewId(from);
+			redirect.execute();
+		}
+			
 		return "cancel";
+	}
+	
+	public void onLoadView(){
+		redirect.captureCurrentView();
+	}
+	
+	
+	public void onLoadEdit(){
+		redirect.captureCurrentView();
 	}
 
 	protected void clearLists() {
