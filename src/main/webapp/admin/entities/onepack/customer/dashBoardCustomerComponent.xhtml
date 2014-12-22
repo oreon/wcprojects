@@ -27,14 +27,27 @@
 				</s:decorate>
 
 			</ui:repeat>
+			
+			
+			
 
 			<p:commandButton value="Get" update="groupsTree"  process="@form" />
+				
+			<p:chart type="pie" model="#{customerList.tree.data.pieChartModel}" >
+				<p:ajax event="itemSelect" listener="#{customerList.pieChartSelect}" update="growl" />
+			</p:chart>
+			
+			
+			<p:chart type="bar" model="#{customerList.tree.data.pieChartModel}" >
+            	<p:ajax event="itemSelect" listener="#{chartView.itemSelect}" update="growl" />
+        	</p:chart>  
+
 
 				<p:treeTable value="#{customerList.tree}" var="document"
 					id="groupsTree">
 					<f:facet name="header">
-	            Document Viewer
-	   	     </f:facet>
+			           Found #{customerList.tree.data.size}
+			   	     </f:facet>
 					<p:column>
 	   					#{document.name}
 	   			</p:column>
