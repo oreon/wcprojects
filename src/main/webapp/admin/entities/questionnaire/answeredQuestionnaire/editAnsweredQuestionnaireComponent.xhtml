@@ -14,7 +14,7 @@
           <ui:define name="label"> 
             <h:outputText value="#{msg.answeredQuestionnaire_remarks}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestionnaire', 'editRemarks')}"/>
           </ui:define>  
-          <p:editor useSeamText="true" width="400" height="130" escape="false" id="remarks#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestionnaire', 'editRemarks')}" label="#{msg.answeredQuestionnaire_remarks}" required="false" disabled="false" value="#{answeredQuestionnaireAction.answeredQuestionnaire.remarks}"></p:editor> 
+          <p:editor useSeamText="true" width="400" height="130" escape="false" id="remarks#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestionnaire', 'editRemarks')}" label="#{msg.answeredQuestionnaire_remarks}" required="true" disabled="false" value="#{answeredQuestionnaireAction.answeredQuestionnaire.remarks}"></p:editor> 
         </s:decorate>  
         <h:outputText value="#{msg.answeredQuestionnaire_defaultScore}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestionnaire', 'editDefaultScore')}"/>  
         <h:outputText value="#{answeredQuestionnaire.defaultScore}" escape="false"/>  

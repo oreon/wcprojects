@@ -17,9 +17,11 @@ import java.util.Date;
 @MappedSuperclass
 public class CustomerBase extends com.oreon.proj.onepack.Person {
 
+	@NotNull
 	@Column(name = "firstName", unique = false)
 	private String firstName;
 
+	@NotNull
 	@Column(name = "lastName", unique = false)
 	private String lastName;
 

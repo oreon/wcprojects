@@ -1,12 +1,31 @@
 package org.witchcraft.base.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.primefaces.model.chart.PieChartModel;
+
 public class AnalyticsData {
 	
 	
 	private String name;
-	private Integer size;
+	private Long size;
 	
-	public AnalyticsData(String name, Integer size) {
+	private List<AnalyticsData> children = new ArrayList<AnalyticsData>();
+	
+	public List<AnalyticsData> getChildren() {
+		return children;
+	}
+
+
+
+	public void setChildren(List<AnalyticsData> children) {
+		this.children = children;
+	}
+
+
+
+	public AnalyticsData(String name, Long size) {
 		super();
 		this.name = name;
 		this.size = size;
@@ -21,10 +40,10 @@ public class AnalyticsData {
 		this.name = name;
 	}
 	
-	public Integer getSize() {
+	public Long getSize() {
 		return size;
 	}
-	public void setSize(Integer size) {
+	public void setSize(Long size) {
 		this.size = size;
 	}
 	
@@ -40,4 +59,28 @@ public class AnalyticsData {
 		return name + " " + size;
 	}
 
+	private PieChartModel pieChartModel; 
+	
+	public PieChartModel getPieChartModel() {
+		if(pieChartModel == null){
+			createPieModel();
+		}
+		return pieChartModel;
+	}
+
+
+
+	public void setPieChartModel(PieChartModel pieChartModel) {
+		this.pieChartModel = pieChartModel;
+	}
+
+
+
+	private void createPieModel() {
+		pieChartModel = new PieChartModel();
+		
+        for (AnalyticsData childData : children) {
+			pieChartModel.set(childData.getName(), childData.getSize());
+		}
+    }
 }

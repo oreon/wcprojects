@@ -17,12 +17,15 @@ import java.util.Date;
 @MappedSuperclass
 public class AddressBase {
 
+	@NotNull
 	@Column(name = "street", unique = false)
 	private String street;
 
+	@NotNull
 	@Column(name = "city", unique = false)
 	private String city;
 
+	@NotNull
 	@Column(name = "province", unique = false)
 	private String province;
 

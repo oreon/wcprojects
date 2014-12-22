@@ -17,15 +17,16 @@ import java.util.Date;
 @MappedSuperclass
 public class PersonBase extends BaseEntity {
 
+	@NotNull
 	@Column(name = "gender", unique = false)
 	private Gender gender;
 
+	@NotNull
 	@Column(name = "dob", unique = false)
 	private Date dob;
 
-	@ManyToOne(optional = false, fetch = FetchType.LAZY)
-	@JoinColumn(name = "address_id", nullable = false, updatable = true, insertable = true)
-	private Address address;
+	@Embedded
+	private Address address = new Address();
 
 	public void setGender(Gender gender) {
 		this.gender = gender;
@@ -48,6 +49,8 @@ public class PersonBase extends BaseEntity {
 	}
 
 	public Address getAddress() {
+		if(address == null)
+			address = new Address();
 		return address;
 	}
 
