@@ -42,7 +42,7 @@
       <p:column headerText="#{msg.employee_department}" sortBy="#{employee.department}" rendered="#{ ! excludeDepartment == true and ( skipPermissionCheck == 'true' || s:hasPermission('employee', 'viewDepartment')) }"> 
         <h:panelGroup> 
           <h:link id="departmentemployee_department" escape="false" value="#{_employee.department.displayName}" outcome="/admin/entities/onepack/department/viewDepartment.xhtml" propagation="none"> 
-            <f:param name="departmentId" value="#{_employee.department.id}"/>  
+            <f:param name="id" value="#{_employee.department.id}"/>  
             <f:param name="from" value="#{request.servletPath}"/> 
           </h:link> 
         </h:panelGroup> 

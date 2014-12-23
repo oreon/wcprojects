@@ -6,17 +6,29 @@ import java.util.Date;
 
 public class InvestorProfileBase {
 
-	private String nameEng;
+	private String nameEng
 
-	private String nameFre;
+	;
 
-	private String descEng;
+	private String nameFre
 
-	private String descFre;
+	;
 
-	private String imageFileUri;
+	private String descEng
 
-	private Integer conservativeOrder;
+	;
+
+	private String descFre
+
+	;
+
+	private String imageFileUri
+
+	;
+
+	private Integer conservativeOrder
+
+	;
 
 	public void setNameEng(String nameEng) {
 		this.nameEng = nameEng;

@@ -30,6 +30,15 @@
             <f:selectItem itemLabel="Select One" itemValue=""/>  
             <f:selectItems value="#{customerList.fetchAll()}" var="itemIter" itemLabel="#{itemIter.displayName}" itemValue="#{itemIter}"/> 
           </p:selectOneMenu> 
+        </s:decorate>  
+        <s:decorate id="paymentMethodIdDecorate" rendered="#{ ! excludePaymentMethod == true}" template="/layout/edit.xhtml"> 
+          <ui:define name="label"> 
+            <h:outputText value="#{msg.customerOrder_paymentMethod}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customerOrder', 'editPaymentMethod')}"/>
+          </ui:define>  
+          <p:selectOneMenu id="paymentMethodId" label="#{msg.customerOrder_paymentMethod}" value="#{customerOrderAction.customerOrder.paymentMethod}" required="false" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customerOrder', 'editPaymentMethod')}" disabled="false" converter="#{paymentMethodList.converter}"> 
+            <f:selectItem itemLabel="Select One" itemValue=""/>  
+            <f:selectItems value="#{paymentMethodList.fetchAll()}" var="itemIter" itemLabel="#{itemIter.displayName}" itemValue="#{itemIter}"/> 
+          </p:selectOneMenu> 
         </s:decorate> 
       </h:panelGrid>  
       <br/>  

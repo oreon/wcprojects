@@ -6,7 +6,9 @@ import java.util.Date;
 
 public class InvestingGoalPlanCodeBase {
 
-	private String investingGoalCode;
+	private String investingGoalCode
+
+	;
 
 	public void setInvestingGoalCode(String investingGoalCode) {
 		this.investingGoalCode = investingGoalCode;

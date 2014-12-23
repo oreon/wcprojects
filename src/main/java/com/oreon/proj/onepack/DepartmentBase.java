@@ -19,14 +19,20 @@ public class DepartmentBase extends BaseEntity {
 
 	@OneToMany(mappedBy = "department", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@OrderBy("id DESC")
-	private List<Employee> employees;
+	private List<Employee> employees
+
+	= new ArrayList<Employee>()
+
+	;
 
 	//@Unique(entityName = "com.oreon.proj.onepack.Department", fieldName = "name")
 
 	@NotNull
 	@Size(min = 1, max = 50)
 	@Column(name = "name", unique = true)
-	private String name;
+	private String name
+
+	;
 
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;

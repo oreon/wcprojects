@@ -6,15 +6,25 @@ import java.util.Date;
 
 public class InvestingGoalBase {
 
-	private String nameEng;
+	private String nameEng
 
-	private String nameFre;
+	;
 
-	private String imageFileIri;
+	private String nameFre
 
-	private Boolean isDefault;
+	;
 
-	private InvestingGoalPlanCode investingGoalPlanCode;
+	private String imageFileIri
+
+	;
+
+	private Boolean isDefault
+
+	;
+
+	private InvestingGoalPlanCode investingGoalPlanCode
+
+	;
 
 	public void setNameEng(String nameEng) {
 		this.nameEng = nameEng;

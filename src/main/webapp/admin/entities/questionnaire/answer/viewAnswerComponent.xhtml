@@ -17,7 +17,7 @@
         <h:outputText value="#{msg.answer_question}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answer', 'viewQuestion')}"/>  
         <h:panelGroup> 
           <h:link id="questionanswer_question" escape="false" value="#{answer.question.displayName}" outcome="/admin/entities/questionnaire/question/viewQuestion.xhtml" propagation="none"> 
-            <f:param name="questionId" value="#{answer.question.id}"/>  
+            <f:param name="id" value="#{answer.question.id}"/>  
             <f:param name="from" value="#{request.servletPath}"/> 
           </h:link> 
         </h:panelGroup> 

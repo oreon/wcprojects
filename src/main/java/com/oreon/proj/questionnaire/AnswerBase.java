@@ -19,15 +19,21 @@ public class AnswerBase extends BaseEntity {
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "question_id", nullable = false, updatable = true, insertable = true)
-	private Question question;
+	private Question question
+
+	;
 
 	@Size(min = 10)
 	@Lob
 	@Column(name = "text", unique = false)
-	private String text;
+	private String text
+
+	;
 
 	@Column(name = "score", unique = false)
-	private Integer score;
+	private Integer score
+
+	;
 
 	public void setQuestion(Question question) {
 		this.question = question;

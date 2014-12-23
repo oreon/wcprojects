@@ -19,13 +19,19 @@ public class EmployeeBase extends com.oreon.proj.onepack.Person {
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "department_id", nullable = false, updatable = true, insertable = true)
-	private Department department;
+	private Department department
+
+	;
 
 	@Column(name = "firstName", unique = false)
-	private String firstName;
+	private String firstName
+
+	;
 
 	@Column(name = "lastName", unique = false)
-	private String lastName;
+	private String lastName
+
+	;
 
 	public void setDepartment(Department department) {
 		this.department = department;

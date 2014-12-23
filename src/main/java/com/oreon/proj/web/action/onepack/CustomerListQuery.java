@@ -24,16 +24,15 @@ public class CustomerListQuery extends CustomerListQueryBase implements
 
 	private String[] groupByFlds = { "address.province", "address.city",
 			"gender", };
-	
-	TreeNode root = new DefaultTreeNode(new AnalyticsData("root", 0L), null);
+
+	private TreeNode root = null;
+	private TreeNode selectedNode;
 
 	private List<String> selecteGroupField = new ArrayList<String>();
 
 	public List<String> getListGroupByFields() {
 		return Arrays.asList(groupByFlds);
 	}
-	
-	
 
 	private static void tradd(List<Object> list, TreeNode parent) {
 		if (list.size() >= 2) {
@@ -96,14 +95,22 @@ public class CustomerListQuery extends CustomerListQueryBase implements
 
 	public TreeNode getTree() {
 
-		List<List<Object>> mytuples = findGroupedRecords();
+		if (root == null) {
+			
+			root = new DefaultTreeNode(new AnalyticsData("root", 0L), null);
+			
+			List<List<Object>> mytuples = findGroupedRecords();
 
-		if (mytuples != null) {
+			if (mytuples != null) {
 
-			for (List<Object> list : mytuples) {
-				tradd(list, root);
+				for (List<Object> list : mytuples) {
+					tradd(list, root);
+				}
+
 			}
-
+			
+			if(selectedNode == null)
+				selectedNode = root;
 		}
 
 		return root;
@@ -160,38 +167,32 @@ public class CustomerListQuery extends CustomerListQueryBase implements
 	}
 
 	public void itemSelect(ItemSelectEvent event) {
-		
-		Chart chart = (Chart) event.getSource();
-		
-		PieChartModel model = (PieChartModel) chart.getModel();
-		
-		Number cData = model.getData().get(event.getItemIndex());
-		
-		String id = chart.getId();
-		
-		if(id.equals("root")){
-			root.getChildren().get(event.getItemIndex());
-		}else{
-			
-			
-		}
-		//model.get
-		
-		//UIComponent component = chart.getChildren().get(event.getItemIndex());
-		
-	
-		
-		/*
-		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
-				"Item selected", "Item Index: " + event.getItemIndex()
-						+ ", Series Index:" + event.getSeriesIndex());
 
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-		*/
+		Chart chart = (Chart) event.getSource();
+
+		PieChartModel model = (PieChartModel) chart.getModel();
+
+		Number cData = model.getData().get(event.getItemIndex());
+
+		String id = chart.getId();
+
+		if (id.equals("root")) {
+			root.getChildren().get(event.getItemIndex());
+		} else {
+
+		}
+		
 	}
-	
-	
-	public List<AnalyticsData> fetchChildPieCharts(){
+
+	public List<AnalyticsData> fetchChildPieCharts() {
 		return null;
+	}
+
+	public TreeNode getSelectedNode() {
+		return selectedNode;
+	}
+
+	public void setSelectedNode(TreeNode selectedNode) {
+		this.selectedNode = selectedNode;
 	}
 }

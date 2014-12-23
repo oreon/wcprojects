@@ -37,7 +37,7 @@
       <p:column headerText="#{msg.customerOrder_customer}" sortBy="#{customerOrder.customer}" rendered="#{ ! excludeCustomer == true and ( skipPermissionCheck == 'true' || s:hasPermission('customerOrder', 'viewCustomer')) }"> 
         <h:panelGroup> 
           <h:link id="customercustomerOrder_customer" escape="false" value="#{_customerOrder.customer.displayName}" outcome="/admin/entities/onepack/customer/viewCustomer.xhtml" propagation="none"> 
-            <f:param name="customerId" value="#{_customerOrder.customer.id}"/>  
+            <f:param name="id" value="#{_customerOrder.customer.id}"/>  
             <f:param name="from" value="#{request.servletPath}"/> 
           </h:link> 
         </h:panelGroup> 
@@ -46,6 +46,15 @@
         <h:outputText value="#{_customerOrder.shipDate}"> 
           <s:convertDateTime type="date" dateStyle="medium"/> 
         </h:outputText> 
+      </p:column>  
+      <p:column headerText="#{msg.customerOrder_paymentMethod}" sortBy="#{customerOrder.paymentMethod}" rendered="#{ ! excludePaymentMethod == true and ( skipPermissionCheck == 'true' || s:hasPermission('customerOrder', 'viewPaymentMethod')) }"> 
+        <h:panelGroup> 
+          <h:link id="paymentMethodcustomerOrder_paymentMethod" escape="false" value="#{_customerOrder.paymentMethod.displayName}" outcome="/admin/entities/onepack/paymentMethod/viewPaymentMethod.xhtml" propagation="none"> 
+            <f:param name="id" value="#{_customerOrder.paymentMethod.id}"/>  
+            <f:param name="from" value="#{request.servletPath}"/> 
+             <s:conversationId/> 
+          </h:link> 
+        </h:panelGroup> 
       </p:column>  
       <p:column rendered="#{s:hasPermission('_customerOrder', 'edit') and !_customerOrderCategory.archived}"> 
         <h:link outcome="/admin/entities/onepack/customerOrder/editCustomerOrder.xhtml" rendered="#{s:hasPermission(_customerOrder, 'edit')}"> 

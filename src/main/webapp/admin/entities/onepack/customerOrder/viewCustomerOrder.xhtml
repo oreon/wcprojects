@@ -29,6 +29,13 @@
                 <ui:param name="customer" value="#{customerOrderAction.instance.customer}"/> 
               </ui:include> 
             </h:form> 
+          </p:tab>  
+          <p:tab title="PaymentMethod" rendered="#{customerOrderAction.instance.paymentMethod != null}"> 
+            <h:form> 
+              <ui:include src="/admin/entities/onepack/paymentMethod/viewPaymentMethodComponent.xhtml"> 
+                <ui:param name="paymentMethod" value="#{customerOrderAction.instance.paymentMethod}"/> 
+              </ui:include> 
+            </h:form> 
           </p:tab> 
         </p:tabView>  
         <div class="buttonBox"></div> 

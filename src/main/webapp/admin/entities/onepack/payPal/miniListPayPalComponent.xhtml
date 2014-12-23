@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf">  
+  <p:dataTable var="_payPal" value="#{records}" tableStyle="width:auto"> 
+    <p:column headerText="#{msg.PayPal} #{msg.id}" sortBy="#{payPal.id}" rendered="#{s:hasPermission('id', 'viewId' )}"> 
+      <h:link outcome="/admin/entities/onepack/payPal/viewPayPal.xhtml" rendered="#{s:hasPermission(_payPal, 'view')}" propagation="none"> 
+        <h:outputText value="#{_payPal.id}"/>  
+        <f:param name="payPalId" value="#{_payPal.id}"/> 
+      </h:link> 
+    </p:column>  
+    <p:column headerText="#{msg.paymentMethod_accountAddress}" sortBy="#{payPal.accountAddress}" rendered="#{ ! excludeAccountAddress == true and ( skipPermissionCheck == 'true' || s:hasPermission('payPal', 'viewAccountAddress')) }"> 
+      <h:outputText value="#{_payPal.accountAddress}" escape="false"/> 
+    </p:column>  
+    <p:column headerText="#{msg.payPal_paypalAccountNumber}" sortBy="#{payPal.paypalAccountNumber}" rendered="#{ ! excludePaypalAccountNumber == true and ( skipPermissionCheck == 'true' || s:hasPermission('payPal', 'viewPaypalAccountNumber')) }"> 
+      <h:outputText value="#{_payPal.paypalAccountNumber}" escape="false"/> 
+    </p:column>  
+    <p:column rendered="#{s:hasPermission('_payPal', 'edit') and !_payPalCategory.archived}"> 
+      <h:link outcome="/admin/entities/onepack/payPal/editPayPal.xhtml" rendered="#{s:hasPermission(_payPal, 'edit')}"> 
+        <h:graphicImage value="/images/icons/edit.png" style="border: 0px" alt="edit"/>  
+        <f:param name="payPalId" value="#{_payPal.id}"/>  
+        <s:conversationId/> 
+      </h:link> 
+    </p:column> 
+  </p:dataTable> 
+</ui:composition>

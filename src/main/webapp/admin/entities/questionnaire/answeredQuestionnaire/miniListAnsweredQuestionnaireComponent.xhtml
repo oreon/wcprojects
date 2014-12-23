@@ -20,7 +20,7 @@
     <p:column headerText="#{msg.answeredQuestionnaire_questionnaire}" sortBy="#{answeredQuestionnaire.questionnaire}" rendered="#{ ! excludeQuestionnaire == true and ( skipPermissionCheck == 'true' || s:hasPermission('answeredQuestionnaire', 'viewQuestionnaire')) }"> 
       <h:panelGroup> 
         <h:link id="questionnaireansweredQuestionnaire_questionnaire" escape="false" value="#{_answeredQuestionnaire.questionnaire.displayName}" outcome="/admin/entities/questionnaire/questionnaire/viewQuestionnaire.xhtml" propagation="none"> 
-          <f:param name="questionnaireId" value="#{_answeredQuestionnaire.questionnaire.id}"/>  
+          <f:param name="id" value="#{_answeredQuestionnaire.questionnaire.id}"/>  
           <f:param name="from" value="#{request.servletPath}"/> 
         </h:link> 
       </h:panelGroup> 
@@ -28,7 +28,7 @@
     <p:column headerText="#{msg.answeredQuestionnaire_customer}" sortBy="#{answeredQuestionnaire.customer}" rendered="#{ ! excludeCustomer == true and ( skipPermissionCheck == 'true' || s:hasPermission('answeredQuestionnaire', 'viewCustomer')) }"> 
       <h:panelGroup> 
         <h:link id="customeransweredQuestionnaire_customer" escape="false" value="#{_answeredQuestionnaire.customer.displayName}" outcome="/admin/entities/onepack/customer/viewCustomer.xhtml" propagation="none"> 
-          <f:param name="customerId" value="#{_answeredQuestionnaire.customer.id}"/>  
+          <f:param name="id" value="#{_answeredQuestionnaire.customer.id}"/>  
           <f:param name="from" value="#{request.servletPath}"/> 
         </h:link> 
       </h:panelGroup> 

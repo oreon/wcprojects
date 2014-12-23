@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf">  
+  <s:div rendered="#{payPalList.textToSearch != null}">Found #{payPalList.entityList.size} results for search term: 
+    <b>${payPalList.textToSearch}</b> 
+  </s:div>  
+  <br/>  
+  <br/>  
+  <h:form> 
+    <h:inputText name="searchText" size="70" value="#{payPalList.textToSearch}" required="true"/>  
+    <h:commandButton value="Search" action="#{payPalList.textSearch}"> 
+      <s:conversationPropagation type="join"/> 
+    </h:commandButton>  
+    <p:tabView dynamic="true" cache="true"> 
+      <p:tab header="Search Results"> 
+        <ui:repeat var="_var" value="#{payPalList.entityList}"> 
+          <s:link value="${_var.displayName}" action="#{payPalAction.viewPayPal}"> 
+            <f:param name="currentEntityId" value="${_var.id}"/>  
+            <s:conversationPropagation type="join"/> 
+          </s:link>  
+          <br/>. 
+          <h:outputText value="${_var.higlightedFragment}" escape="false"/>  
+          <hr/> 
+        </ui:repeat> 
+      </p:tab>  
+      <p:tab header="Tabular"> 
+        <ui:include src="listPayPalComponent.xhtml"> 
+          <ui:param name="records" value="#{payPalList.entityList}"/> 
+        </ui:include> 
+      </p:tab> 
+    </p:tabView> 
+  </h:form> 
+</ui:composition>

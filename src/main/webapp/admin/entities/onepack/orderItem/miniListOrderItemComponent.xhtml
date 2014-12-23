@@ -14,7 +14,7 @@
     <p:column headerText="#{msg.orderItem_product}" sortBy="#{orderItem.product}" rendered="#{ ! excludeProduct == true and ( skipPermissionCheck == 'true' || s:hasPermission('orderItem', 'viewProduct')) }"> 
       <h:panelGroup> 
         <h:link id="productorderItem_product" escape="false" value="#{_orderItem.product.displayName}" outcome="/admin/entities/onepack/product/viewProduct.xhtml" propagation="none"> 
-          <f:param name="productId" value="#{_orderItem.product.id}"/>  
+          <f:param name="id" value="#{_orderItem.product.id}"/>  
           <f:param name="from" value="#{request.servletPath}"/> 
         </h:link> 
       </h:panelGroup> 
@@ -22,7 +22,7 @@
     <p:column headerText="#{msg.orderItem_customerOrder}" sortBy="#{orderItem.customerOrder}" rendered="#{ ! excludeCustomerOrder == true and ( skipPermissionCheck == 'true' || s:hasPermission('orderItem', 'viewCustomerOrder')) }"> 
       <h:panelGroup> 
         <h:link id="customerOrderorderItem_customerOrder" escape="false" value="#{_orderItem.customerOrder.displayName}" outcome="/admin/entities/onepack/customerOrder/viewCustomerOrder.xhtml" propagation="none"> 
-          <f:param name="customerOrderId" value="#{_orderItem.customerOrder.id}"/>  
+          <f:param name="id" value="#{_orderItem.customerOrder.id}"/>  
           <f:param name="from" value="#{request.servletPath}"/> 
         </h:link> 
       </h:panelGroup> 
