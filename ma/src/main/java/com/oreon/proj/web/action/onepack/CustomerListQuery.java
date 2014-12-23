@@ -2,62 +2,50 @@ package com.oreon.proj.web.action.onepack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
-import org.apache.commons.collections.MultiHashMap;
-import org.apache.commons.collections.MultiMap;
-import org.eclipse.persistence.descriptors.SelectedFieldsLockingPolicy;
+import javax.persistence.Query;
+
 import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
-import org.jboss.seam.framework.EntityQuery;
-import org.witchcraft.seam.action.BaseQuery;
-import org.witchcraft.base.entity.AnalyticsData;
-import org.witchcraft.base.entity.Range;
+import org.primefaces.component.chart.Chart;
+import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.DefaultTreeNode;
-import org.primefaces.model.SortOrder;
 import org.primefaces.model.TreeNode;
-import org.witchcraft.seam.action.EntityLazyDataModel;
-import org.primefaces.model.LazyDataModel;
-
-import java.util.Map;
-
-import org.jboss.seam.annotations.Observer;
-
-import java.math.BigDecimal;
-
-import javax.faces.model.DataModel;
-import javax.persistence.Query;
-
-import org.jboss.seam.annotations.security.Restrict;
-import org.jboss.seam.annotations.In;
-import org.jboss.seam.Component;
+import org.primefaces.model.chart.PieChartModel;
+import org.witchcraft.base.entity.AnalyticsData;
 
 @Name("customerList")
 @Scope(ScopeType.CONVERSATION)
 public class CustomerListQuery extends CustomerListQueryBase implements
 		java.io.Serializable {
 
-	private String[] groupByFlds = { "gender", "address.city",
-			"address.province" };
+	private String[] groupByFlds = { "address.province", "address.city",
+			"gender", };
+	
+	TreeNode root = new DefaultTreeNode(new AnalyticsData("root", 0L), null);
 
 	private List<String> selecteGroupField = new ArrayList<String>();
 
 	public List<String> getListGroupByFields() {
 		return Arrays.asList(groupByFlds);
 	}
+	
+	
 
 	private static void tradd(List<Object> list, TreeNode parent) {
 		if (list.size() >= 2) {
 
 			AnalyticsData adata = null;
 
+			String firstElement = list.get(0).toString();
+
 			if (list.size() == 2) {
-				adata = new AnalyticsData((String) list.get(0),
-						(Long) list.get(1));
+				adata = new AnalyticsData(firstElement, (Long) list.get(1));
 			} else {
-				adata = new AnalyticsData(list.get(0).toString(), 0L);
+				adata = new AnalyticsData(firstElement, 0L);
 			}
 
 			TreeNode child = findElement(parent.getChildren(), adata);
@@ -71,7 +59,7 @@ public class CustomerListQuery extends CustomerListQueryBase implements
 			tradd(list.subList(1, list.size()), child);
 
 			updateTotals(parent);
-			
+
 		}
 	}
 
@@ -108,14 +96,12 @@ public class CustomerListQuery extends CustomerListQueryBase implements
 
 	public TreeNode getTree() {
 
-		TreeNode root = new DefaultTreeNode(new AnalyticsData("root", 0L), null);
-
 		List<List<Object>> mytuples = findGroupedRecords();
 
 		if (mytuples != null) {
 
 			for (List<Object> list : mytuples) {
-				tradd(list, root);	
+				tradd(list, root);
 			}
 
 		}
@@ -133,9 +119,9 @@ public class CustomerListQuery extends CustomerListQueryBase implements
 
 	public List<List<Object>> findGroupedRecords() {
 
-		if (selecteGroupField.isEmpty()){
+		if (selecteGroupField.isEmpty()) {
 			selecteGroupField.addAll(getListGroupByFields());
-			//return null;
+			// return null;
 		}
 
 		StringBuilder sb = new StringBuilder();
@@ -147,8 +133,12 @@ public class CustomerListQuery extends CustomerListQueryBase implements
 		// remove trailing comma
 		sb.deleteCharAt(sb.length() - 1);
 
-		String qry = "select  %s,  count(p.id) from "
-				+ " Customer "  /*getClass().getCanonicalName()*/ + " p "
+		String qry = "select  %s,  count(p.id) from " + " Customer " /*
+																	 * getClass()
+																	 * .
+																	 * getCanonicalName
+																	 * ()
+																	 */+ " p "
 				+ " group by %s order by %s  ";
 
 		qry = String.format(qry, sb.toString(), sb.toString(), sb.toString());
@@ -167,5 +157,41 @@ public class CustomerListQuery extends CustomerListQueryBase implements
 
 		return mytuples;
 
+	}
+
+	public void itemSelect(ItemSelectEvent event) {
+		
+		Chart chart = (Chart) event.getSource();
+		
+		PieChartModel model = (PieChartModel) chart.getModel();
+		
+		Number cData = model.getData().get(event.getItemIndex());
+		
+		String id = chart.getId();
+		
+		if(id.equals("root")){
+			root.getChildren().get(event.getItemIndex());
+		}else{
+			
+			
+		}
+		//model.get
+		
+		//UIComponent component = chart.getChildren().get(event.getItemIndex());
+		
+	
+		
+		/*
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"Item selected", "Item Index: " + event.getItemIndex()
+						+ ", Series Index:" + event.getSeriesIndex());
+
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		*/
+	}
+	
+	
+	public List<AnalyticsData> fetchChildPieCharts(){
+		return null;
 	}
 }
