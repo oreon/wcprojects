@@ -104,6 +104,8 @@ public abstract class CustomerOrderListQueryBase
 			"customerOrder.shipDate >= #{customerOrderList.shipDateRange.begin}",
 			"customerOrder.shipDate <= #{customerOrderList.shipDateRange.end}",
 
+			"customerOrder.paymentMethod.id = #{customerOrderList.customerOrder.paymentMethod.id}",
+
 			"customerOrder.dateCreated <= #{customerOrderList.dateCreatedRange.end}",
 			"customerOrder.dateCreated >= #{customerOrderList.dateCreatedRange.begin}",};
 
@@ -122,6 +124,19 @@ public abstract class CustomerOrderListQueryBase
 	public Long getCustomerId() {
 		return customerOrder.getCustomer() == null ? null : customerOrder
 				.getCustomer().getId();
+	}
+
+	public void setPaymentMethodId(Long id) {
+		if (customerOrder.getPaymentMethod() == null) {
+			customerOrder
+					.setPaymentMethod(new com.oreon.proj.onepack.PaymentMethod());
+		}
+		customerOrder.getPaymentMethod().setId(id);
+	}
+
+	public Long getPaymentMethodId() {
+		return customerOrder.getPaymentMethod() == null ? null : customerOrder
+				.getPaymentMethod().getId();
 	}
 
 }

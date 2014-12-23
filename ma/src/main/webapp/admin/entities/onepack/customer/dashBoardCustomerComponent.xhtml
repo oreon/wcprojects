@@ -18,8 +18,7 @@
 					<ui:define name="label">
 						<h:outputText value="" />
 					</ui:define>
-					<p:selectOneMenu 
-						value="#{customerList.selecteGroupField}">
+					<p:selectOneMenu value="#{customerList.selecteGroupField}">
 						<f:selectItem itemLabel="Select One" itemValue="" />
 						<f:selectItems value="#{customerList.listGroupByFields}"
 							var="itemIter" itemLabel="#{itemIter}" itemValue="#{itemIter}" />
@@ -27,35 +26,31 @@
 				</s:decorate>
 
 			</ui:repeat>
-			
-			
-			
-
-			<p:commandButton value="Get" update="groupsTree"  process="@form" />
-				
-			<p:chart type="pie" model="#{customerList.tree.data.pieChartModel}" >
-				<p:ajax event="itemSelect" listener="#{customerList.pieChartSelect}" update="growl" />
-			</p:chart>
-			
-			
-			<p:chart type="bar" model="#{customerList.tree.data.pieChartModel}" >
-            	<p:ajax event="itemSelect" listener="#{chartView.itemSelect}" update="growl" />
-        	</p:chart>  
 
 
-				<p:treeTable value="#{customerList.tree}" var="document"
-					id="groupsTree">
-					<f:facet name="header">
+			<p:commandButton value="Get" update="groupsTree" process="@form" />
+
+
+			<p:treeTable value="#{customerList.tree}" var="document"   selectionMode="single" 
+				selection="#{customerList.selectedNode}"
+				id="groupsTree">
+				<p:ajax event="select" update=":#{p:component('currentChart')}"  />
+				<f:facet name="header">
 			           Found #{customerList.tree.data.size}
 			   	     </f:facet>
-					<p:column>
+				<p:column>
 	   					#{document.name}
 	   			</p:column>
-					<p:column>
+				<p:column>
 	   					#{document.size}
 	   			</p:column>
 
-				</p:treeTable>
+			</p:treeTable>
+			
+			
+			<p:chart type="pie" model="#{customerList.selectedNode.data.pieChartModel}" id="currentChart">
+			
+			</p:chart>
 		</h:form>
 
 	</h:panelGrid>

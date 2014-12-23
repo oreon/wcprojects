@@ -18,15 +18,21 @@ import java.util.Date;
 public class OrderItemBase extends BaseEntity {
 
 	@Column(name = "qty", unique = false)
-	private Integer qty;
+	private Integer qty
+
+	;
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id", nullable = false, updatable = true, insertable = true)
-	private Product product;
+	private Product product
+
+	;
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "customerOrder_id", nullable = false, updatable = true, insertable = true)
-	private CustomerOrder customerOrder;
+	private CustomerOrder customerOrder
+
+	;
 
 	public void setQty(Integer qty) {
 		this.qty = qty;

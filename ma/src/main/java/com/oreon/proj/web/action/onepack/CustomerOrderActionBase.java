@@ -123,6 +123,12 @@ public abstract class CustomerOrderActionBase extends BaseAction<CustomerOrder>
 						 getInstance().setCustomer(customer);
 					}
 				 
+				 
+					com.oreon.proj.onepack.PaymentMethod paymentMethod = paymentMethodAction.getInstance();
+					if (paymentMethod != null  ) {
+						 getInstance().setPaymentMethod(paymentMethod);
+					}
+				 
 			
 		}
 		 */
@@ -150,6 +156,11 @@ public abstract class CustomerOrderActionBase extends BaseAction<CustomerOrder>
 		if (instance.getCustomer() != null) {
 			criteria = criteria.add(Restrictions.eq("customer.id", instance
 					.getCustomer().getId()));
+		}
+
+		if (instance.getPaymentMethod() != null) {
+			criteria = criteria.add(Restrictions.eq("paymentMethod.id",
+					instance.getPaymentMethod().getId()));
 		}
 
 	}

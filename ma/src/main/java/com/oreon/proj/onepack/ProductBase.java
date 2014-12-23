@@ -20,7 +20,9 @@ public class ProductBase extends BaseEntity {
 	@NotNull
 	@Size(min = 1, max = 50)
 	@Column(name = "name", unique = false)
-	private String name;
+	private String name
+
+	;
 
 	public void setName(String name) {
 		this.name = name;

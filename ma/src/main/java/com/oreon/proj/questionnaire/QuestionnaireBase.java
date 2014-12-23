@@ -22,11 +22,17 @@ public class QuestionnaireBase extends BaseEntity {
 	@NotNull
 	@Size(min = 1, max = 50)
 	@Column(name = "name", unique = true)
-	private String name;
+	private String name
+
+	;
 
 	@OneToMany(mappedBy = "questionnaire", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@OrderBy("id DESC")
-	private List<Section> sections;
+	private List<Section> sections
+
+	= new ArrayList<Section>()
+
+	;
 
 	public void setName(String name) {
 		this.name = name;

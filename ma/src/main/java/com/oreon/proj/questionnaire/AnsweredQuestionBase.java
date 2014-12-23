@@ -19,19 +19,29 @@ public class AnsweredQuestionBase extends BaseEntity {
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "question_id", nullable = false, updatable = true, insertable = true)
-	private Question question;
+	private Question question
+
+	;
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "answeredQuestionnaire_id", nullable = false, updatable = true, insertable = true)
-	private AnsweredQuestionnaire answeredQuestionnaire;
+	private AnsweredQuestionnaire answeredQuestionnaire
+
+	;
 
 	@ManyToOne(optional = true, fetch = FetchType.LAZY)
 	@JoinColumn(name = "answer_id", nullable = true, updatable = true, insertable = true)
-	private Answer answer;
+	private Answer answer
+
+	;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@OrderBy("id DESC")
-	private List<Answer> answers;
+	private List<Answer> answers
+
+	= new ArrayList<Answer>()
+
+	;
 
 	public void setQuestion(Question question) {
 		this.question = question;

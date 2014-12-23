@@ -19,7 +19,14 @@
         <h:outputText value="#{msg.customerOrder_customer}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customerOrder', 'viewCustomer')}"/>  
         <h:panelGroup> 
           <h:link id="customercustomerOrder_customer" escape="false" value="#{customerOrder.customer.displayName}" outcome="/admin/entities/onepack/customer/viewCustomer.xhtml" propagation="none"> 
-            <f:param name="customerId" value="#{customerOrder.customer.id}"/>  
+            <f:param name="id" value="#{customerOrder.customer.id}"/>  
+            <f:param name="from" value="#{request.servletPath}"/> 
+          </h:link> 
+        </h:panelGroup>  
+        <h:outputText value="#{msg.customerOrder_paymentMethod}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customerOrder', 'viewPaymentMethod')}"/>  
+        <h:panelGroup> 
+          <h:link id="paymentMethodcustomerOrder_paymentMethod" escape="false" value="#{customerOrder.paymentMethod.displayName}" outcome="/admin/entities/onepack/paymentMethod/viewPaymentMethod.xhtml" propagation="none"> 
+            <f:param name="id" value="#{customerOrder.paymentMethod.id}"/>  
             <f:param name="from" value="#{request.servletPath}"/> 
           </h:link> 
         </h:panelGroup> 

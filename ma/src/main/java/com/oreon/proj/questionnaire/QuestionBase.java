@@ -19,18 +19,28 @@ public class QuestionBase extends BaseEntity {
 
 	@Lob
 	@Column(name = "text", unique = false)
-	private String text;
+	private String text
+
+	;
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "section_id", nullable = false, updatable = true, insertable = true)
-	private Section section;
+	private Section section
+
+	;
 
 	@OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@OrderBy("id DESC")
-	private List<Answer> answers;
+	private List<Answer> answers
+
+	= new ArrayList<Answer>()
+
+	;
 
 	@Column(name = "answerType", unique = false)
-	private AnswerType answerType;
+	private AnswerType answerType
+
+	;
 
 	public void setText(String text) {
 		this.text = text;

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:wc="http://witchcraft.sourceforge.net/jsf">  
+  <h:panelGroup id="editPaymentMethodComponentPanel"> 
+    <h:panelGrid columns="1" styleClass="editInfo" columnClasses="leftCol, rightCol"> 
+      <c:if test="${numColumns == null }"> 
+        <c:set var="numColumns" value="2"/> 
+      </c:if>  
+      <h:panelGrid columns="${numColumns}"> 
+        <f:facet name="header"> 
+          <h:outputText value="#{msg.PaymentMethod}"/> 
+        </f:facet>  
+        <s:decorate id="accountAddressDecorate" rendered="#{ ! excludeAccountAddress == true}" template="/layout/edit.xhtml"> 
+          <ui:define name="label"> 
+            <h:outputText value="#{msg.paymentMethod_accountAddress}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('paymentMethod', 'editAccountAddress')}"/>
+          </ui:define>  
+          <h:inputText escape="false" id="accountAddress#{entityId}" rendered="#{skipPermissionCheck == 'true' || s:hasPermission('paymentMethod', 'editAccountAddress')}" label="#{msg.paymentMethod_accountAddress}" required="false" disabled="false" value="#{paymentMethodAction.paymentMethod.accountAddress}"></h:inputText> 
+        </s:decorate> 
+      </h:panelGrid>  
+      <br/>  
+      <br/> 
+    </h:panelGrid> 
+  </h:panelGroup> 
+</ui:composition>

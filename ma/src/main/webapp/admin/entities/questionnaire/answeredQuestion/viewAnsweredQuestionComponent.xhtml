@@ -13,21 +13,21 @@
         <h:outputText value="#{msg.answeredQuestion_question}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestion', 'viewQuestion')}"/>  
         <h:panelGroup> 
           <h:link id="questionansweredQuestion_question" escape="false" value="#{answeredQuestion.question.displayName}" outcome="/admin/entities/questionnaire/question/viewQuestion.xhtml" propagation="none"> 
-            <f:param name="questionId" value="#{answeredQuestion.question.id}"/>  
+            <f:param name="id" value="#{answeredQuestion.question.id}"/>  
             <f:param name="from" value="#{request.servletPath}"/> 
           </h:link> 
         </h:panelGroup>  
         <h:outputText value="#{msg.answeredQuestion_answeredQuestionnaire}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestion', 'viewAnsweredQuestionnaire')}"/>  
         <h:panelGroup> 
           <h:link id="answeredQuestionnaireansweredQuestion_answeredQuestionnaire" escape="false" value="#{answeredQuestion.answeredQuestionnaire.displayName}" outcome="/admin/entities/questionnaire/answeredQuestionnaire/viewAnsweredQuestionnaire.xhtml" propagation="none"> 
-            <f:param name="answeredQuestionnaireId" value="#{answeredQuestion.answeredQuestionnaire.id}"/>  
+            <f:param name="id" value="#{answeredQuestion.answeredQuestionnaire.id}"/>  
             <f:param name="from" value="#{request.servletPath}"/> 
           </h:link> 
         </h:panelGroup>  
         <h:outputText value="#{msg.answeredQuestion_answer}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestion', 'viewAnswer')}"/>  
         <h:panelGroup> 
           <h:link id="answeransweredQuestion_answer" escape="false" value="#{answeredQuestion.answer.displayName}" outcome="/admin/entities/questionnaire/answer/viewAnswer.xhtml" propagation="none"> 
-            <f:param name="answerId" value="#{answeredQuestion.answer.id}"/>  
+            <f:param name="id" value="#{answeredQuestion.answer.id}"/>  
             <f:param name="from" value="#{request.servletPath}"/> 
           </h:link> 
         </h:panelGroup> 

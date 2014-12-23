@@ -28,18 +28,34 @@ public class CustomerOrderBase extends BaseEntity {
 	@NotNull
 	@Lob
 	@Column(name = "notes", unique = false)
-	private String notes;
+	private String notes
+
+	;
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "customer_id", nullable = false, updatable = true, insertable = true)
-	private Customer customer;
+	private Customer customer
+
+	;
 
 	@OneToMany(mappedBy = "customerOrder", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@OrderBy("id DESC")
-	private List<OrderItem> orderItems;
+	private List<OrderItem> orderItems
+
+	= new ArrayList<OrderItem>()
+
+	;
 
 	@Column(name = "ship_Date", unique = false)
-	private Date shipDate;
+	private Date shipDate
+
+	;
+
+	@ManyToOne(optional = true, fetch = FetchType.LAZY)
+	@JoinColumn(name = "paymentMethod_id", nullable = true, updatable = true, insertable = true)
+	private PaymentMethod paymentMethod
+
+	;
 
 	public void setNotes(String notes) {
 		this.notes = notes;
@@ -87,6 +103,14 @@ public class CustomerOrderBase extends BaseEntity {
 
 	public Date getShipDate() {
 		return shipDate;
+	}
+
+	public void setPaymentMethod(PaymentMethod paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
+	public PaymentMethod getPaymentMethod() {
+		return paymentMethod;
 	}
 
 	@Transient

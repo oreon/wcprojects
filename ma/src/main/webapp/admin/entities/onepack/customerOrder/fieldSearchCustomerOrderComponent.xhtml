@@ -31,6 +31,15 @@
       <p:calendar value="#{customerOrderList.shipDateRange.begin}"/> To
       <br/>  
       <p:calendar value="#{customerOrderList.shipDateRange.end}"/> 
+    </h:panelGroup>  
+    <h:panelGroup> 
+      <h:outputText value="#{msg.customerOrder_paymentMethod}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('customerOrder', 'editPaymentMethod')}"/>  
+      <br/>  
+      <p:selectOneMenu id="paymentMethodId" converter="#{paymentMethodList.converter}" value="#{ customerOrderList.customerOrder.paymentMethod}"> 
+        <f:selectItem itemLabel="Any..." itemValue=""/>  
+        <f:selectItem itemLabel="--None--" itemValue=""/>  
+        <f:selectItems value="#{paymentMethodList.fetchAll()}" var="itemIter" itemLabel="#{itemIter.displayName}" itemValue="#{itemIter}"/> 
+      </p:selectOneMenu> 
     </h:panelGroup> 
   </h:panelGrid>  
   <h:panelGrid columns="2"> 

@@ -11,7 +11,7 @@
     <p:column headerText="#{msg.answer_question}" sortBy="#{answer.question}" rendered="#{ ! excludeQuestion == true and ( skipPermissionCheck == 'true' || s:hasPermission('answer', 'viewQuestion')) }"> 
       <h:panelGroup> 
         <h:link id="questionanswer_question" escape="false" value="#{_answer.question.displayName}" outcome="/admin/entities/questionnaire/question/viewQuestion.xhtml" propagation="none"> 
-          <f:param name="questionId" value="#{_answer.question.id}"/>  
+          <f:param name="id" value="#{_answer.question.id}"/>  
           <f:param name="from" value="#{request.servletPath}"/> 
         </h:link> 
       </h:panelGroup> 

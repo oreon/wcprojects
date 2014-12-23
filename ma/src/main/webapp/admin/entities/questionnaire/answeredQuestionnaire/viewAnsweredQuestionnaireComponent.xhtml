@@ -17,14 +17,14 @@
         <h:outputText value="#{msg.answeredQuestionnaire_questionnaire}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestionnaire', 'viewQuestionnaire')}"/>  
         <h:panelGroup> 
           <h:link id="questionnaireansweredQuestionnaire_questionnaire" escape="false" value="#{answeredQuestionnaire.questionnaire.displayName}" outcome="/admin/entities/questionnaire/questionnaire/viewQuestionnaire.xhtml" propagation="none"> 
-            <f:param name="questionnaireId" value="#{answeredQuestionnaire.questionnaire.id}"/>  
+            <f:param name="id" value="#{answeredQuestionnaire.questionnaire.id}"/>  
             <f:param name="from" value="#{request.servletPath}"/> 
           </h:link> 
         </h:panelGroup>  
         <h:outputText value="#{msg.answeredQuestionnaire_customer}  " rendered="#{skipPermissionCheck == 'true' || s:hasPermission('answeredQuestionnaire', 'viewCustomer')}"/>  
         <h:panelGroup> 
           <h:link id="customeransweredQuestionnaire_customer" escape="false" value="#{answeredQuestionnaire.customer.displayName}" outcome="/admin/entities/onepack/customer/viewCustomer.xhtml" propagation="none"> 
-            <f:param name="customerId" value="#{answeredQuestionnaire.customer.id}"/>  
+            <f:param name="id" value="#{answeredQuestionnaire.customer.id}"/>  
             <f:param name="from" value="#{request.servletPath}"/> 
           </h:link> 
         </h:panelGroup> 

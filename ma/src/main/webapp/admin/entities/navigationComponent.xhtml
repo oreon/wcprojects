@@ -57,6 +57,33 @@
           <s:conversationPropagation type="end"/>  
           <f:param name="orderItemId" value="0"/> 
         </h:commandLink>  
+        <br/>  
+        <h:commandLink value="PaymentMethod" action="paymentMethod"> 
+          <s:conversationPropagation type="none"/> 
+        </h:commandLink>  
+        <h:commandLink action="editPaymentMethod"> 
+          <h:graphicImage value="/images/icons/add.png" style="border: 0px" alt="create"/>  
+          <s:conversationPropagation type="end"/>  
+          <f:param name="paymentMethodId" value="0"/> 
+        </h:commandLink>  
+        <br/>  
+        <h:commandLink value="CreditCard" action="creditCard"> 
+          <s:conversationPropagation type="none"/> 
+        </h:commandLink>  
+        <h:commandLink action="editCreditCard"> 
+          <h:graphicImage value="/images/icons/add.png" style="border: 0px" alt="create"/>  
+          <s:conversationPropagation type="end"/>  
+          <f:param name="creditCardId" value="0"/> 
+        </h:commandLink>  
+        <br/>  
+        <h:commandLink value="PayPal" action="payPal"> 
+          <s:conversationPropagation type="none"/> 
+        </h:commandLink>  
+        <h:commandLink action="editPayPal"> 
+          <h:graphicImage value="/images/icons/add.png" style="border: 0px" alt="create"/>  
+          <s:conversationPropagation type="end"/>  
+          <f:param name="payPalId" value="0"/> 
+        </h:commandLink>  
         <br/> 
       </p:tab>  
       <p:tab title="Questionnaire" expanded="#{panelMenuStateBean.state['Questionnaire']}"> 
