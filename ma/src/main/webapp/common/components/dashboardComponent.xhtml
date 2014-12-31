@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:wc="http://witchcraft.sourceforge.net/jsf">
+	<h:panelGrid columns="1" styleClass="summarywrap">
+		<h:form>
+
+			<p:pickList id="pickList"
+				value="#{viewBean.selecteGroupFields}" var="cities"
+				showTargetControls="true" showCheckbox="true" itemLabel="#{cities}"
+				itemValue="#{cities}" />
+
+
+			<h:commandButton value="Get"
+				action="#{viewBean.updateTree()}"
+				update="#{p:component('groupsTree')}">
+
+			</h:commandButton>
+		
+
+
+		<p:treeTable value="#{viewBean.groupsTree}" var="document"
+			selectionMode="single" selection="#{viewBean.selectedNode}"
+			id="groupsTree">
+			<p:ajax event="select" update=":#{p:component('charts')}" />
+			<f:facet name="header">
+			           Total :  #{viewBean.groupsTree.data.size}
+			</f:facet>
+			
+				<p:column>
+	   					#{document.name}
+	   			</p:column>
+				<p:column>
+	   					#{document.size}
+	   			</p:column>
+		</p:treeTable>
+
+		<p:panel id="charts">
+			<p:chart type="pie"
+				model="#{viewBean.selectedNode.data.pieChartModel}"
+				id="currentPieChart" />
+			<p:chart type="bar"
+				model="#{viewBean.selectedNode.data.barChartModel}"
+				id="currentBarChart" />
+		</p:panel>
+
+
+		</h:form>
+	</h:panelGrid>
+</ui:composition>
