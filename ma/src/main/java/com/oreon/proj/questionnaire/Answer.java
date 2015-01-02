@@ -1,15 +1,17 @@
 package com.oreon.proj.questionnaire;
 
 import javax.persistence.*;
+
 import org.witchcraft.base.entity.FileAttachment;
 import org.witchcraft.base.entity.BaseEntity;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.Filters;
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
 
 import javax.validation.constraints.*;
 
 import java.math.BigDecimal;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
@@ -22,6 +24,7 @@ import java.util.Date;
 @Entity
 @Table(name = "answer")
 @Filters({@Filter(name = "archiveFilterDef"), @Filter(name = "tenantFilterDef")})
+@Audited(auditParents = AnswerBase.class)
 public class Answer extends AnswerBase implements java.io.Serializable {
 	private static final long serialVersionUID = 1969982965L;
 }

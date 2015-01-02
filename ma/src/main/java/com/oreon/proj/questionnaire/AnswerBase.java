@@ -1,15 +1,18 @@
 package com.oreon.proj.questionnaire;
 
 import javax.persistence.*;
+
 import org.witchcraft.base.entity.FileAttachment;
 import org.witchcraft.base.entity.BaseEntity;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.Filters;
+import org.hibernate.envers.AuditMappedBy;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
 
 import javax.validation.constraints.*;
 
 import java.math.BigDecimal;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
@@ -19,6 +22,7 @@ public class AnswerBase extends BaseEntity {
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "question_id", nullable = false, updatable = true, insertable = true)
+	@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 	private Question question
 
 	;
