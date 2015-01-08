@@ -45,10 +45,5 @@ import org.witchcraft.base.entity.BaseEntity;
 public abstract class AbstractPersonAction<T extends com.oreon.proj.onepack.Person>
 		extends
 			BaseAction<T> implements java.io.Serializable {
-	
-	
-	public void getThis(){
-		
-	}
 
 }

@@ -9,8 +9,6 @@ import java.util.Date;
  * DO NOT MODIFY any changes will be overwritten with the next run of the code generator.
  */
 
-//should not gen advice
-
 public class InvestingGoal extends InvestingGoalBase
 		implements
 			java.io.Serializable {

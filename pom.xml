@@ -82,6 +82,13 @@
 							<port>${jetty.port}</port>
 						</connector>
 					</connectors>
+
+					<webApp>
+						<contextPath>/</contextPath>
+						<baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
+							<resourcesAsCSV>src/main/webapp,generated/main/webapp</resourcesAsCSV>
+						</baseResource>
+					</webApp>
 				</configuration>
 				<!-- <configuration> <scanIntervalSeconds>10</scanIntervalSeconds> </configuration> -->
 			</plugin>
@@ -107,6 +114,41 @@
 					<path>/cererbrumehr</path>
 				</configuration>
 			</plugin>
+
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>generated/main/java</source>
+								<source>generated/test/java</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<webResources>
+						<resource>
+							<!-- this is relative to the pom.xml directory -->
+							<directory>generated/main/webapp</directory>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+
+
 		</plugins>
 	</build>
 
@@ -333,8 +375,8 @@
 			<artifactId>resteasy-jackson-provider</artifactId>
 			<version>2.3.4.Final</version>
 		</dependency>
- 
-  
+
+
 		<!-- <dependency> <groupId>javax.ws.rs</groupId> <artifactId>jsr311-api</artifactId> 
 			<version>1.1.1</version> </dependency> -->
 		<dependency>
