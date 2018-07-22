@@ -17,7 +17,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
-		<drools.version>5.0.1</drools.version>
+		<drools.version>6.2.0.Final</drools.version>
 		<jetty.port>7788</jetty.port>
 	</properties>
 
@@ -440,7 +440,7 @@
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
-			<version>3.2</version>
+			<version>3.2.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.derby</groupId>
@@ -481,7 +481,7 @@
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
-			<version>4.0.0</version>
+			<version>6.2.1</version>
 			<exclusions>
 				<exclusion>
 					<groupId>eclipse</groupId>
@@ -538,7 +538,7 @@
 			<!-- jsoup HTML parser library @ http://jsoup.org/ -->
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
-			<version>1.6.3</version>
+			<version>1.8.3</version>
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
