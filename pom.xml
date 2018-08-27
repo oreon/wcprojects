@@ -200,7 +200,7 @@
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
-			<version>1.4.7</version>
+			<version>1.4.10</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -422,7 +422,7 @@
 					<artifactId>commons-collections</artifactId>
 				</exclusion>
 			</exclusions>
-			<version>1.8.3</version>
+			<version>1.9.2</version>
 		</dependency>
 
 		<dependency>
@@ -445,7 +445,7 @@
 		<dependency>
 			<groupId>org.apache.derby</groupId>
 			<artifactId>derby</artifactId>
-			<version>10.8.1.2</version>
+			<version>10.14.2.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.el</groupId>
@@ -481,7 +481,7 @@
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
-			<version>4.0.0</version>
+			<version>6.4.1</version>
 			<exclusions>
 				<exclusion>
 					<groupId>eclipse</groupId>
