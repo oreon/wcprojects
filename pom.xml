@@ -200,7 +200,7 @@
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
-			<version>1.4.7</version>
+			<version>1.4.14-jdk7</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -233,7 +233,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-search</artifactId>
-			<version>4.1.1.Final</version>
+			<version>5.4.0.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
