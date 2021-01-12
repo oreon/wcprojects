@@ -366,7 +366,7 @@
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-client</artifactId>
-			<version>3.0.0.Final</version>
+			<version>4.5.8.SP1</version>
 		</dependency>
 
 
