@@ -200,7 +200,7 @@
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
-			<version>1.4.7</version>
+			<version>1.4.17</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -264,7 +264,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-envers</artifactId>
-			<version>4.1.9.Final</version>
+			<version>5.4.24.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.richfaces.ui</groupId>
