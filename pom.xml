@@ -440,7 +440,7 @@
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
-			<version>3.2</version>
+			<version>3.2.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.derby</groupId>
@@ -481,7 +481,7 @@
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
-			<version>4.0.0</version>
+			<version>6.2.1</version>
 			<exclusions>
 				<exclusion>
 					<groupId>eclipse</groupId>
