@@ -422,7 +422,7 @@
 					<artifactId>commons-collections</artifactId>
 				</exclusion>
 			</exclusions>
-			<version>1.8.3</version>
+			<version>1.11.0</version>
 		</dependency>
 
 		<dependency>
